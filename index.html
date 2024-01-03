@@ -19,6 +19,51 @@
 background:#008E97;
 }
 
+
+.bgL{
+      display: none;
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+         justify-content: center;
+         align-items: center;
+}
+.msg{
+        width: 300px;
+        text-align: center;
+         height: 100%;
+         max-height: 50px;
+         margin: 50px auto;
+         background-color: #37a337;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.msg p{
+   font-size: 18px;
+   color:white;
+}
+.bgconteudo{
+         width: 600px;
+         height: 100%;
+         max-height: 600px;
+         margin: 50px auto;
+         background-color: #fff;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+       
+}
+.bgcontentt{
+   width: 100%;
+   height: 100%;
+     overflow: auto;
+}
+
+
       .container{
         width: 100%;
         border-radius: 10px;
@@ -61,6 +106,29 @@ background:#008E97;
          background-color: #20f511;
          color: white;
       }
+
+
+           .azul {
+         padding: 10px;
+         margin-bottom: 10px;
+         margin-top: 10px;
+            margin: 0 auto;
+         border: none;
+         text-align: center;
+         border-radius: 5px;
+         cursor: pointer;
+         font-size: 14px;
+         border: 1px solid white;
+         transition: background-color 0.3s ease;
+         background-color: #2255f0;
+              color: white;
+      }
+
+      .azul:hover {
+         background-color: #2255f0;
+    
+      }
+
 
         .negativo {
          padding: 10px;
@@ -109,10 +177,16 @@ background:#008E97;
       li.concluida {
          background-color: #d2f7d3;
          border-color: green;
-         
+
       }
 
       .descricao-detalhada, .descricao-datacriacao, .descricao-dataconcluida {
+         margin-top: 5px;
+         color: #777;
+      }
+
+
+            .datac, .statusc, .aproveitamentoc{
          margin-top: 5px;
          color: #777;
       }
@@ -126,6 +200,63 @@ background:#008E97;
       button.deletar:hover {
          background-color: #ff1744;
       }
+
+      .fechar{
+         text-align: center;
+         width: 100%;
+         max-width: 150px;
+         padding: 15px;
+         padding-top:0px;
+         height: 30px;
+         color: white;
+         border: 1px solid white;
+         border-radius: 12px;
+         background-color: #ff4545;
+         margin: 0 auto;
+      
+         cursor: pointer;
+
+      .tarefasconcluidas p {
+         color: white;
+          font-family: 'Arial', sans-serif;
+      }
+
+
+      /*animacoes*/
+
+    /* Animação para pontuação salva */
+@keyframes pontuacaoSalvaAnimation {
+   0% { opacity: 0; transform: translateY(30px); }
+   100% { opacity: 1; transform: translateY(0); }
+}
+
+.pontuacaosalva {
+   animation: pontuacaoSalvaAnimation 0.5s ease-out;
+}
+
+/* Animação para tarefas resetadas */
+@keyframes tarefasResetadasAnimation {
+   0% { opacity: 0; transform: translateY(30px); }
+   100% { opacity: 1; transform: translateY(0); }
+}
+
+.tarefasresetadas {
+   animation: tarefasResetadasAnimation 0.5s ease-out;
+}
+
+/* Animação para tarefa adicionada */
+@keyframes tarefaAdicionadaAnimation {
+   0% { opacity: 0; transform: translateY(30px); }
+   100% { opacity: 1; transform: translateY(0); }
+}
+
+.tarefadicionada {
+   animation: tarefaAdicionadaAnimation 0.5s ease-out;
+}
+
+
+
+
 
       @media (max-width: 600px) {
          li {
@@ -144,12 +275,94 @@ background:#008E97;
 
    <button class="positivo" onclick="fazerRequisicaoPost()">Adicionar Tarefa</button>
    <button class="negativo" onclick="resetarTarefas()">Resetar Tarefas</button>
+    <button class="azul" onclick="abrirhistoicodiario()">Histórico diário</button>
+
+    <div class="tarefasconcluidas">
+      <p id="infoTarefasConcluidas">Tarefas concluídas: <span id="concluidasCount">0</span>/<span id="totalTarefas">0</span></p>
+   </div>
+
 
    <ul id="listaTarefas"></ul>
+
+    <button class="azul" onclick="salvarpontuacao()">Salvar pontuação do dia</button>
 </div><!---container-->
 
+
+<div id="bgLid" class="bgL">
+  
+   <div class="bgconteudo">
+
+         <div class="bgcontentt">
+              <ul id="historicodiario"></ul>
+         </div>
+       
+
+
+          <div class="fechar" onclick="fecharhistoicodiario()">
+             <p>Fechar Histórico</p>
+
+          </div>
+   </div>
+</div>
+
+<div id="bgLidpont" class="bgL">
+  
+   <div class="msg">
+
+             <p>Pontuação salva com sucesso!</p>
+   </div>
+</div>
+<div id="bgLidreset" class="bgL">
+  
+   <div class="msg">
+
+             <p>Tarefas resetadas!</p>
+   </div>
+</div>
+
+
+
    <script>
- 
+
+   var total = 0;
+   var concluidas = 0;
+
+
+
+
+
+
+
+
+
+
+
+
+function pontsalva() {
+
+       var bgLpont = document.getElementById('bgLidpont')
+        bgLpont.style.display = "initial"
+
+   // Remove o elemento após a animação
+   setTimeout(function() {
+  ;      bgLpont.style.display = "none"
+   }, 2000); // Ajuste o tempo conforme necessário
+}
+
+
+function tarefaresetadas() {
+
+       var bgLreset = document.getElementById('bgLidreset')
+        bgLreset.style.display = "initial"
+
+   // Remove o elemento após a animação
+   setTimeout(function() {
+  ;      bgLreset.style.display = "none"
+   }, 2000); // Ajuste o tempo conforme necessário
+}
+
+
+
 
       function fazerRequisicaoGet() {
          var xhr = new XMLHttpRequest();
@@ -166,11 +379,23 @@ background:#008E97;
            fazerRequisicaoGet()
 
       function exibirTarefas(tarefas) {
+
+         var infoTarefasConcluidas = document.getElementById('infoTarefasConcluidas');
+         var concluidasCount = document.getElementById('concluidasCount');
+         var totalTarefasElement = document.getElementById('totalTarefas');
+
+
+
+
          var listaTarefas = document.getElementById('listaTarefas');
          listaTarefas.innerHTML = ''; // Limpa a lista para evitar duplicatas
 
+              var tarefasConcluidas = 0;
+         var totalTarefas = 0;
+
          for (var id in tarefas) {
             var tarefa = tarefas[id];
+              totalTarefas++;
             var itemLista = document.createElement('li');
           
             var botaoDeletar = document.createElement('button');
@@ -193,6 +418,7 @@ background:#008E97;
                   };
                })(id));
             } else {
+               tarefasConcluidas++;
                 var botaoConcluir = document.createElement('p');
                 botaoConcluir.textContent = "Concluída!";
                 botaoConcluir.classList.add('conluidap');
@@ -239,18 +465,33 @@ background:#008E97;
             itemLista.appendChild(botaoConcluir);
             itemLista.appendChild(botaoDeletar);
             listaTarefas.appendChild(itemLista);
+
+
+               concluidasCount.textContent = tarefasConcluidas;
+         totalTarefasElement.textContent = totalTarefas;
+
+            total = totalTarefas
+            concluidas = tarefasConcluidas
          }
       }
 
 
 
 function formatarData(dataString) {
+
+  
+
    const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' };
    return new Date(dataString).toLocaleDateString('pt-BR', options);
 }
 
 
       function fazerRequisicaoPost() {
+
+          
+
+
+
          var xhr = new XMLHttpRequest();
          xhr.open('POST', 'https://appatividades-7450d-default-rtdb.firebaseio.com/tarefas.json', true);
          xhr.setRequestHeader('Content-Type', 'application/json');
@@ -323,8 +564,16 @@ function formatarData(dataString) {
                   atualizarStatusConcluida(id, false);
                }
 
+               setTimeout(function() {
+                  tarefaresetadas()
+                  fazerRequisicaoGet();
+               }, 1000);
+                             
+
                console.log('Todas as tarefas resetadas para não concluídas!');
-               fazerRequisicaoGet(); // Atualiza a lista de tarefas
+                // Atualiza a lista de tarefas
+              
+
             }
          };
          xhr.send();
@@ -336,7 +585,122 @@ function formatarData(dataString) {
          xhr.open('PATCH', url, true);
          xhr.setRequestHeader('Content-Type', 'application/json');
          xhr.send(JSON.stringify({ concluida: novoStatus }));
+
+         
+      };
+
+
+
+
+
+
+
+
+//histrico diario 
+      function abrirhistoicodiario(){
+        var bgL = document.getElementById('bgLid')
+        bgL.style.display = "initial"
+
+      
+            fazerRequisicaoGetpontuacao();
+       ;
+       
+        
+
       }
+      function fecharhistoicodiario(){
+        var bgL = document.getElementById('bgLid')
+        bgL.style.display = "none"
+
+      }
+
+
+
+
+      function exibirHistorico(historico){
+
+         var historicodiario = document.getElementById('historicodiario');
+         historicodiario.innerHTML = ''; // Limpa a lista para evitar duplicatas
+
+         for (var id in historico) {
+
+            var historicos = historico[id];
+             console.log(historicos)
+            var itemLista = document.createElement('li');
+         
+
+         var data = document.createElement('div');
+         data.textContent = `Data: ${formatarData(historicos.data)}`
+      
+         var aproveitamento = document.createElement('div');
+         aproveitamento.textContent = `Aproveitamento: ${historicos.aproveitamento}`
+
+         var status = document.createElement('div');
+         status.textContent = `Tarefas concluídas no dia: ${ historicos.status}`;
+
+
+         data.classList.add('datac');
+         status.classList.add('statusc');
+         aproveitamento.classList.add('aproveitamentoc');
+
+
+         itemLista.appendChild(status);
+         itemLista.appendChild(aproveitamento);
+         itemLista.appendChild(data);
+
+         historicodiario.appendChild(itemLista);
+
+         }
+      }
+
+
+           function fazerRequisicaoGetpontuacao() {
+         var xhr = new XMLHttpRequest();
+         xhr.open('GET', 'https://appatividades-7450d-default-rtdb.firebaseio.com/hisotico.json', true);
+         xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+               var historico = JSON.parse(xhr.responseText);
+               
+
+                    setTimeout(function() {
+                    exibirHistorico(historico);
+                     }, 400);
+
+              
+            }
+         };
+         xhr.send()
+       
+      };
+
+
+
+        function salvarpontuacao(){
+
+         pontsalva()
+
+         var aproveitamento = (concluidas/total) * 100
+
+            var xhr = new XMLHttpRequest();
+         xhr.open('POST', 'https://appatividades-7450d-default-rtdb.firebaseio.com/hisotico.json', true);
+         xhr.setRequestHeader('Content-Type', 'application/json');
+         xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+               console.log('historico adicionada com sucesso!');
+            }
+         };
+
+        console.log(total)
+
+         var novohistorico = {
+            data: new Date().toISOString(),
+            status: concluidas,
+            aproveitamento: `${aproveitamento}%`,
+         };
+
+         xhr.send(JSON.stringify(novohistorico));
+
+        }
    </script>
 </body>
 </html>
