@@ -31,6 +31,31 @@ background:#008E97;
          justify-content: center;
          align-items: center;
 }
+
+.bgL2{
+      display: initial;
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+         justify-content: center;
+         align-items: center;
+}
+
+.bgL3{
+      display: none;
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+         justify-content: center;
+         align-items: center;
+}
+
 .msg{
         width: 300px;
         text-align: center;
@@ -57,12 +82,56 @@ background:#008E97;
          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
        
 }
+
+      .loginbtn{
+         text-align: center;
+         width: 100%;
+         max-width: 150px;
+         padding: 15px;
+         padding-top:0px;
+         height: 30px;
+         color: white;
+         border: 1px solid white;
+         border-radius: 12px;
+         background-color: skyblue;
+         margin: 0 auto;
+         margin-top: 40px;
+         cursor: pointer;
+  }
+.bgconteudolog{
+         width: 300px;
+         height: 100%;
+         max-height: 250px;
+         margin: 50px auto;
+         background-color: #fff;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+       
+}
+
 .bgcontentt{
    width: 100%;
    height: 100%;
      overflow: auto;
 }
 
+
+.btntrocar{
+     text-align: center;
+         width: 100%;
+         max-width: 150px;
+         padding: 15px;
+         padding-top:0px;
+         height: 30px;
+         color: black;
+         border: 1px solid white;
+         border-radius: 12px;
+         background-color: #ccc;
+         margin: 0 auto;
+      margin-top: 10px;
+         cursor: pointer;
+}
 
       .container{
         width: 100%;
@@ -216,7 +285,7 @@ background:#008E97;
          margin: 0 auto;
       
          cursor: pointer;
-
+  }
       .tarefasconcluidas p {
          color: white;
           font-family: 'Arial', sans-serif;
@@ -311,6 +380,52 @@ background:#008E97;
    </div>
 </div>
 
+
+
+<div id="bgloginid" class="bgL2">
+  
+   <div class="bgconteudolog">
+
+         <div class="bgcontentt">
+              <input type="text" id="nomeuser" placeholder="Nome: ">
+               <input type="text" id="senhauser" placeholder="Senha: ">
+
+                 <div class="loginbtn" onclick="login()">
+             <p>LOGIN</p>
+          </div>
+           <div class="btntrocar" onclick="irpc()">
+             <p>cadastro</p>
+          </div>
+         </div>
+       
+
+        
+   </div>
+</div>
+
+<div id="cadastroid" class="bgL3">
+  
+   <div class="bgconteudolog">
+
+         <div class="bgcontentt">
+               <input type="text" id="" placeholder="Nome: ">
+               <input type="text" id="" placeholder="Senha: ">
+
+                  <div class="loginbtn" onclick="cadastro()">
+             <p>CADASTRO</p>
+          </div>
+           <div class="btntrocar" onclick="irpl()">
+             <p>login</p>
+          </div>
+         </div>
+       
+
+       
+   </div>
+</div>
+
+
+
 <div id="bgLidpont" class="bgL">
   
    <div class="msg">
@@ -332,6 +447,66 @@ background:#008E97;
 
    var total = 0;
    var concluidas = 0;
+
+
+function irpl(){
+   var bgllogin = document.getElementById('bgloginid');
+      bgllogin.style.display = "initial"
+   var cadastro = document.getElementById('cadastroid');
+      cadastro.style.display = "none"
+}
+function irpc(){
+   var bgllogin = document.getElementById('bgloginid');
+      bgllogin.style.display = "none"
+   var cadastro = document.getElementById('cadastroid');
+      cadastro.style.display = "initial"
+}
+
+
+function login(){
+
+   if(1>0){
+      var bgllogin = document.getElementById('bgloginid');
+      bgllogin.style.display = "none"
+   }else{
+
+       var errologin = document.getElementById('errologinid');
+        errologin.style.display = "initial"
+
+      setTimeout(function() {
+
+             ;       errologin.style.display = "none"
+      }, 2000);
+     
+   }
+}
+
+function cadastro(){
+    var xhr = new XMLHttpRequest();
+         xhr.open('POST', 'https://appatividades-7450d-default-rtdb.firebaseio.com/usuarios.json', true);
+         xhr.setRequestHeader('Content-Type', 'application/json');
+         xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+               console.log('usuario adicionado com sucesso!');
+               fazerRequisicaoGet(); // Após adicionar, atualiza a lista de tarefas
+            }
+         };
+
+         var novaTarefa = {
+           nome: document.getElementById('nomeuser').value,
+           senha: document.getElementById('senhauser').value,
+         };
+
+         xhr.send(JSON.stringify(novaTarefa));
+}
+
+
+
+
+ localStorage.setItem('nome', 'SeuNome');
+ localStorage.setItem('idade', '25');
+ console.log(localStorage.getItem('nome'))
+
 
 
 
@@ -521,10 +696,6 @@ function formatarData(dataString) {
 
 
       function fazerRequisicaoPost() {
-
-          
-
-
 
          var xhr = new XMLHttpRequest();
          xhr.open('POST', 'https://appatividades-7450d-default-rtdb.firebaseio.com/tarefas.json', true);
