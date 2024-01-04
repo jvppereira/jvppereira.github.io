@@ -72,7 +72,7 @@ background:#008E97;
          height: 100%;
         padding: 20px;
         max-width: 800px;
-        min-width: 340px;
+        min-width: 310px;
 
 }
       h1 {
@@ -336,7 +336,35 @@ background:#008E97;
 
 
 
+function fazerRequisicaoGetbyid(id) {
+   console.log("dsds")
+   var xhr = new XMLHttpRequest();
+   xhr.open('GET', `https://appatividades-7450d-default-rtdb.firebaseio.com/tarefas.json?orderBy="$key"&equalTo="${id}"`, true);
+   xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+         var tarefag = JSON.parse(xhr.responseText);
+         console.log(tarefag);
 
+      }
+   };
+   xhr.send();
+
+}
+
+function buscarTarefaPorDescricao(descricao) {
+   var xhr = new XMLHttpRequest();
+   xhr.open('GET', `https://appatividades-7450d-default-rtdb.firebaseio.com/tarefas.json?orderBy="$descricao"&equalTo="${descricao}"`, true);
+   xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+         var tarefasr = JSON.parse(xhr.responseText);
+         console.log(tarefasr);
+      }
+   };
+   xhr.send();
+}
+
+//buscarTarefaPorDescricao('Comer fruta')
+//fazerRequisicaoGetbyid('-NnG2q8XyU3CrYL66zlG');
 
 
 
@@ -586,13 +614,20 @@ function formatarData(dataString) {
       }
 
       function atualizarStatusConcluida(tarefaId, novoStatus) {
+          var dataCriacao = new Date().toISOString();
          var xhr = new XMLHttpRequest();
          var url = 'https://appatividades-7450d-default-rtdb.firebaseio.com/tarefas/' + tarefaId + '.json';
          xhr.open('PATCH', url, true);
          xhr.setRequestHeader('Content-Type', 'application/json');
-         xhr.send(JSON.stringify({ concluida: novoStatus }));
+         xhr.send(JSON.stringify({
 
-         
+               concluida: novoStatus,
+               dataConclusao: null,
+               dataCriacao: dataCriacao,
+
+
+            }));
+
       };
 
 
