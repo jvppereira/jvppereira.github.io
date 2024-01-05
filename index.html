@@ -1360,6 +1360,10 @@ function marcarComoConcluida(tarefaId) {
 
         function salvarpontuacao(){
 
+         //aqui falta fazer um get que vai verificar se ja existe aquela data cadastrada para essse usuario no historico, se ja existir ele da patch
+
+
+
          pontsalva()
 
          var aproveitamento = (concluidas/total) * 100
@@ -1386,7 +1390,15 @@ function marcarComoConcluida(tarefaId) {
 
         }
 
+
+
+
+
+
+
          function salvarpontuacaosemanima(){
+             //aqui falta fazer um get que vai verificar se ja existe aquela data cadastrada para essse usuario no historico, se ja existir ele nao ataliza nada, so da o reset e boa
+
 
          var aproveitamento = (concluidas/total) * 100
 
@@ -1401,8 +1413,11 @@ function marcarComoConcluida(tarefaId) {
 
        
 
+         const resultado = getDiaAnterior();
+         console.log(resultado);
+
          var novohistorico = {
-            data: new Date().toISOString(),
+            data: resultado,
             status: concluidas,
             aproveitamento: `${aproveitamento}%`,
             userId: user.id,
@@ -1411,6 +1426,28 @@ function marcarComoConcluida(tarefaId) {
          xhr.send(JSON.stringify(novohistorico));
 
         }
+
+
+
+
+
+
+        function getDiaAnterior() {
+           // Obter a data atual
+           const dataAtual = new Date();
+
+           // Subtrair um dia da data atual
+           const diaAnterior = new Date(dataAtual);
+           diaAnterior.setDate(dataAtual.getDate() - 1);
+
+           // Ajustar as horas para 00:00:00
+           diaAnterior.setHours(0, 0, 0, 0);
+
+           // Formatar a data no formato desejado
+           const formatoDesejado = diaAnterior.toISOString();
+
+           return formatoDesejado;
+         }
 
    </script>
 </body>
