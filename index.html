@@ -400,7 +400,7 @@ background:#008E97;
 <body>
 
 <div class="container">
-   <h1>Cronograma Diário JV (2024)</h1>
+   <h1 id="nomedocara">Cronograma Diário (2024)</h1>
    <input type="text" id="descricaoTarefa" placeholder="Descrição da Tarefa">
    <input type="text" id="descricaoDetalhada" placeholder="Descrição Detalhada">
 
@@ -581,7 +581,7 @@ function verificarCheckbox() {
         localStorage.setItem('nome', nome);
           localStorage.setItem('senha', senha);
 
-          console.log(localStorage.getItem('nome'))
+         
     } else {
         
     }
@@ -593,7 +593,7 @@ function verificarCheckbox() {
          localStorage.removeItem('nome');
          localStorage.removeItem('senha');
 
-         console.log('Usuário saiu');
+         
 
           location.reload();
       }
@@ -611,6 +611,7 @@ if(localStorage.getItem('nome') && localStorage.getItem('nome')){
                   var bgllogin = document.getElementById('bgloginid');
                   bgllogin.style.display = "none"
                    fazerRequisicaoGet(user.id);
+                   document.getElementById("nomedocara").innerHTML = "Cronograma Diário " + nome + " (2024)";
 
                }
        },400)
@@ -639,6 +640,9 @@ function login(){
             bgllogin.style.display = "none"
              fazerRequisicaoGet(user.id);
 
+            document.getElementById("nomedocara").innerHTML = "Cronograma Diário " + nome + " (2024)";
+
+
          }else{
 
              var errologins = document.getElementById('errologin');
@@ -663,7 +667,7 @@ function cadastro(){
          xhr.setRequestHeader('Content-Type', 'application/json');
          xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-               console.log('usuario adicionado com sucesso!');
+               
                
             }
          };
@@ -695,7 +699,7 @@ function getusuarios(nome, senha) {
       if (xhr.readyState == 4 && xhr.status == 200) {
          var usuario = JSON.parse(xhr.responseText);
          var users = [];
-         console.log(usuario)
+         
          // Itera sobre cada chave (ID) no objeto
          for (var id in usuario) {
             // Verifica se a descrição é igual ao parâmetro
@@ -708,7 +712,7 @@ function getusuarios(nome, senha) {
          }
 
          // Exibe as tarefas encontradas
-         console.log(users);
+         
       }
    };
    xhr.send();
@@ -800,10 +804,10 @@ function tarefaresetadas() {
             if (xhr.readyState == 4 && xhr.status == 200) {
 
                if(tarefasr){
-                  console.log("ja tem")
+                  
                   tarefasr = JSON.parse(xhr.responseText);
                }else{
-                   console.log("n tem")
+                   
                   tarefasr = JSON.parse(xhr.responseText);
                }
 
@@ -822,7 +826,7 @@ function tarefaresetadas() {
          }
 
          // Exibe as tarefas encontradas
-         console.log(tarefasEncontradas);
+        
 
 
                exibirTarefas(tarefasEncontradas);
@@ -836,7 +840,7 @@ function tarefaresetadas() {
 
 
       function exibirTarefas(tarefas) {
-      console.log(tarefas)
+      
          var infoTarefasConcluidas = document.getElementById('infoTarefasConcluidas');
          var concluidasCount = document.getElementById('concluidasCount');
          var totalTarefasElement = document.getElementById('totalTarefas');
@@ -853,7 +857,7 @@ function tarefaresetadas() {
          for (var id in tarefas) {
             var tarefa = tarefas[id];
 
-            console.log(tarefa.id)
+            
 
               totalTarefas++;
             var itemLista = document.createElement('li');
@@ -967,7 +971,7 @@ function tarefaresetadas() {
          xhr.setRequestHeader('Content-Type', 'application/json');
          xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-               console.log('Tarefa adicionada com sucesso!');
+               
                   setTimeout(function() {
                      fazerRequisicaoGet();
                    }, 1000); 
@@ -993,7 +997,7 @@ function tarefaresetadas() {
 
 
 function marcarComoConcluida(tarefaId) {
-   console.log(tarefaId);
+   
 
    var xhr = new XMLHttpRequest();
    var url = `https://appatividades-7450d-default-rtdb.firebaseio.com/tarefas/${tarefaId}.json`;
@@ -1026,16 +1030,16 @@ function marcarComoConcluida(tarefaId) {
 
       function deletarTarefa(tarefaId) {
 
-         console.log(tarefaId)
+         
 
          var xhr = new XMLHttpRequest();
-         var url = `https://appatividades-7450d-default-rtdb.firebaseio.com/tarefas.json?orderBy="$key"&equalTo="${tarefaId}"`;
+         var url = `https://appatividades-7450d-default-rtdb.firebaseio.com/tarefas/${tarefaId}.json`;
 
          xhr.open('DELETE', url, true);
          xhr.onreadystatechange = function () {
             if (xhr.readyState == 4) {
                if (xhr.status == 200) {
-                  console.log('Tarefa deletada com sucesso!');
+                  
 
                     setTimeout(function() {
                      fazerRequisicaoGet();
@@ -1074,7 +1078,7 @@ function marcarComoConcluida(tarefaId) {
                }, 1000);
                              
 
-               console.log('Todas as tarefas resetadas para não concluídas!');
+               
                 // Atualiza a lista de tarefas
               
 
@@ -1138,7 +1142,7 @@ function marcarComoConcluida(tarefaId) {
          for (var id in historico) {
 
             var historicos = historico[id];
-             console.log(historicos)
+            
             var itemLista = document.createElement('li');
          
 
@@ -1189,7 +1193,7 @@ function marcarComoConcluida(tarefaId) {
                   }
 
                   // Exibe as tarefas encontradas
-                  console.log(hisotricoEncontradas);
+                 
 
 
 
@@ -1217,11 +1221,11 @@ function marcarComoConcluida(tarefaId) {
          xhr.setRequestHeader('Content-Type', 'application/json');
          xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-               console.log('historico adicionada com sucesso!');
+               
             }
          };
 
-        console.log(total)
+       
 
          var novohistorico = {
             data: new Date().toISOString(),
