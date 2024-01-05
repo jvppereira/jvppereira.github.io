@@ -387,6 +387,22 @@ background:#008E97;
 }
 
 
+.carregando {
+   z-index: 10;
+  
+    border: 15px solid #3498db;
+    border-top: 15px solid white;
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+    animation: spin 1s linear infinite;
+    margin: 50px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 
 
@@ -511,6 +527,16 @@ background:#008E97;
    </div>
 </div>
 
+
+<div id="carregandoid" class="bgL">
+  
+   <div class="carregando">
+
+   </div>
+</div>
+
+
+
 <div id="usuariocadastradoid" class="bgL">
   
    <div class="msg">
@@ -547,6 +573,48 @@ background:#008E97;
    var total = 0;
    var concluidas = 0;
    var tarefasr = null;
+   var datacomparativa = 0;
+
+
+ //location.reload();
+
+function diario(){
+
+   carregando()
+
+
+   
+   var dataatual = new Date().toISOString()
+
+   dataatual = formatarData(dataatual)
+
+   var datacriacao = formatarData(datacomparativa.dataCriacao)
+
+
+
+   console.log(dataatual[1])
+
+   console.log(datacriacao[1])
+
+   //var dataatual = 6
+
+   if(dataatual[1] > datacriacao[1] ){
+       setTimeout(function() {
+         salvarpontuacaosemanima()
+         console.log("salvarp")
+        },100)
+
+         setTimeout(function() {
+           resetarTarefassemanima()
+            console.log("resetart")
+        },2000)
+   }else{
+      console.log("prazo")
+   }
+
+}
+
+
 
 
 function irpl(){
@@ -608,10 +676,27 @@ if(localStorage.getItem('nome') && localStorage.getItem('nome')){
        setTimeout(function() {
             if(user){
 
-                  var bgllogin = document.getElementById('bgloginid');
-                  bgllogin.style.display = "none"
-                   fazerRequisicaoGet(user.id);
-                   document.getElementById("nomedocara").innerHTML = "Cronograma Diário " + nome + " (2024)";
+
+                  fazerRequisicaoGet(user.id);
+
+                  
+
+                  document.getElementById("nomedocara").innerHTML = "Cronograma Diário " + nome + " (2024)";
+
+                  setTimeout(function() {
+
+                        diario()
+
+                     }, 1000);
+
+
+                      setTimeout(function() {
+
+                        var bgllogin = document.getElementById('bgloginid');
+                        bgllogin.style.display = "none"
+
+                     }, 2000);
+
 
                }
        },400)
@@ -636,11 +721,24 @@ function login(){
 
          if(user){
 
-            var bgllogin = document.getElementById('bgloginid');
-            bgllogin.style.display = "none"
-             fazerRequisicaoGet(user.id);
+                  fazerRequisicaoGet(user.id);
 
-            document.getElementById("nomedocara").innerHTML = "Cronograma Diário " + nome + " (2024)";
+               
+                  document.getElementById("nomedocara").innerHTML = "Cronograma Diário " + nome + " (2024)";
+
+                  setTimeout(function() {
+
+                        diario()
+
+                     }, 1000);
+
+
+                      setTimeout(function() {
+
+                        var bgllogin = document.getElementById('bgloginid');
+                        bgllogin.style.display = "none"
+
+                     }, 2000);
 
 
          }else{
@@ -763,6 +861,16 @@ function pontsalva() {
    }, 2000); // Ajuste o tempo conforme necessário
 }
 
+function carregando() {
+
+       var carregando = document.getElementById('carregandoid')
+        carregando.style.display = "initial"
+
+   // Remove o elemento após a animação
+   setTimeout(function() {
+        carregando.style.display = "none"
+   }, 2000); // Ajuste o tempo conforme necessário
+}
 
 function usercadastrado() {
 
@@ -828,8 +936,9 @@ function tarefaresetadas() {
          // Exibe as tarefas encontradas
         
 
-
+               datacomparativa = tarefasEncontradas[0]
                exibirTarefas(tarefasEncontradas);
+               
             }
          };
          xhr.send();
@@ -922,7 +1031,7 @@ function tarefaresetadas() {
          var dataconluida = document.createElement('div');
          dataconluida.textContent = tarefa.dataConclusao
             ? `Data de Conclusão: ${formatarData(tarefa.dataConclusao)}`
-            : ''; // Exibe a descrição detalhada se existir
+            : ''; // Exibe a descrição detalhada se existir 
 
 
 
@@ -1087,6 +1196,45 @@ function marcarComoConcluida(tarefaId) {
          xhr.send();
       }
 
+
+
+      function resetarTarefassemanima() {
+
+         //aqui falta mnudar para ele resetar so as do usuario
+
+         var xhr = new XMLHttpRequest();
+         var url = 'https://appatividades-7450d-default-rtdb.firebaseio.com/tarefas.json';
+         xhr.open('GET', url, true);
+         xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+
+               // Itera sobre todas as tarefas e redefine concluída como false
+               for (var id in tarefasr) {
+                  nid = tarefasr[id].id
+                  
+                  atualizarStatusConcluida(nid, false);
+               }
+
+               setTimeout(function() {
+                  
+                  fazerRequisicaoGet();
+               }, 1000);
+                             
+
+               
+                // Atualiza a lista de tarefas
+              
+
+            }
+         };
+         xhr.send();
+      }
+
+
+
+
+
+
       function atualizarStatusConcluida(tarefaId, novoStatus) {
           var dataCriacao = new Date().toISOString();
          var xhr = new XMLHttpRequest();
@@ -1237,6 +1385,33 @@ function marcarComoConcluida(tarefaId) {
          xhr.send(JSON.stringify(novohistorico));
 
         }
+
+         function salvarpontuacaosemanima(){
+
+         var aproveitamento = (concluidas/total) * 100
+
+            var xhr = new XMLHttpRequest();
+         xhr.open('POST', 'https://appatividades-7450d-default-rtdb.firebaseio.com/hisotico.json', true);
+         xhr.setRequestHeader('Content-Type', 'application/json');
+         xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+               
+            }
+         };
+
+       
+
+         var novohistorico = {
+            data: new Date().toISOString(),
+            status: concluidas,
+            aproveitamento: `${aproveitamento}%`,
+            userId: user.id,
+         };
+
+         xhr.send(JSON.stringify(novohistorico));
+
+        }
+
    </script>
 </body>
 </html>
