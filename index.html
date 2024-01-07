@@ -56,6 +56,18 @@ background:#008E97;
          align-items: center;
 }
 
+.bgL4{
+     
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+         justify-content: center;
+         align-items: center;
+}
+
 .msg{
         width: 300px;
         text-align: center;
@@ -252,7 +264,7 @@ background:#008E97;
       }
 
       .negativo:hover {
-         #db1616;
+         
          color: white;
       }
 
@@ -352,6 +364,37 @@ background:#008E97;
          cursor: pointer;
 }
 
+.explicacao{
+        width: 300px;
+        text-align: center;
+         height: 100%;
+         max-height: 300px;
+         margin: 50px auto;
+         background-color: #95ecea;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.explicacao p{
+   font-size: 18px;
+   color:rgb(0, 0, 0);
+}
+
+.btnok{
+  text-align: center;
+         width: 100%;
+         max-width: 150px;
+         padding: 15px;
+         padding-top:24px;
+         height: 30px;
+         color: white;
+         border: 1px solid white;
+         border-radius: 12px;
+         background-color: #458fff;
+         margin: 0 auto;
+         margin-top: 1px;
+         cursor: pointer;
+}
 
 
       /*animacoes*/
@@ -417,6 +460,9 @@ background:#008E97;
 
 <div class="container">
    <h1 id="nomedocara">Cronograma Diário (2024)</h1>
+
+
+
    <input type="text" id="descricaoTarefa" placeholder="Descrição da Tarefa">
    <input type="text" id="descricaoDetalhada" placeholder="Descrição Detalhada">
 
@@ -528,7 +574,7 @@ background:#008E97;
 </div>
 
 
-<div id="carregandoid" class="bgL">
+<div id="carregandoid" class="bgL4">
   
    <div class="carregando">
 
@@ -537,12 +583,22 @@ background:#008E97;
 
 
 
+
 <div id="usuariocadastradoid" class="bgL">
   
-   <div class="msg">
+   <div class="explicacao">
 
-             <p>Usuário foi cadastrado!</p>
+      <p>Esse é um cronograma diário para se organizar em relaçao a tarefas do dia a dia</p>
+   
+      <p>Aqui voce pode criar tarefas, excluir, marcar como concluídas e reseta-las manualmente. Ao final do dia todas as suas tarefas só resetadas e sua pontuacao é salva automaticamente.</p>
+   
+      <p>Voce tambem pode salvar sua pontuacao manualmente quantas vezes quiser</p>
+   
    </div>
+   <div class="btnok" onclick="fecharmodalexplica()">
+      OK
+   </div>
+
 </div>
 
 
@@ -567,6 +623,9 @@ background:#008E97;
 
    <script>
 
+carregando()
+
+
 //---------------------variaveis globais--------------------
 
    var user = null;
@@ -574,13 +633,16 @@ background:#008E97;
    var concluidas = 0;
    var tarefasr = null;
    var datacomparativa = 0;
+   var historicoporid = [];
+   var jatem = false;
+   var naotem = false;
 
 
  //location.reload();
 
 function diario(){
 
-   carregando()
+
 
 
    
@@ -596,7 +658,7 @@ function diario(){
 
    console.log(datacriacao[1])
 
-   //var dataatual = 6
+   //var dataatual = 8
 
    if(dataatual[1] > datacriacao[1] ){
        setTimeout(function() {
@@ -607,7 +669,7 @@ function diario(){
          setTimeout(function() {
            resetarTarefassemanima()
             console.log("resetart")
-        },2000)
+        },3000)
    }else{
       console.log("prazo")
    }
@@ -675,7 +737,7 @@ if(localStorage.getItem('nome') && localStorage.getItem('nome')){
 
        setTimeout(function() {
             if(user){
-
+               carregando()
 
                   fazerRequisicaoGet(user.id);
 
@@ -695,7 +757,7 @@ if(localStorage.getItem('nome') && localStorage.getItem('nome')){
                         var bgllogin = document.getElementById('bgloginid');
                         bgllogin.style.display = "none"
 
-                     }, 2000);
+                     }, 1000);
 
 
                }
@@ -720,6 +782,7 @@ function login(){
      setTimeout(function() {
 
          if(user){
+            carregando()
 
                   fazerRequisicaoGet(user.id);
 
@@ -738,7 +801,7 @@ function login(){
                         var bgllogin = document.getElementById('bgloginid');
                         bgllogin.style.display = "none"
 
-                     }, 2000);
+                     }, 1000);
 
 
          }else{
@@ -869,7 +932,7 @@ function carregando() {
    // Remove o elemento após a animação
    setTimeout(function() {
         carregando.style.display = "none"
-   }, 2000); // Ajuste o tempo conforme necessário
+   }, 3000); // Ajuste o tempo conforme necessário
 }
 
 function usercadastrado() {
@@ -877,11 +940,13 @@ function usercadastrado() {
        var usuariocadastrado = document.getElementById('usuariocadastradoid')
         usuariocadastrado.style.display = "initial"
 
-   // Remove o elemento após a animação
-   setTimeout(function() {
-        usuariocadastrado.style.display = "none";
-      location.reload();
-   }, 2000); // Ajuste o tempo conforme necessário
+
+}
+function fecharmodalexplica(){
+   var usuariocadastrado = document.getElementById('usuariocadastradoid')
+        usuariocadastrado.style.display = "none"
+        location.reload();
+
 }
 
 
@@ -1107,7 +1172,7 @@ function tarefaresetadas() {
 
 function marcarComoConcluida(tarefaId) {
    
-
+console.log(tarefaId)
    var xhr = new XMLHttpRequest();
    var url = `https://appatividades-7450d-default-rtdb.firebaseio.com/tarefas/${tarefaId}.json`;
 
@@ -1238,9 +1303,11 @@ function marcarComoConcluida(tarefaId) {
       function atualizarStatusConcluida(tarefaId, novoStatus) {
           var dataCriacao = new Date().toISOString();
          var xhr = new XMLHttpRequest();
+         //console.log(tarefaId)
          var url = `https://appatividades-7450d-default-rtdb.firebaseio.com/tarefas/${tarefaId}.json`;
          xhr.open('PATCH', url, true);
          xhr.setRequestHeader('Content-Type', 'application/json');
+
          xhr.send(JSON.stringify({
 
                concluida: novoStatus,
@@ -1335,7 +1402,8 @@ function marcarComoConcluida(tarefaId) {
                      if (historico[id].userId === user.id) {
                         // Adiciona o ID ao objeto da tarefa
                         var pontuacao = historico[id];
-                        
+                        pontuacao.id = id
+                     
                         hisotricoEncontradas.push(pontuacao);
                      }
                   }
@@ -1346,8 +1414,10 @@ function marcarComoConcluida(tarefaId) {
 
 
                     setTimeout(function() {
+                   
                     exibirHistorico(hisotricoEncontradas);
-                     }, 900);
+                    historicoporid = hisotricoEncontradas
+                     }, 700);
 
               
             }
@@ -1358,74 +1428,172 @@ function marcarComoConcluida(tarefaId) {
 
 
 
-        function salvarpontuacao(){
+        function salvarpontuacao(){ 
+      
+            fazerRequisicaoGetpontuacao()   
+            
+            pontsalva()
 
-         //aqui falta fazer um get que vai verificar se ja existe aquela data cadastrada para essse usuario no historico, se ja existir ele da patch
+            //settimeout aquis
+            setTimeout(function() {
+
+            var aproveitamento = (concluidas/total) * 100
+            var aproveitamento = parseInt(aproveitamento.toFixed(0));
 
 
+               var datahj = new Date().toISOString()
 
-         pontsalva()
+               datahj = formatarData(datahj)
+            
+               var partes = datahj.split(", ");
+               var dataString = partes[0];
 
-         var aproveitamento = (concluidas/total) * 100
-
-            var xhr = new XMLHttpRequest();
-         xhr.open('POST', 'https://appatividades-7450d-default-rtdb.firebaseio.com/hisotico.json', true);
-         xhr.setRequestHeader('Content-Type', 'application/json');
-         xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-               
-            }
-         };
-
-       
-
-         var novohistorico = {
-            data: new Date().toISOString(),
-            status: concluidas,
-            aproveitamento: `${aproveitamento}%`,
-            userId: user.id,
-         };
-
-         xhr.send(JSON.stringify(novohistorico));
-
-        }
+               console.log(dataString);
 
 
 
+                  for (var id in historicoporid) {
+                           console.log(historicoporid)
+                           // Verifica se a descrição é igual ao parâmetro
 
+                           var dat = historicoporid[id].data
+
+                           dat = formatarData(dat)
+
+                           var partes2 = dat.split(", ");
+                           var dataString2 = partes2[0];
+
+                           console.log(dataString2);
+
+
+                              if (dataString2 === dataString) {
+
+                              console.log("jatem re")
+                              console.log(historicoporid[id].id)
+
+                                 var dataCriacao = new Date().toISOString();
+
+                                 
+                                 //
+
+                                 var xhr = new XMLHttpRequest();
+                                 var url = `https://appatividades-7450d-default-rtdb.firebaseio.com/hisotico/${historicoporid[id].id}.json`;
+                                 
+                                 xhr.open('PATCH', url, true);
+                                 xhr.setRequestHeader('Content-Type', 'application/json');
+
+                                 xhr.send(JSON.stringify({
+
+                                 data: new Date().toISOString(),
+                                 status: concluidas,
+                                 aproveitamento: `${aproveitamento}%`,
+                                 userId: user.id,
+
+
+
+                              }));
+
+                              jatem = true;
+
+                              }else{
+                                                      
+                                 
+                              }
+                     }
+
+                     setTimeout(function() {
+
+                        if(!jatem){
+
+                           console.log("naotem ainda em papai")
+                              
+                              var xhr = new XMLHttpRequest();
+                              xhr.open('POST', 'https://appatividades-7450d-default-rtdb.firebaseio.com/hisotico.json', true);
+                              xhr.setRequestHeader('Content-Type', 'application/json');
+                              xhr.onreadystatechange = function () {
+                                 if (xhr.readyState == 4 && xhr.status == 200) {
+                                    
+                                 }
+                              };
+            
+                              var novohistorico = {
+                                 data: new Date().toISOString(),
+                                 status: concluidas,
+                                 aproveitamento: `${aproveitamento}%`,
+                                 userId: user.id,
+                              };
+            
+                              xhr.send(JSON.stringify(novohistorico));
+                           }
+
+                     }, 3000)
+
+                  },1000)
+               }
+
+
+
+             
 
 
 
          function salvarpontuacaosemanima(){
              //aqui falta fazer um get que vai verificar se ja existe aquela data cadastrada para essse usuario no historico, se ja existir ele nao ataliza nada, so da o reset e boa
+             var datahj2 = new Date().toISOString()
+             datahj2 = formatarData(datahj2)
+            var partes3 = datahj2.split(", ");
+            var dataString3 = partes3[0];
+
+            console.log(dataString3);
+
+             for (var id in historicoporid) {
+
+               var dat2 = !historicoporid[id].data
+               dat2 = formatarData(dat2)
+               var partes4 = dat2.split(", ");
+               var dataString4 = partes4[0];
+
+                     // Verifica se a descrição é igual ao parâmetro
+                     if (dataString4 != dataString3) {
+                           naotem = true;
+                           console.log("naotem ativado!")
+                     }
+
+               }
 
 
-         var aproveitamento = (concluidas/total) * 100
 
-            var xhr = new XMLHttpRequest();
-         xhr.open('POST', 'https://appatividades-7450d-default-rtdb.firebaseio.com/hisotico.json', true);
-         xhr.setRequestHeader('Content-Type', 'application/json');
-         xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-               
-            }
-         };
+               setTimeout(function() {
+                  if(naotem){
+                           var aproveitamento = (concluidas/total) * 100
+                           var aproveitamento = parseInt(aproveitamento.toFixed(0));
 
-       
+                           var xhr = new XMLHttpRequest();
+                           xhr.open('POST', 'https://appatividades-7450d-default-rtdb.firebaseio.com/hisotico.json', true);
+                           xhr.setRequestHeader('Content-Type', 'application/json');
+                           xhr.onreadystatechange = function () {
+                           if (xhr.readyState == 4 && xhr.status == 200) {
+                              
+                           }
+                           };
 
-         const resultado = getDiaAnterior();
-         console.log(resultado);
 
-         var novohistorico = {
-            data: resultado,
-            status: concluidas,
-            aproveitamento: `${aproveitamento}%`,
-            userId: user.id,
-         };
 
-         xhr.send(JSON.stringify(novohistorico));
+                           const resultado = getDiaAnterior();
+                     
 
-        }
+                           var novohistorico = {
+                           data: resultado,
+                           status: concluidas,
+                           aproveitamento: `${aproveitamento}%`,
+                           userId: user.id,
+                           };
+
+                           xhr.send(JSON.stringify(novohistorico));
+                     }
+                   }, 1000); 
+
+         }   
 
 
 
