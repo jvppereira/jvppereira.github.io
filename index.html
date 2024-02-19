@@ -198,6 +198,9 @@ background: linear-gradient(90deg, rgba(240, 68, 68, 0.789) 0%, rgba(0,0,0,1) 22
 
 
       .btn-body{
+        -webkit-box-shadow: 2px 4px 36px -6px rgba(255,255,255,1);
+-moz-box-shadow: 2px 4px 36px -6px rgba(255,255,255,1);
+box-shadow: 2px 4px 36px -6px rgba(255,255,255,1);
         border: 1px solid white;
         cursor: pointer;
         border-radius: 100%;
@@ -205,19 +208,43 @@ background: linear-gradient(90deg, rgba(240, 68, 68, 0.789) 0%, rgba(0,0,0,1) 22
         height: 35px;
         background-color: rgb(46, 45, 118);
         position: fixed;
-        top: 585px;
+        top: 610px;
         left: 83%;
         z-index: 10;
         color:  white;
         padding-top: 20px;
         transition: .3s;
+        animation: bounce 1.4s ease infinite; 
         text-align: center;
       }
       .btn-body:hover {
         background-color: rgba(46, 45, 118, 0.591);
 
       }
+  /* Animação de pulo */
+  @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
 
+    /* Animação de rotação */
+    @keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Estilo para adicionar rotação ao clicar */
+    .rotate {
+        animation: rotate 2s linear infinite;
+    }
 
       /*--------------------conteudo-header--------------------*/
       .conteudo-header{
