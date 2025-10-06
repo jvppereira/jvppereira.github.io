@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=">
+	<title></title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<style type="text/css">
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:wght@500&display=swap');
+
+	body{
+		padding: 0;
+		margin: 0;
+		font-family: 'Arial', sans-serif;
+		font-family: "Roboto", sans-serif;
+		font-weight: 400;
+
+		box-sizing: border-box;
+	}
+
+		.loginbtn{
+         text-align: center;
+         width: 100%;
+         max-width: 150px;
+         padding: 15px;
+         padding-top:0px;
+         height: 30px;
+         color: white;
+         border: 1px solid white;
+         border-radius: 12px;
+         background-color: skyblue;
+         margin: 0 auto;
+         margin-top: 40px;
+         cursor: pointer;
+  }
+  .bgL{
+      display: none;
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+         justify-content: center;
+         align-items: center;
+}
+.msg{
+        width: 300px;
+        text-align: center;
+         height: 100%;
+         max-height: 50px;
+         margin: 50px auto;
+         background-color: #37a337;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.msg p{
+   font-size: 18px;
+   color:white;
+}
+.msgerro{
+           width: 300px;
+        text-align: center;
+         height: 100%;
+         max-height: 50px;
+         margin: 50px auto;
+         background-color: red;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.msgerro p{
+   font-size: 18px;
+   color:white;
+}
+
+  .botoes{
+  	display: flex;
+  	width: 100%;
+  	max-width: 400px;
+  	margin: 0 auto;
+  	margin-bottom: 40px;
+  }
+
+
+
+  .container{
+  	
+  	width: 100%;
+  	height: 100%;
+  	max-width: 1980px;
+  	height: 650px;
+  	display: flex;
+
+  }
+
+  .containerdash{
+
+	text-align: center;
+  	width: 100%;
+	margin: 0 auto;
+	
+  	background-color: rgb(255, 255, 255);
+  	height: 100%;
+
+  }
+
+.menucima{
+	
+	width: 100%;
+	height: 110px;
+	display: flex;
+	background-color: #0c8762;
+}
+.contsingle{
+	
+
+	padding-left: 30px;	
+	margin: 0 auto;
+	padding: 20px;
+	width: 30%;
+	
+}
+.user{
+	padding-left: 50%;
+	position: relative;
+
+	display: flex;
+	width: 100%;
+	max-width: 200px;
+}
+.nome{
+	
+	width: 100px;
+	color: white;
+}
+.titulo{
+	color: white;
+	text-align: center;
+}
+.titulo p{
+	font-size: 20px;
+}
+.logo{
+	position: relative;
+	
+	left: 40px;
+	width: 100%;
+	border-radius: 10px;
+	height: 70px;
+}
+.logo img{
+	border-radius: 10px;
+	width: 100px;
+	height: 100%;
+}
+
+
+.foto{
+
+	width: 50px;
+	border-radius: 10px;
+	height: 40px;
+}
+.foto img{
+	position: relative;
+	top: 5px;
+	cursor: pointer;
+	border-radius: 100%;
+	width: 90%;
+	height: 100%;
+}
+
+.menulateral{
+	overflow-x: auto;
+	background-color: #0c8762;
+	width: 300px;
+  	height: 100%;
+	max-height: 650px;
+	
+  	
+}
+
+.lsitaitems{
+
+	margin-top: 0px;
+	text-align: center;
+}
+.item{
+
+	cursor: pointer;
+		padding: 10px;
+	font-size: 17px;
+	color: white;
+	transition: .3s;
+}
+
+.item:hover{
+	color:#6c8577;
+	
+}
+.bgL3{
+     
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+         justify-content: center;
+         align-items: center;
+}
+.bgconteudolog{
+
+width: 340px;
+height: 100%;
+max-height: 320px;
+margin: 50px auto;
+background-color: #fff;
+padding: 20px;
+overflow-x: hidden;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+}
+.bgcontentt{
+   width: 100%;
+   height: 100%;
+     overflow: auto;
+}
+.bgcontentt h1{
+	font-size: 20px;
+  text-align: center;
+  color: #095a2d;
+  font-weight: 200;
+}
+
+.loginbtn{
+         text-align: center;
+         width: 100%;
+         max-width: 150px;
+         padding: 15px;
+         padding-top:0px;
+         height: 30px;
+         color: white;
+         border: 1px solid white;
+         border-radius: 12px;
+         background-color: #0c8762;
+         margin: 0 auto;
+         margin-top: 80px;
+         cursor: pointer;
+		 transition: .3s;
+  }
+  .loginbtn:hover{
+	background-color: #b9c8c4;
+	color: #0c8762;;
+  }
+  
+  input {
+         padding: 10px;
+         margin-bottom: 10px;
+         border: 1px solid #ccc;
+         border-radius: 5px;
+         font-size: 14px;
+         box-sizing: border-box;
+         width: 100%;
+      }
+
+	.listitemsubcats{
+	
+		background-color:  #5bac85;;
+	  }
+
+	.subcats{
+		
+		padding: 10px;
+	cursor: pointer;
+		border-bottom: 1px solid white;
+	color: white;
+	transition: .3s;
+	padding-left: 0px;
+	}
+
+	.subcats:hover{
+	color:#038D42;
+	background-color: #ffffff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.bgcirar{
+		border: 1px solid black;
+		border-radius: 8px;
+		text-align: center;
+		width: 740px;
+		height: 100%;
+		max-height: 500px;
+		overflow-x: hidden;
+		margin: 50px auto;
+		padding: 20px;
+	
+	}
+
+	.bgcriar input[type=text]{
+		width: 200px;
+	}
+	.checkdiv{
+	text-align: center;
+	margin-top: 20px;
+	color: #666666;
+	}
+	.check{
+	overflow-x: hidden;
+	position: relative;
+	top: -18px;
+	left: 70px;
+	}
+
+.bgcriar h1{
+	 font-size: 20px;
+	 text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.tabelacoontainer{
+            margin: 0 auto;
+            width: 1200px;
+            height: 500px;
+            overflow: auto;
+			text-align: center;
+        }
+		h4{
+            
+			padding-top: 10px;
+			padding-left: 0px;
+			text-align: left;
+			font-size: 25px;
+			color:#095a2d;;
+           
+        }
+        .containerbotoes{
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 1200px;
+			padding-left: 120px;
+			text-align: left;
+			
+          
+        }
+        .btns{
+	
+			
+            width: 10%;
+            padding: 10px;
+            border-radius: 15px;
+          background-color: #0c8762;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            cursor: pointer;
+            transition: .2s;
+            border: none;
+			margin-top: 50px;
+		
+
+        }
+        .btns:hover{
+            color: #0c8762;
+          	background-color: #e2e3e2;
+        }   
+        table {
+            border-collapse: collapse;
+            width: 80%;
+       
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+			background-color: #0c8762;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .grafico{
+            margin: 0 auto;
+            text-align: center;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+
+
+
+	</style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="paglogin" style="display: none;">
+
+	<div id="cadastroid" class="bgL3">
+  
+		<div class="bgconteudolog">
+	 
+			  <div class="bgcontentt">
+
+					<h1 style="	font-family: 'Roboto', sans-serif;
+					font-weight: 400;">Relizar login para acessar painel</h1>
+
+					<input type="text" id="nomeuser" placeholder="Nome: ">
+					<input type="password" id="senhauserc" placeholder="Senha: ">
+	 
+
+
+					
+			<div class="loginbtn" onclick="login()">
+				  <p>Login</p>
+			   </div>
+			
+			  </div>
+			
+	 
+			
+		</div>
+	 </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="pag1" style="display: initial;">
+
+<div class="menucima">
+
+
+
+	<div class="contsingle">
+	<div class="logo">
+		<img src="unimed-logo.png"/>
+	</div>
+</div>
+
+
+
+
+<div class="contsingle">
+	<div class="titulo">
+		<p>Painel Unimed</p>
+	</div>
+</div>
+
+
+
+	<div class="contsingle">
+	<div class="user" style="position: relative;">
+
+		<div class="nome">
+			<p id="user"></p>
+		</div>
+	
+		<div class="foto">
+			<img src="user.webp"/>
+		</div>
+	
+	</div>
+</div>
+
+</div>
+
+<div class="container">
+
+<div class="menulateral">
+
+<div class="lsitaitems">
+
+
+
+		<div class="item"  style="display: none;" id="subcategoria1" onclick="teste(this.id)" style="border-top: 1px solid white">
+			
+			<p>Faturamento</p>
+
+		</div>
+
+
+<!--SUBCATEGORIA 1-->
+		<div class="" style="display: none;" id="subcategoria1v">
+				
+			<div class="listitemsubcats"> 
+
+				<div id="https://app.powerbi.com/reportEmbed?reportId=15abb0f1-568e-455c-a52e-153e80896a4d&autoAuth=true&ctid=e639878c-010f-442a-9926-86151f075ba0&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XLUluZm8tMi1DcmVkZW50aWFscy1QeXRob24tQlItVXNlcnMud2luZG93cy5uZXQvIn0%3D" class="subcats" onclick="dashselect(this.id)">
+					<p> Geral </p>
+				</div>
+
+				<div id="https://app.powerbi.com/reportEmbed?reportId=5d8ac478-4f15-49aa-ab32-3bf6b981574e&autoAuth=true&ctid=e639878c-010f-442a-9926-86151f075ba0" class="subcats" onclick="dashselect(this.id)">
+					<p> Financeiro </p>
+				</div>
+
+				<div id="https://app.powerbi.com/reportEmbed?reportId=d27922bb-99f1-4168-bb95-2087c2537c39&autoAuth=true&ctid=e639878c-010f-442a-9926-86151f075ba0" class="subcats" onclick="dashselect(this.id)">
+					<p> Pendente </p>
+				</div>
+
+			</div><!--listitemsubcats-->
+
+		</div>
+<!--SUBCATEGORIA 1-->
+
+
+
+		<div class="item" style="display: none;" id="subcategoria2" onclick="teste(this.id)">
+			<p>Análise</p>
+		</div>
+
+			<!--SUBCATEGORIA 2-->
+			<div class="" style="display: none;" id="subcategoria2v">
+				
+				<div class="listitemsubcats"> 
+	
+					<div id="" class="subcats" onclick="dashselect(this.id)">
+						<p> > Subcategoria dash2</p>
+					</div>
+	
+					<div id="" class="subcats" onclick="dashselect(this.id)">
+						<p> > Subcategoria2 dash2</p>
+					</div>
+	
+					<div id="" class="subcats" onclick="dashselect(this.id)">
+						<p> > Subcategoria3 dash2</p>
+					</div>
+	
+				</div><!--listitemsubcats-->
+	
+			</div>
+	<!--SUBCATEGORIA 2-->
+
+
+
+		<div class="item" style="display: none;" id="subcategoria3" onclick="teste(this.id)">
+			<p>Pacientes</p>
+
+		</div>
+
+			<!--SUBCATEGORIA 1-->
+			<div class="" style="display: none;" id="subcategoria3v">
+				
+				<div class="listitemsubcats"> 
+	
+					<div id="" class="subcats" onclick="dashselect(this.id)">
+						<p> > Subcategoria dash3</p>
+					</div>
+	
+					<div id="" class="subcats" onclick="dashselect(this.id)">
+						<p> > Subcategoria2 dash3</p>
+					</div>
+	
+					<div id="" class="subcats" onclick="dashselect(this.id)">
+						<p> > Subcategoria3 dash3</p>
+					</div>
+	
+				</div><!--listitemsubcats-->
+	
+			</div>
+	<!--SUBCATEGORIA 2-->
+
+
+	<div class="item" style="display: none;" id="subcategoria4" onclick="teste(this.id)" style="border-top: 1px solid white">
+			
+		<p>Gestão</p>
+
+	</div>
+
+
+<!--SUBCATEGORIA 1-->
+	<div class="" style="display: none;" id="subcategoria4v">
+			
+		<div class="listitemsubcats"> 
+
+			<div id="" class="subcats" onclick="dashselect(this.id)">
+				<p> > Subcategoria dash</p>
+			</div>
+
+			<div id="" class="subcats" onclick="dashselect(this.id)">
+				<p> > Subcategoria2 dash</p>
+			</div>
+
+			<div id="" class="subcats" onclick="dashselect(this.id)">
+				<p> > Subcategoria3 dash</p>
+			</div>
+
+		</div><!--listitemsubcats-->
+
+	</div>
+<!--SUBCATEGORIA 1-->
+
+
+
+
+<div class="item" style="display: none;" id="subcategoria5" onclick="teste(this.id)" style="border-top: 1px solid white">
+			
+	<p>Cirurgias</p>
+
+</div>
+
+
+<!--SUBCATEGORIA 1-->
+<div class="" style="display: none;" id="subcategoria5v">
+		
+	<div class="listitemsubcats"> 
+
+		<div id="" class="subcats" onclick="dashselect(this.id)">
+			<p> > Subcategoria dash</p>
+		</div>
+
+		<div id="" class="subcats" onclick="dashselect(this.id)">
+			<p> > Subcategoria2 dash</p>
+		</div>
+
+		<div id="" class="subcats" onclick="dashselect(this.id)">
+			<p> > Subcategoria3 dash</p>
+		</div>
+
+	</div><!--listitemsubcats-->
+
+</div>
+<!--SUBCATEGORIA 1-->
+
+
+
+		<div class="item" id="bgcadastroitem" onclick="criar()" style="border-bottom: none; display: none;">
+			<p>Gestão de usuários</p>
+		</div>
+
+
+		<div class="item" onclick="sair()" style="border-bottom: none;">
+			<p>Sair</p>
+		</div>
+
+
+
+	</div>
+
+</div>
+
+
+
+
+	<div class="containerdash" id="dahsid">
+
+		<iframe id="dmeudash" title="Pronto Atendimento - Internado" width="100%" height="641.25" src="https://app.powerbi.com/reportEmbed?reportId=15abb0f1-568e-455c-a52e-153e80896a4d&autoAuth=true&ctid=e639878c-010f-442a-9926-86151f075ba0&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XLUluZm8tMi1DcmVkZW50aWFscy1QeXRob24tQlItVXNlcnMud2luZG93cy5uZXQvIn0%3D" frameborder="0" allowFullScreen="true"></iframe>
+		
+	</div>
+
+
+
+	<div class="bgcirar" style="display: none;" id="bgcadatron">
+
+		<h1 style="	font-family: 'Roboto', sans-serif;
+		font-weight: 400; font-size: 30px; margin-bottom: 40px;">Criando novo usuário</h1>
+
+		<input type="text" id="nuser" placeholder="Nome: ">
+		<input type="text" id="nsenha" placeholder="Senha: ">
+	  
+		<div class="checkdiv">
+		   
+		  <label for="myCheckbox">Financeiro</label>
+					 <input type="checkbox" id="financeiro" class="check" onchange="verificarCheckbox('financeiro')">
+		  <label for="myCheckbox">Analise</label>
+					 <input type="checkbox" id="analise" class="check" onchange="verificarCheckbox('analise')">
+			<label for="myCheckbox">Pacientes</label>
+					 <input type="checkbox" id="pacientes" class="check" onchange="verificarCheckbox('pacientes')">
+		<label for="myCheckbox">Gestão</label>
+					 <input type="checkbox" id="gestao" class="check" onchange="verificarCheckbox('gestao')">
+<label for="myCheckbox">Cirurgias</label>
+					 <input type="checkbox" id="cirurgias" class="check" onchange="verificarCheckbox('cirurgias')">
+		
+
+					 <label for="myCheckbox">Usuário admin?</label>
+					 <input type="checkbox" id="admin" class="check" onchange="verificarCheckbox('admin')">
+
+
+	  </div>
+  
+
+	<div class="loginbtn" onclick="cadastroreal()">
+	  <p>CADASTRAR</p>
+   </div>
+  
+
+
+
+
+</div>
+
+	
+
+
+
+
+
+
+
+<div style="display: none; overflow-x: hidden;" id="bgcadatro">
+
+
+
+   
+    <div class='containerbotoes'>
+
+		<h4 style="	font-family: 'Roboto', sans-serif;
+		font-weight: 400; font-size: 30px;">Gestão de usuários do sistema</h4>
+
+        <button class='btns' onclick='Criarnovo()'>Criar novo usuário</button>
+
+		<button class='btns' style="margin-left: 20px;"   onclick='Criarnovo()'>Editar dados de usuários</button>
+
+		<button class='btns' style="margin-left: 20px;"   onclick='Criarnovo()'>Deletar todos os usuários</button>
+  
+    </div>
+    
+
+	<div class='tabelacoontainer'>
+        <table>
+            <thead>
+                <tr>
+                    <!-- Os cabeçalhos serão preenchidos dinamicamente -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Os dados serão preenchidos dinamicamente -->
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+	</div><!--container-->
+
+
+
+
+
+</div>
+
+
+
+<div id="usuariocadastradoid" class="bgL">
+  
+	<div class="msg">
+ 
+			  <p>Usuário foi cadastrado!</p>
+	</div>
+ </div>
+
+
+
+ <div id="errologin" class="bgL">
+  
+	<div class="msgerro">
+ 
+			  <p>Usuário não encontrado</p>
+	</div>
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+   var user = null;
+var usuario = ""
+var atributos = []
+
+
+
+
+function Criarnovo(){
+	var bgcadatron = document.getElementById('bgcadatron')
+	bgcadatron.style.display = "initial"
+
+
+	var bgcadatro = document.getElementById('bgcadatro')
+	bgcadatro.style.display = "none"
+	
+}
+
+
+
+
+
+
+
+
+function usercadastrado() {
+
+var usuariocadastrado = document.getElementById('usuariocadastradoid')
+ usuariocadastrado.style.display = "initial"
+
+// Remove o elemento após a animação
+setTimeout(function() {
+ usuariocadastrado.style.display = "none";
+location.reload();
+}, 2000); // Ajuste o tempo conforme necessário
+}
+
+
+function login(){	
+
+	  usuario = document.getElementById('nomeuser').value
+	  senha = document.getElementById('senhauserc').value
+
+	  getusuarios(usuario, senha)
+
+
+
+            setTimeout(function() {
+
+              
+          
+	  if(1 =1){
+		var bgllogin = document.getElementById('pag1');
+      bgllogin.style.display = "initial"
+   var cadastro = document.getElementById('paglogin');
+      cadastro.style.display = "none"
+
+
+
+	  var meuParagrafo = document.getElementById('user');
+	  meuParagrafo.textContent = "Usuário: " + usuario;
+
+	  abrirabas()
+	  }else{
+		var errologins = document.getElementById('errologin');
+              errologins.style.display = "initial"
+
+            setTimeout(function() {
+
+               errologins.style.display = "none"
+            }, 2000);
+		}}, 2000);	
+
+
+
+}
+
+function sair(){
+	var bgllogin = document.getElementById('paglogin');
+      bgllogin.style.display = "initial"
+   var cadastro = document.getElementById('pag1');
+      cadastro.style.display = "none"
+}
+
+
+function criar(){
+
+	var dash = document.getElementById('dahsid');
+	dash.style.display = "none"
+
+	var bgcadatron = document.getElementById('bgcadatron')
+	bgcadatron.style.display = "none"
+
+	buscarusers()
+
+	var bcadastro = document.getElementById('bgcadatro');
+	bcadastro.style.display = "initial"
+
+
+}
+
+const LISTA = {};
+function cadastroreal(){
+	atr = ['financeiro', 'analise','pacientes','gestao','cirurgias','admin']
+	
+		 for (let i = 0; i < atr.length; i++) {
+			var atributo = atr[i];
+			if (atributos.includes(atributo)) {
+				LISTA[atributo] = true;
+			} else {
+				LISTA[atributo] = false;
+			}
+		}
+
+		console.log(LISTA.cirurgias)
+		setTimeout(() => {
+			cadastro()
+		}, "1000");
+	
+}
+
+
+//usercadastrado
+function cadastro(){
+    var xhr = new XMLHttpRequest();
+         xhr.open('POST', 'https://appatividades-7450d-default-rtdb.firebaseio.com/usuarios.json', true);
+         xhr.setRequestHeader('Content-Type', 'application/json');
+         xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+               
+               
+            }
+         };
+
+
+
+
+
+
+         var novaTarefa = {
+           nome: document.getElementById('nuser').value,
+           senha: document.getElementById('nsenha').value,
+		    financeiro: LISTA.financeiro,
+			analise: LISTA.analise,
+		    pacientes: LISTA.pacientes,
+		    gestao: LISTA.gestao,
+			cirurgias: LISTA.cirurgias,
+			criadopor: usuario,
+			admin: LISTA.admin,
+         };
+
+         xhr.send(JSON.stringify(novaTarefa));
+
+
+         usercadastrado()
+
+        
+}
+
+
+
+//setando os atributos do usuario novo
+
+
+
+function verificarCheckbox(atributo) {
+console.log(atributo)
+
+    // Obter a referência do elemento checkbox
+    var checkbox = document.getElementById(`${atributo}`);
+
+
+    // Verificar se a checkbox está marcada
+    if (checkbox.checked) {
+		//console.log("esta marcada")
+		// if(atributos.includes(atributo)){
+		// 	atributos.splice(atributo)
+		
+		 	atributos.push(atributo)
+			
+		
+	
+		// console.log(atributos)
+         
+    }else{
+		//console.log("n esta marcada")
+	
+		 atributos = atributos.filter(elemento => elemento !== atributo);
+		
+		// 	atributos.push(atributo)
+			
+		// }
+	
+		// console.log(atributos)
+	
+	}
+	console.log(atributos)
+}
+
+
+
+//getuser
+function getusuarios(nome, senha) {
+   var xhr = new XMLHttpRequest();
+   xhr.open('GET', 'https://appatividades-7450d-default-rtdb.firebaseio.com/usuarios.json', true);
+   xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+         var usuario = JSON.parse(xhr.responseText);
+         var users = [];
+         
+         // Itera sobre cada chave (ID) no objeto
+         for (var id in usuario) {
+            // Verifica se a descrição é igual ao parâmetro
+            if (usuario[id].nome === nome && usuario[id].senha === senha) {
+               // Adiciona o ID ao objeto da tarefa
+               user = usuario[id];
+               user.id = id; //???
+               users.push(user);
+            }
+         }
+
+         // Exibe as tarefas encontradas
+         
+      }
+   };
+   xhr.send();
+}
+
+
+
+
+
+
+
+
+
+function camposTrue(user) {
+    const lista = [];
+    for (let campo in user) {
+        if (user[campo] === true) {
+            lista.push(campo);
+        }
+    }
+    return lista;
+}
+
+//abrir abas do usuario
+
+
+function abrirabas(){
+	const natributos = camposTrue(user);
+
+	console.log(natributos)
+
+	if(!user.admin){
+		if(natributos.includes('financeiro')){
+
+		var select = document.getElementById('subcategoria1');
+		select.style.display = "initial"
+		}
+		if(natributos.includes('analise')){
+		var select = document.getElementById('subcategoria2');
+		select.style.display = "initial"
+		}
+		if(natributos.includes('pacientes')){
+		var select = document.getElementById('subcategoria3');
+		select.style.display = "initial"
+		}
+		if(natributos.includes('gestao')){
+		var select = document.getElementById('subcategoria4');
+		select.style.display = "initial"
+		}
+		if(natributos.includes('cirurgias')){
+		var select = document.getElementById('subcategoria5');
+		select.style.display = "initial"
+		}
+
+	}else{
+	
+		var select = document.getElementById('bgcadastroitem');
+		select.style.display = "initial"
+
+		for (let i = 1; i < 6; i++) {
+			id = "subcategoria" + i
+			var select = document.getElementById(`${id}`);
+			select.style.display = "initial"
+		}
+	}
+
+
+	
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function abrirselect(id){
+
+	console.log(id)
+	var select = document.getElementById(`${id}`);
+
+    select.style.display = "initial"
+
+}
+
+
+function teste(id) {
+
+
+
+
+
+    console.log(id);
+    
+    var select = document.getElementById(id);
+
+	id = id + "v"
+
+	console.log(id);
+
+    var subcat = document.getElementById(id);
+
+    // Verifica se o elemento foi encontrado
+    if (select) {
+        // Obtém o valor do estilo display
+        var displayValue = window.getComputedStyle(subcat).getPropertyValue('display');
+
+        console.log('Valor do display:', displayValue);
+		
+
+		if(displayValue == "block" || displayValue == "inline"){
+			
+			console.log('block:', displayValue);
+			subcat.style.display = "none"
+
+		}else if(displayValue == "none"){
+
+			subcat.style.display = "initial"
+
+			console.log('outrovalor:', displayValue);
+		}
+
+
+    } else {
+        console.error('Elemento não encontrado.');
+    }
+}
+
+
+
+function dashselect(id){
+	
+	var bcadastro = document.getElementById('bgcadatro');
+	bcadastro.style.display = "none"
+
+	
+
+	var bgcadatron = document.getElementById('bgcadatron');
+	bgcadatron.style.display = "none"
+
+
+	var bcadastro = document.getElementById('dahsid');
+	bcadastro.style.display = "initial"
+
+	var iframe = document.getElementById('dmeudash');
+var novaURL = `${id}`;
+iframe.src = novaURL;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function buscarusers() {
+
+	var xhr = new XMLHttpRequest();
+   xhr.open('GET', 'https://appatividades-7450d-default-rtdb.firebaseio.com/usuarios.json', true);
+   xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+         var usuario = JSON.parse(xhr.responseText);
+       
+         
+        //  // Itera sobre cada chave (ID) no objeto
+        //  for (var id in usuario) {
+        //     // Verifica se a descrição é igual ao parâmetro
+        //     if (usuario[id].nome === nome && usuario[id].senha === senha) {
+        //        // Adiciona o ID ao objeto da tarefa
+        //        user = usuario[id];
+        //        user.id = id;
+        //        users.push(user);
+        //     }
+        //  }
+
+		removerSenhas(usuario)
+
+ 
+      }
+   };
+   xhr.send();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function removerSenhas(data) {
+	//console.log(data)
+    // Percorrer a lista de JSONs e remover o campo "senha" de cada um
+	for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+            // Remover o campo "senha" de cada objeto
+            delete data[key].senha;
+        }
+    }
+	criartabela(data)
+}
+
+
+
+
+
+function criartabela(data) {
+    console.log(data);
+
+    // Limpar o conteúdo atual da tabela
+    clearTable();
+    console.log('tabela atualizada');
+    
+    // Obter a tabela
+    var tabela = document.querySelector('table');
+    
+    // Preencher o cabeçalho (thead)
+    var thead = tabela.querySelector('thead tr');
+    Object.keys(data[Object.keys(data)[0]]).forEach(chave => { // Usando a primeira chave para determinar as colunas
+		
+			var th = document.createElement('th');
+        th.textContent = chave;
+        thead.appendChild(th);
+		
+     
+    });
+
+    // Preencher o corpo da tabela (tbody)
+    var tbody = tabela.querySelector('tbody');
+
+    // Iterar sobre as chaves do objeto data
+    Object.keys(data).forEach(chave => {
+		if(chave != "senha"){
+        var tr = document.createElement('tr');
+        // Iterar sobre as propriedades de cada objeto
+        Object.values(data[chave]).forEach(valor => {
+			
+            var td = document.createElement('td');
+            td.textContent = valor;
+            tr.appendChild(td); 
+        });
+        tbody.appendChild(tr);}
+    });
+}
+
+function clearTable() {
+var tabela = document.querySelector('table');
+tabela.querySelector('thead tr').innerHTML = '';
+tabela.querySelector('tbody').innerHTML = '';
+}
+
+
+
+
+
+</script>
+</body>
+</html>
