@@ -1,1403 +1,1303 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="pt-BR">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=">
-	<title></title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<style type="text/css">
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik:wght@500&display=swap');
-
-	body{
-		padding: 0;
-		margin: 0;
-		font-family: 'Arial', sans-serif;
-		font-family: "Roboto", sans-serif;
-		font-weight: 400;
-
-		box-sizing: border-box;
-	}
-
-		.loginbtn{
-         text-align: center;
-         width: 100%;
-         max-width: 150px;
-         padding: 15px;
-         padding-top:0px;
-         height: 30px;
-         color: white;
-         border: 1px solid white;
-         border-radius: 12px;
-         background-color: skyblue;
-         margin: 0 auto;
-         margin-top: 40px;
-         cursor: pointer;
-  }
-  .bgL{
-      display: none;
-         position: fixed;
-         top: 0;
-         left: 0;
-         width: 100%;
-         height: 100%;
-         background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
-         justify-content: center;
-         align-items: center;
-}
-.msg{
-        width: 300px;
-        text-align: center;
-         height: 100%;
-         max-height: 50px;
-         margin: 50px auto;
-         background-color: #37a337;
-         padding: 20px;
-         border-radius: 8px;
-         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-.msg p{
-   font-size: 18px;
-   color:white;
-}
-.msgerro{
-           width: 300px;
-        text-align: center;
-         height: 100%;
-         max-height: 50px;
-         margin: 50px auto;
-         background-color: red;
-         padding: 20px;
-         border-radius: 8px;
-         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-.msgerro p{
-   font-size: 18px;
-   color:white;
-}
-
-  .botoes{
-  	display: flex;
-  	width: 100%;
-  	max-width: 400px;
-  	margin: 0 auto;
-  	margin-bottom: 40px;
-  }
-
-
-
-  .container{
-  	
-  	width: 100%;
-  	height: 100%;
-  	max-width: 1980px;
-  	height: 650px;
-  	display: flex;
-
-  }
-
-  .containerdash{
-
-	text-align: center;
-  	width: 100%;
-	margin: 0 auto;
-	
-  	background-color: rgb(255, 255, 255);
-  	height: 100%;
-
-  }
-
-.menucima{
-	
-	width: 100%;
-	height: 110px;
-	display: flex;
-	background-color: #0c8762;
-}
-.contsingle{
-	
-
-	padding-left: 30px;	
-	margin: 0 auto;
-	padding: 20px;
-	width: 30%;
-	
-}
-.user{
-	padding-left: 50%;
-	position: relative;
-
-	display: flex;
-	width: 100%;
-	max-width: 200px;
-}
-.nome{
-	
-	width: 100px;
-	color: white;
-}
-.titulo{
-	color: white;
-	text-align: center;
-}
-.titulo p{
-	font-size: 20px;
-}
-.logo{
-	position: relative;
-	
-	left: 40px;
-	width: 100%;
-	border-radius: 10px;
-	height: 70px;
-}
-.logo img{
-	border-radius: 10px;
-	width: 100px;
-	height: 100%;
-}
-
-
-.foto{
-
-	width: 50px;
-	border-radius: 10px;
-	height: 40px;
-}
-.foto img{
-	position: relative;
-	top: 5px;
-	cursor: pointer;
-	border-radius: 100%;
-	width: 90%;
-	height: 100%;
-}
-
-.menulateral{
-	overflow-x: auto;
-	background-color: #0c8762;
-	width: 300px;
-  	height: 100%;
-	max-height: 650px;
-	
-  	
-}
-
-.lsitaitems{
-
-	margin-top: 0px;
-	text-align: center;
-}
-.item{
-
-	cursor: pointer;
-		padding: 10px;
-	font-size: 17px;
-	color: white;
-	transition: .3s;
-}
-
-.item:hover{
-	color:#6c8577;
-	
-}
-.bgL3{
-     
-         position: fixed;
-         top: 0;
-         left: 0;
-         width: 100%;
-         height: 100%;
-         background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
-         justify-content: center;
-         align-items: center;
-}
-.bgconteudolog{
-
-width: 340px;
-height: 100%;
-max-height: 320px;
-margin: 50px auto;
-background-color: #fff;
-padding: 20px;
-overflow-x: hidden;
-border-radius: 8px;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-
-}
-.bgcontentt{
-   width: 100%;
-   height: 100%;
-     overflow: auto;
-}
-.bgcontentt h1{
-	font-size: 20px;
-  text-align: center;
-  color: #095a2d;
-  font-weight: 200;
-}
-
-.loginbtn{
-         text-align: center;
-         width: 100%;
-         max-width: 150px;
-         padding: 15px;
-         padding-top:0px;
-         height: 30px;
-         color: white;
-         border: 1px solid white;
-         border-radius: 12px;
-         background-color: #0c8762;
-         margin: 0 auto;
-         margin-top: 80px;
-         cursor: pointer;
-		 transition: .3s;
-  }
-  .loginbtn:hover{
-	background-color: #b9c8c4;
-	color: #0c8762;;
-  }
-  
-  input {
-         padding: 10px;
-         margin-bottom: 10px;
-         border: 1px solid #ccc;
-         border-radius: 5px;
-         font-size: 14px;
-         box-sizing: border-box;
-         width: 100%;
-      }
-
-	.listitemsubcats{
-	
-		background-color:  #5bac85;;
-	  }
-
-	.subcats{
-		
-		padding: 10px;
-	cursor: pointer;
-		border-bottom: 1px solid white;
-	color: white;
-	transition: .3s;
-	padding-left: 0px;
-	}
-
-	.subcats:hover{
-	color:#038D42;
-	background-color: #ffffff;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-	.bgcirar{
-		border: 1px solid black;
-		border-radius: 8px;
-		text-align: center;
-		width: 740px;
-		height: 100%;
-		max-height: 500px;
-		overflow-x: hidden;
-		margin: 50px auto;
-		padding: 20px;
-	
-	}
-
-	.bgcriar input[type=text]{
-		width: 200px;
-	}
-	.checkdiv{
-	text-align: center;
-	margin-top: 20px;
-	color: #666666;
-	}
-	.check{
-	overflow-x: hidden;
-	position: relative;
-	top: -18px;
-	left: 70px;
-	}
-
-.bgcriar h1{
-	 font-size: 20px;
-	 text-align: center;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.tabelacoontainer{
-            margin: 0 auto;
-            width: 1200px;
-            height: 500px;
-            overflow: auto;
-			text-align: center;
-        }
-		h4{
-            
-			padding-top: 10px;
-			padding-left: 0px;
-			text-align: left;
-			font-size: 25px;
-			color:#095a2d;;
-           
-        }
-        .containerbotoes{
-            width: 100%;
-            margin: 0 auto;
-            padding: 20px;
-            max-width: 1200px;
-			padding-left: 120px;
-			text-align: left;
-			
-          
-        }
-        .btns{
-	
-			
-            width: 10%;
-            padding: 10px;
-            border-radius: 15px;
-          background-color: #0c8762;
-            color: rgb(255, 255, 255);
-            text-align: center;
-            cursor: pointer;
-            transition: .2s;
-            border: none;
-			margin-top: 50px;
-		
-
-        }
-        .btns:hover{
-            color: #0c8762;
-          	background-color: #e2e3e2;
-        }   
-        table {
-            border-collapse: collapse;
-            width: 80%;
-       
-            margin: 20px auto;
-            background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-			background-color: #0c8762;
-            color: #fff;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        .grafico{
-            margin: 0 auto;
-            text-align: center;
-            width: 100%;
-            max-width: 1000px;
-        }
-
-
-
-
-	</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AdSponsor — Protótipo com Simulador ROI</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root{
+      --bg: #ffffff;
+      --accent: #00FF7F; /* verde limão atualizado */
+      --muted: #6b7280;
+      --dark: #111827;
+      --card-shadow: 0 8px 24px rgba(16,24,40,0.06);
+      --glass: rgba(255,255,255,0.6);
+      --radius: 12px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%; margin:0; font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); color:var(--dark); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+
+    /* Layout */
+    .app {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 24px;
+      padding: 24px;
+      min-height:100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.98));
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--card-shadow);
+      position: sticky;
+      top: 24px;
+      height: calc(100vh - 48px);
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo {
+      width:44px;
+      height:44px;
+      border-radius:10px;
+      background:linear-gradient(135deg,var(--accent), #00cc66);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#072;
+      font-weight:700;
+      box-shadow:0 6px 18px rgba(0,255,127,0.12);
+    }
+    .brand h1{margin:0;font-size:16px;font-family:"Poppins";letter-spacing:0.2px;color:var(--dark)}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    .nav {
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-top:6px;
+    }
+    .nav button {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:10px 12px;
+      border-radius:10px;
+      background:transparent;
+      border:none;
+      width:100%;
+      text-align:left;
+      cursor:pointer;
+      color:var(--dark);
+      font-weight:600;
+      transition:all .16s ease;
+    }
+    .nav button svg{opacity:0.9}
+    .nav button:hover{background:rgba(0,0,0,0.04)}
+    .nav button.active{background:linear-gradient(90deg, rgba(0,255,127,0.12), rgba(0,255,127,0.06)); box-shadow:inset 0 0 0 1px rgba(0,255,127,0.06)}
+
+    .sidebar-footer{margin-top:auto; font-size:12px; color:var(--muted)}
+    .small-btn{
+      display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:10px; background:transparent; border:1px dashed rgba(0,0,0,0.06); cursor:pointer; font-weight:600;
+    }
+
+    /* Main content */
+    .main {
+      padding: 18px;
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), #ffffff);
+      min-height:calc(100vh - 48px);
+      overflow:auto;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:14px;
+    }
+    .user {
+      display:flex; gap:12px; align-items:center;
+    }
+    .avatar {
+      width:44px; height:44px; border-radius:10px; background:linear-gradient(180deg,#e6ffe0,#d6ffd0); display:flex;align-items:center;justify-content:center;font-weight:700;color:#044;
+    }
+    .notif {
+      border-radius:10px; padding:8px 10px; background:linear-gradient(90deg,var(--accent), #00cc66); color:#042; font-weight:700; cursor:pointer;
+      box-shadow:0 6px 14px rgba(0,255,127,0.12);
+    }
+
+    /* Grid & cards */
+    .grid {
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+      margin-bottom:18px;
+    }
+    .card {
+      border-radius:12px; padding:14px; background:#fff; box-shadow:var(--card-shadow);
+    }
+    .card h3{margin:0 0 8px 0; font-size:13px; color:var(--muted)}
+    .big{font-size:22px; font-weight:700}
+
+    /* Charts area */
+    .charts {
+      display:grid;
+      grid-template-columns: 2fr 1fr;
+      gap:16px;
+    }
+    .chart-card{padding:12px; border-radius:12px; background:#fff; box-shadow:var(--card-shadow)}
+
+    /* Campaign list */
+    .campaigns {
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
+      gap:14px;
+      margin-top:12px;
+    }
+    .camp {
+      padding:12px; border-radius:12px; background:linear-gradient(180deg,#ffffff,#fbfff7); box-shadow:var(--card-shadow);
+      display:flex; flex-direction:column; gap:8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+    .camp:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(16,24,40,0.1);
+    }
+    .camp .meta{display:flex; justify-content:space-between; align-items:center}
+    .pill{padding:6px 10px; border-radius:999px; font-weight:700; font-size:12px}
+    .status-running{background:linear-gradient(90deg, rgba(0,255,127,0.12), rgba(0,255,127,0.06)); color:#0b3b00}
+    .status-wait{background:#fff3d6;color:#7a5b00}
+    .camp button{padding:8px 10px;border-radius:8px;border:none;background:var(--accent);color:#052;font-weight:700;cursor:pointer}
+
+    /* Table */
+    table{width:100%; border-collapse:collapse; font-size:14px}
+    table th, table td{padding:10px; text-align:left; border-bottom:1px solid #f3f4f6}
+    .muted{color:var(--muted); font-weight:600}
+
+    /* Sponsors list */
+    .sponsor {
+      display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px; border-radius:10px; background:#fff; box-shadow:var(--card-shadow)
+    }
+
+    /* Modal */
+    .overlay{
+      position:fixed; inset:0; background:rgba(2,6,23,0.45); display:flex; align-items:center; justify-content:center; z-index:60;
+    }
+    .modal {
+      width:90%; max-width:800px; border-radius:12px; background:#fff; padding:18px; box-shadow:0 18px 60px rgba(2,6,23,0.3);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .modal h2{margin:0 0 8px 0}
+    .row{display:flex; gap:10px; align-items:center}
+    input[type="number"], input[type="text"], select {
+      width:100%; padding:10px; border-radius:8px; border:1px solid #e6e7ea; font-size:14px;
+    }
+    .btn {
+      padding:10px 14px; border-radius:8px; border:none; cursor:pointer; font-weight:700;
+    }
+
+    /* Loader */
+    .loader-wrap {
+      position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#ffffff,#f8fff0); z-index:80;
+    }
+    .spinner {
+      width:96px; height:96px; border-radius:18px; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;
+      box-shadow:var(--card-shadow);
+    }
+    .dot {
+      width:14px; height:14px; border-radius:50%; background:var(--accent); animation:pop 1s infinite alternate;
+    }
+    @keyframes pop { from{transform:translateY(0)} to{transform:translateY(-10px)} }
+
+    /* Responsive */
+    @media (max-width:980px){
+      .app{grid-template-columns: 1fr; padding:12px}
+      .sidebar{position:relative; height:auto; order:2; margin-top:12px}
+      .main{order:1}
+      .grid{grid-template-columns: repeat(2,1fr)}
+      .charts{grid-template-columns: 1fr}
+    }
+    @media (max-width:640px){
+      .grid{grid-template-columns: 1fr}
+    }
+
+    /* small helpers */
+    .muted-sm{color:var(--muted); font-size:13px}
+    .kpi {display:flex; gap:12px; align-items:center}
+    
+    /* ROI Simulator Styles */
+    .roi-result {
+      background: linear-gradient(90deg, rgba(0,255,127,0.08), rgba(0,255,127,0.04));
+      border-radius: 8px;
+      padding: 10px;
+      margin: 8px 0;
+      border-left: 3px solid var(--accent);
+    }
+    .roi-highlight {
+      font-weight: 800;
+      color: #0b3b00;
+    }
+    .roi-formula {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 4px 0;
+      padding: 6px;
+      background: rgba(0,0,0,0.02);
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    .simulator-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+    }
+    .input-group {
+      margin-bottom: 12px;
+    }
+    .input-group label {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .formula-section {
+      background: #f9fafb;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 16px;
+    }
+    .formula-item {
+      margin: 8px 0;
+      font-size: 13px;
+    }
+    .formula-highlight {
+      background: rgba(0,255,127,0.1);
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .animated-value {
+      transition: all 0.3s ease;
+    }
+    .value-updated {
+      animation: pulse-green 0.5s ease;
+    }
+    @keyframes pulse-green {
+      0% { background-color: transparent; }
+      50% { background-color: rgba(0,255,127,0.2); }
+      100% { background-color: transparent; }
+    }
+    .camp-roi-preview {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .camp-roi-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+    .camp-roi-highlight {
+      font-weight: 700;
+      color: #0b3b00;
+    }
+  </style>
 </head>
 <body>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div id="paglogin" style="display: none;">
-
-	<div id="cadastroid" class="bgL3">
-  
-		<div class="bgconteudolog">
-	 
-			  <div class="bgcontentt">
-
-					<h1 style="	font-family: 'Roboto', sans-serif;
-					font-weight: 400;">Relizar login para acessar painel</h1>
-
-					<input type="text" id="nomeuser" placeholder="Nome: ">
-					<input type="password" id="senhauserc" placeholder="Senha: ">
-	 
-
-
-					
-			<div class="loginbtn" onclick="login()">
-				  <p>Login</p>
-			   </div>
-			
-			  </div>
-			
-	 
-			
-		</div>
-	 </div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div id="pag1" style="display: initial;">
-
-<div class="menucima">
-
-
-
-	<div class="contsingle">
-	<div class="logo">
-		<img src="unimed-logo.png"/>
-	</div>
-</div>
-
-
-
-
-<div class="contsingle">
-	<div class="titulo">
-		<p>Painel Unimed</p>
-	</div>
-</div>
-
-
-
-	<div class="contsingle">
-	<div class="user" style="position: relative;">
-
-		<div class="nome">
-			<p id="user"></p>
-		</div>
-	
-		<div class="foto">
-			<img src="user.webp"/>
-		</div>
-	
-	</div>
-</div>
-
-</div>
-
-<div class="container">
-
-<div class="menulateral">
-
-<div class="lsitaitems">
-
-
-
-		<div class="item"  style="display: none;" id="subcategoria1" onclick="teste(this.id)" style="border-top: 1px solid white">
-			
-			<p>Faturamento</p>
-
-		</div>
-
-
-<!--SUBCATEGORIA 1-->
-		<div class="" style="display: none;" id="subcategoria1v">
-				
-			<div class="listitemsubcats"> 
-
-				<div id="https://app.powerbi.com/reportEmbed?reportId=15abb0f1-568e-455c-a52e-153e80896a4d&autoAuth=true&ctid=e639878c-010f-442a-9926-86151f075ba0&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XLUluZm8tMi1DcmVkZW50aWFscy1QeXRob24tQlItVXNlcnMud2luZG93cy5uZXQvIn0%3D" class="subcats" onclick="dashselect(this.id)">
-					<p> Geral </p>
-				</div>
-
-				<div id="https://app.powerbi.com/reportEmbed?reportId=5d8ac478-4f15-49aa-ab32-3bf6b981574e&autoAuth=true&ctid=e639878c-010f-442a-9926-86151f075ba0" class="subcats" onclick="dashselect(this.id)">
-					<p> Financeiro </p>
-				</div>
-
-				<div id="https://app.powerbi.com/reportEmbed?reportId=d27922bb-99f1-4168-bb95-2087c2537c39&autoAuth=true&ctid=e639878c-010f-442a-9926-86151f075ba0" class="subcats" onclick="dashselect(this.id)">
-					<p> Pendente </p>
-				</div>
-
-			</div><!--listitemsubcats-->
-
-		</div>
-<!--SUBCATEGORIA 1-->
-
-
-
-		<div class="item" style="display: none;" id="subcategoria2" onclick="teste(this.id)">
-			<p>Análise</p>
-		</div>
-
-			<!--SUBCATEGORIA 2-->
-			<div class="" style="display: none;" id="subcategoria2v">
-				
-				<div class="listitemsubcats"> 
-	
-					<div id="" class="subcats" onclick="dashselect(this.id)">
-						<p> > Subcategoria dash2</p>
-					</div>
-	
-					<div id="" class="subcats" onclick="dashselect(this.id)">
-						<p> > Subcategoria2 dash2</p>
-					</div>
-	
-					<div id="" class="subcats" onclick="dashselect(this.id)">
-						<p> > Subcategoria3 dash2</p>
-					</div>
-	
-				</div><!--listitemsubcats-->
-	
-			</div>
-	<!--SUBCATEGORIA 2-->
-
-
-
-		<div class="item" style="display: none;" id="subcategoria3" onclick="teste(this.id)">
-			<p>Pacientes</p>
-
-		</div>
-
-			<!--SUBCATEGORIA 1-->
-			<div class="" style="display: none;" id="subcategoria3v">
-				
-				<div class="listitemsubcats"> 
-	
-					<div id="" class="subcats" onclick="dashselect(this.id)">
-						<p> > Subcategoria dash3</p>
-					</div>
-	
-					<div id="" class="subcats" onclick="dashselect(this.id)">
-						<p> > Subcategoria2 dash3</p>
-					</div>
-	
-					<div id="" class="subcats" onclick="dashselect(this.id)">
-						<p> > Subcategoria3 dash3</p>
-					</div>
-	
-				</div><!--listitemsubcats-->
-	
-			</div>
-	<!--SUBCATEGORIA 2-->
-
-
-	<div class="item" style="display: none;" id="subcategoria4" onclick="teste(this.id)" style="border-top: 1px solid white">
-			
-		<p>Gestão</p>
-
-	</div>
-
-
-<!--SUBCATEGORIA 1-->
-	<div class="" style="display: none;" id="subcategoria4v">
-			
-		<div class="listitemsubcats"> 
-
-			<div id="" class="subcats" onclick="dashselect(this.id)">
-				<p> > Subcategoria dash</p>
-			</div>
-
-			<div id="" class="subcats" onclick="dashselect(this.id)">
-				<p> > Subcategoria2 dash</p>
-			</div>
-
-			<div id="" class="subcats" onclick="dashselect(this.id)">
-				<p> > Subcategoria3 dash</p>
-			</div>
-
-		</div><!--listitemsubcats-->
-
-	</div>
-<!--SUBCATEGORIA 1-->
-
-
-
-
-<div class="item" style="display: none;" id="subcategoria5" onclick="teste(this.id)" style="border-top: 1px solid white">
-			
-	<p>Cirurgias</p>
-
-</div>
-
-
-<!--SUBCATEGORIA 1-->
-<div class="" style="display: none;" id="subcategoria5v">
-		
-	<div class="listitemsubcats"> 
-
-		<div id="" class="subcats" onclick="dashselect(this.id)">
-			<p> > Subcategoria dash</p>
-		</div>
-
-		<div id="" class="subcats" onclick="dashselect(this.id)">
-			<p> > Subcategoria2 dash</p>
-		</div>
-
-		<div id="" class="subcats" onclick="dashselect(this.id)">
-			<p> > Subcategoria3 dash</p>
-		</div>
-
-	</div><!--listitemsubcats-->
-
-</div>
-<!--SUBCATEGORIA 1-->
-
-
-
-		<div class="item" id="bgcadastroitem" onclick="criar()" style="border-bottom: none; display: none;">
-			<p>Gestão de usuários</p>
-		</div>
-
-
-		<div class="item" onclick="sair()" style="border-bottom: none;">
-			<p>Sair</p>
-		</div>
-
-
-
-	</div>
-
-</div>
-
-
-
-
-	<div class="containerdash" id="dahsid">
-
-		<iframe id="dmeudash" title="Pronto Atendimento - Internado" width="100%" height="641.25" src="https://app.powerbi.com/reportEmbed?reportId=15abb0f1-568e-455c-a52e-153e80896a4d&autoAuth=true&ctid=e639878c-010f-442a-9926-86151f075ba0&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XLUluZm8tMi1DcmVkZW50aWFscy1QeXRob24tQlItVXNlcnMud2luZG93cy5uZXQvIn0%3D" frameborder="0" allowFullScreen="true"></iframe>
-		
-	</div>
-
-
-
-	<div class="bgcirar" style="display: none;" id="bgcadatron">
-
-		<h1 style="	font-family: 'Roboto', sans-serif;
-		font-weight: 400; font-size: 30px; margin-bottom: 40px;">Criando novo usuário</h1>
-
-		<input type="text" id="nuser" placeholder="Nome: ">
-		<input type="text" id="nsenha" placeholder="Senha: ">
-	  
-		<div class="checkdiv">
-		   
-		  <label for="myCheckbox">Financeiro</label>
-					 <input type="checkbox" id="financeiro" class="check" onchange="verificarCheckbox('financeiro')">
-		  <label for="myCheckbox">Analise</label>
-					 <input type="checkbox" id="analise" class="check" onchange="verificarCheckbox('analise')">
-			<label for="myCheckbox">Pacientes</label>
-					 <input type="checkbox" id="pacientes" class="check" onchange="verificarCheckbox('pacientes')">
-		<label for="myCheckbox">Gestão</label>
-					 <input type="checkbox" id="gestao" class="check" onchange="verificarCheckbox('gestao')">
-<label for="myCheckbox">Cirurgias</label>
-					 <input type="checkbox" id="cirurgias" class="check" onchange="verificarCheckbox('cirurgias')">
-		
-
-					 <label for="myCheckbox">Usuário admin?</label>
-					 <input type="checkbox" id="admin" class="check" onchange="verificarCheckbox('admin')">
-
-
-	  </div>
-  
-
-	<div class="loginbtn" onclick="cadastroreal()">
-	  <p>CADASTRAR</p>
-   </div>
-  
-
-
-
-
-</div>
-
-	
-
-
-
-
-
-
-
-<div style="display: none; overflow-x: hidden;" id="bgcadatro">
-
-
-
-   
-    <div class='containerbotoes'>
-
-		<h4 style="	font-family: 'Roboto', sans-serif;
-		font-weight: 400; font-size: 30px;">Gestão de usuários do sistema</h4>
-
-        <button class='btns' onclick='Criarnovo()'>Criar novo usuário</button>
-
-		<button class='btns' style="margin-left: 20px;"   onclick='Criarnovo()'>Editar dados de usuários</button>
-
-		<button class='btns' style="margin-left: 20px;"   onclick='Criarnovo()'>Deletar todos os usuários</button>
-  
+  <!-- LOADER -->
+  <div id="loader" class="loader-wrap">
+    <div class="spinner">
+      <div style="font-weight:700; color:var(--dark)">AdSponsor</div>
+      <div style="display:flex; gap:8px;">
+        <div class="dot" style="animation-delay:0s"></div>
+        <div class="dot" style="animation-delay:.15s"></div>
+        <div class="dot" style="animation-delay:.3s"></div>
+      </div>
+      <div class="muted-sm">Carregando protótipo...</div>
     </div>
-    
+  </div>
 
-	<div class='tabelacoontainer'>
-        <table>
-            <thead>
+  <div class="app" id="app" style="display:none">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">AS</div>
+        <div>
+          <h1>AdSponsor</h1>
+          <p>Invest & Grow</p>
+        </div>
+      </div>
+
+      <nav class="nav" id="nav">
+        <button class="active" data-view="dashboard" title="Dashboard">
+          <!-- icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zM13 21h8V11h-8v10zM13 3v6h8V3h-8z" fill="#111827"/></svg>
+          Dashboard
+        </button>
+        <button data-view="campanhas" title="Campanhas">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 11h4v10H3zM7 7h4v14H7zM11 3h4v18h-4zM15 15h4v6h-4z" fill="#111827"/></svg>
+          Campanhas
+        </button>
+        <button data-view="patrocinar" title="Patrocinar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2l3 7h7l-5.5 4.1L20 23l-8-5-8 5 1.5-9.9L0 9h7l3-7z" fill="#111827"/></svg>
+          Patrocinar
+        </button>
+        <button data-view="pagamentos" title="Pagamentos">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M2 7h20v11H2zM4 9v7h16V9zm8-7l6 5H6z" fill="#111827"/></svg>
+          Pagamentos
+        </button>
+        <button data-view="metricas" title="Métricas">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M4 22h4V6H4v16zM10 22h4V2h-4v20zM16 22h4v-8h-4v8z" fill="#111827"/></svg>
+          Métricas
+        </button>
+        <button data-view="patrocinadores" title="Seus patrocinadores">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4 8 5.79 8 8s1.79 4 4 4zm0 2c-3.31 0-8 1.67-8 5v1h16v-1c0-3.33-4.69-5-8-5z" fill="#111827"/></svg>
+          Seus patrocinadores
+        </button>
+        <button data-view="config" title="Configurações">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M19.4 12.9c.04-.3.06-.61.06-.92s-.02-.62-.06-.92l2.11-1.65a.5.5 0 00.12-.64l-2-3.46a.5.5 0 00-.6-.22l-2.49 1a7.027 7.027 0 00-1.6-.93l-.38-2.65A.5.5 0 0013.5 2h-3a.5.5 0 00-.49.42l-.38 2.65c-.58.23-1.12.53-1.6.93l-2.49-1a.5.5 0 00-.6.22l-2 3.46a.5.5 0 00.12.64L4.5 11c-.04.3-.06.61-.06.92s.02.62.06.92L2.39 14.5a.5.5 0 00-.12.64l2 3.46c.14.24.44.34.68.22l2.49-1c.48.4 1.02.7 1.6.93l.38 2.65c.05.28.28.49.57.49h3c.29 0 .52-.21.57-.49l.38-2.65c.58-.23 1.12-.53 1.6-.93l2.49 1c.24.12.54.02.68-.22l2-3.46a.5.5 0 00-.12-.64L19.4 12.9z" fill="#111827"/></svg>
+          Configurações
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div style="margin-bottom:8px">Saldo disponível</div>
+        <div style="display:flex; align-items:center; gap:12px">
+          <div style="font-weight:800; font-size:18px">R$ 2.350</div>
+          <div class="small-btn" id="addFunds">+ Investir</div>
+        </div>
+        <div style="margin-top:12px; font-size:12px;" class="muted">Protótipo — sem integração real</div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main" id="main">
+      <div class="topbar">
+        <div>
+          <div style="font-size:13px; color:var(--muted)">Visão geral</div>
+          <h2 style="margin:2px 0 0 0">Dashboard</h2>
+        </div>
+        <div class="user">
+          <div style="text-align:right; font-size:13px; margin-right:8px;">
+            <div style="font-weight:700">João Vitor</div>
+            <div class="muted-sm">Patrocinador</div>
+          </div>
+          <div class="avatar">JV</div>
+          <div class="notif">3</div>
+        </div>
+      </div>
+
+      <!-- Dashboard view -->
+      <section id="view-dashboard">
+        <div class="grid">
+          <div class="card">
+            <h3>Saldo disponível</h3>
+            <div class="big">R$ <span id="saldo">2.350</span></div>
+            <div class="muted-sm" style="margin-top:6px">Saldo que você pode investir agora</div>
+          </div>
+
+          <div class="card">
+            <h3>ROI médio</h3>
+            <div class="big">32%</div>
+            <div class="muted-sm" style="margin-top:6px">Retorno médio das suas campanhas patrocinadas</div>
+          </div>
+
+          <div class="card">
+            <h3>Campanhas ativas</h3>
+            <div class="big" id="camp-active">5</div>
+            <div class="muted-sm" style="margin-top:6px">Campanhas rodando no momento</div>
+          </div>
+        </div>
+
+        <div class="charts">
+          <div class="chart-card">
+            <h3 style="margin-bottom:8px">Lucro por campanha</h3>
+            <canvas id="barChart" height="160"></canvas>
+          </div>
+          <div class="chart-card">
+            <h3 style="margin-bottom:8px">Evolução de vendas</h3>
+            <canvas id="lineChart" height="160"></canvas>
+          </div>
+        </div>
+
+        <h3 style="margin-top:18px; margin-bottom:8px">Campanhas</h3>
+        <div class="campaigns" id="campaignList"></div>
+      </section>
+
+      <!-- Campanhas view -->
+      <section id="view-campanhas" style="display:none">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px">
+          <h2 style="margin:0">Campanhas</h2>
+          <button class="btn" id="newCampBtn" style="background:var(--accent)">Criar campanha</button>
+        </div>
+
+        <div id="listAllCampaigns" class="campaigns"></div>
+      </section>
+
+      <!-- Patrocinar view -->
+      <section id="view-patrocinar" style="display:none">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px">
+          <h2 style="margin:0">Patrocinar campanhas</h2>
+          <div class="muted-sm">Escolha uma campanha e invista um valor</div>
+        </div>
+
+        <div id="availableToSponsor" class="campaigns"></div>
+      </section>
+
+      <!-- Pagamentos view -->
+      <section id="view-pagamentos" style="display:none">
+        <h2 style="margin-bottom:8px">Pagamentos & Extrato</h2>
+        <div style="display:flex; gap:16px; margin-bottom:12px">
+          <div class="card" style="flex:1">
+            <h3>Saldo</h3>
+            <div class="big">R$ <span id="saldo2">2.350</span></div>
+            <div style="margin-top:8px">
+              <button class="btn" style="background:var(--accent)" id="withdrawBtn">Sacar</button>
+              <button class="btn" style="background:transparent; margin-left:10px; border:1px solid #e6e6e6" id="addFundsBtn">Adicionar fundos</button>
+            </div>
+          </div>
+
+          <div class="card" style="flex:2">
+            <h3>Extrato recente</h3>
+            <table id="transactionsTable" style="margin-top:8px">
+              <thead>
                 <tr>
-                    <!-- Os cabeçalhos serão preenchidos dinamicamente -->
+                  <th>Data</th>
+                  <th>Descrição</th>
+                  <th>Valor</th>
+                  <th>Status</th>
                 </tr>
-            </thead>
-            <tbody>
-                <!-- Os dados serão preenchidos dinamicamente -->
-            </tbody>
-        </table>
-    </div>
-
-
-</div>
-
-
-
-
-
-
-	</div><!--container-->
-
-
-
-
-
-</div>
-
-
-
-<div id="usuariocadastradoid" class="bgL">
-  
-	<div class="msg">
- 
-			  <p>Usuário foi cadastrado!</p>
-	</div>
- </div>
-
-
-
- <div id="errologin" class="bgL">
-  
-	<div class="msgerro">
- 
-			  <p>Usuário não encontrado</p>
-	</div>
- </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script type="text/javascript">
-   var user = null;
-var usuario = ""
-var atributos = []
-
-
-
-
-function Criarnovo(){
-	var bgcadatron = document.getElementById('bgcadatron')
-	bgcadatron.style.display = "initial"
-
-
-	var bgcadatro = document.getElementById('bgcadatro')
-	bgcadatro.style.display = "none"
-	
-}
-
-
-
-
-
-
-
-
-function usercadastrado() {
-
-var usuariocadastrado = document.getElementById('usuariocadastradoid')
- usuariocadastrado.style.display = "initial"
-
-// Remove o elemento após a animação
-setTimeout(function() {
- usuariocadastrado.style.display = "none";
-location.reload();
-}, 2000); // Ajuste o tempo conforme necessário
-}
-
-
-function login(){	
-
-	  usuario = document.getElementById('nomeuser').value
-	  senha = document.getElementById('senhauserc').value
-
-	  getusuarios(usuario, senha)
-
-
-
-            setTimeout(function() {
-
-              
-          
-	  if(1 =1){
-		var bgllogin = document.getElementById('pag1');
-      bgllogin.style.display = "initial"
-   var cadastro = document.getElementById('paglogin');
-      cadastro.style.display = "none"
-
-
-
-	  var meuParagrafo = document.getElementById('user');
-	  meuParagrafo.textContent = "Usuário: " + usuario;
-
-	  abrirabas()
-	  }else{
-		var errologins = document.getElementById('errologin');
-              errologins.style.display = "initial"
-
-            setTimeout(function() {
-
-               errologins.style.display = "none"
-            }, 2000);
-		}}, 2000);	
-
-
-
-}
-
-function sair(){
-	var bgllogin = document.getElementById('paglogin');
-      bgllogin.style.display = "initial"
-   var cadastro = document.getElementById('pag1');
-      cadastro.style.display = "none"
-}
-
-
-function criar(){
-
-	var dash = document.getElementById('dahsid');
-	dash.style.display = "none"
-
-	var bgcadatron = document.getElementById('bgcadatron')
-	bgcadatron.style.display = "none"
-
-	buscarusers()
-
-	var bcadastro = document.getElementById('bgcadatro');
-	bcadastro.style.display = "initial"
-
-
-}
-
-const LISTA = {};
-function cadastroreal(){
-	atr = ['financeiro', 'analise','pacientes','gestao','cirurgias','admin']
-	
-		 for (let i = 0; i < atr.length; i++) {
-			var atributo = atr[i];
-			if (atributos.includes(atributo)) {
-				LISTA[atributo] = true;
-			} else {
-				LISTA[atributo] = false;
-			}
-		}
-
-		console.log(LISTA.cirurgias)
-		setTimeout(() => {
-			cadastro()
-		}, "1000");
-	
-}
-
-
-//usercadastrado
-function cadastro(){
-    var xhr = new XMLHttpRequest();
-         xhr.open('POST', 'https://appatividades-7450d-default-rtdb.firebaseio.com/usuarios.json', true);
-         xhr.setRequestHeader('Content-Type', 'application/json');
-         xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-               
-               
-            }
-         };
-
-
-
-
-
-
-         var novaTarefa = {
-           nome: document.getElementById('nuser').value,
-           senha: document.getElementById('nsenha').value,
-		    financeiro: LISTA.financeiro,
-			analise: LISTA.analise,
-		    pacientes: LISTA.pacientes,
-		    gestao: LISTA.gestao,
-			cirurgias: LISTA.cirurgias,
-			criadopor: usuario,
-			admin: LISTA.admin,
-         };
-
-         xhr.send(JSON.stringify(novaTarefa));
-
-
-         usercadastrado()
-
-        
-}
-
-
-
-//setando os atributos do usuario novo
-
-
-
-function verificarCheckbox(atributo) {
-console.log(atributo)
-
-    // Obter a referência do elemento checkbox
-    var checkbox = document.getElementById(`${atributo}`);
-
-
-    // Verificar se a checkbox está marcada
-    if (checkbox.checked) {
-		//console.log("esta marcada")
-		// if(atributos.includes(atributo)){
-		// 	atributos.splice(atributo)
-		
-		 	atributos.push(atributo)
-			
-		
-	
-		// console.log(atributos)
-         
-    }else{
-		//console.log("n esta marcada")
-	
-		 atributos = atributos.filter(elemento => elemento !== atributo);
-		
-		// 	atributos.push(atributo)
-			
-		// }
-	
-		// console.log(atributos)
-	
-	}
-	console.log(atributos)
-}
-
-
-
-//getuser
-function getusuarios(nome, senha) {
-   var xhr = new XMLHttpRequest();
-   xhr.open('GET', 'https://appatividades-7450d-default-rtdb.firebaseio.com/usuarios.json', true);
-   xhr.onreadystatechange = function () {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-         var usuario = JSON.parse(xhr.responseText);
-         var users = [];
-         
-         // Itera sobre cada chave (ID) no objeto
-         for (var id in usuario) {
-            // Verifica se a descrição é igual ao parâmetro
-            if (usuario[id].nome === nome && usuario[id].senha === senha) {
-               // Adiciona o ID ao objeto da tarefa
-               user = usuario[id];
-               user.id = id; //???
-               users.push(user);
-            }
-         }
-
-         // Exibe as tarefas encontradas
-         
-      }
-   };
-   xhr.send();
-}
-
-
-
-
-
-
-
-
-
-function camposTrue(user) {
-    const lista = [];
-    for (let campo in user) {
-        if (user[campo] === true) {
-            lista.push(campo);
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Métricas view -->
+      <section id="view-metricas" style="display:none">
+        <h2 style="margin-bottom:8px">Métricas</h2>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px">
+          <div class="card">
+            <h3>Lucro acumulado</h3>
+            <canvas id="profitChart" height="140"></canvas>
+          </div>
+
+          <div class="card">
+            <h3>CTR & ROI</h3>
+            <div style="display:flex; gap:12px; align-items:center; margin-top:8px">
+              <div style="flex:1">
+                <div class="muted-sm">CTR médio</div>
+                <div class="big" id="ctrVal">3.8%</div>
+              </div>
+              <div style="flex:1">
+                <div class="muted-sm">ROI por campanha</div>
+                <div class="big" id="roiVal">32%</div>
+              </div>
+            </div>
+            <div style="margin-top:12px">
+              <canvas id="donutChart" height="140"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Patrocinadores view -->
+      <section id="view-patrocinadores" style="display:none">
+        <h2 style="margin-bottom:8px">Seus patrocinadores</h2>
+        <div style="display:grid; gap:12px">
+          <div class="sponsor">
+            <div>
+              <div style="font-weight:800">Mariana Silva</div>
+              <div class="muted-sm">Investiu R$ 800 • ROI 28%</div>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center">
+              <div class="muted-sm">Status: <strong>Ativo</strong></div>
+              <button class="btn" style="background:var(--accent)">Ver</button>
+            </div>
+          </div>
+
+          <div class="sponsor">
+            <div>
+              <div style="font-weight:800">Agência Flux</div>
+              <div class="muted-sm">Investiu R$ 2.200 • ROI 41%</div>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center">
+              <div class="muted-sm">Status: <strong>Ativo</strong></div>
+              <button class="btn" style="background:var(--accent)">Ver</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Config view -->
+      <section id="view-config" style="display:none">
+        <h2>Configurações</h2>
+        <div style="display:grid; gap:12px; margin-top:12px">
+          <div class="card">
+            <h3>Conta</h3>
+            <div class="muted-sm">Nome: João Vitor</div>
+            <div class="muted-sm">Email: joao@example.com</div>
+          </div>
+          <div class="card">
+            <h3>Integrações</h3>
+            <div class="muted-sm">Hotmart: conectado (demo)</div>
+            <div class="muted-sm">Meta Ads: não conectado</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODAL (dinâmico) -->
+  <div id="modalRoot" style="display:none"></div>
+
+  <script>
+    /* ---------- Dados fictícios iniciais ---------- */
+    const state = {
+      saldo: 2350,
+      transactions: [
+        {date:'2025-10-28', desc:'Investimento: Campanha "Funil SEO I"', value:-500, status:'Concluído'},
+        {date:'2025-10-25', desc:'Retorno: Campanha "Curso Ads Básico"', value:320, status:'Concluído'},
+        {date:'2025-10-20', desc:'Investimento: Campanha "Tráfego VIP"', value:-1200, status:'Concluído'},
+        {date:'2025-09-30', desc:'Ganhos: Comissão Plataform', value:250, status:'Concluído'}
+      ],
+      campaigns: [
+        {id:1, name:'Funil SEO I', course:'SEO Masterclass', budget:1200, status:'Rodando', estReturnPct:28, invested:500, profit:320,
+          roiData: {
+            metaTotal: 10000,
+            publicoEstimado: 1000,
+            taxaConversao: 25,
+            precoProduto: 30,
+            investimentoSugerido: 400
+          }
+        },
+        {id:2, name:'Tráfego VIP', course:'Curso Ads Básico', budget:2000, status:'Encerrada', estReturnPct:41, invested:1200, profit:520,
+          roiData: {
+            metaTotal: 15000,
+            publicoEstimado: 1200,
+            taxaConversao: 30,
+            precoProduto: 40,
+            investimentoSugerido: 400
+          }
+        },
+        {id:3, name:'Lançamento Outubro', course:'Copy Rápida', budget:800, status:'Aguardando', estReturnPct:24, invested:0, profit:0,
+          roiData: {
+            metaTotal: 8000,
+            publicoEstimado: 800,
+            taxaConversao: 20,
+            precoProduto: 25,
+            investimentoSugerido: 400
+          }
+        },
+        {id:4, name:'Promo Natal', course:'Design para Vendas', budget:1600, status:'Rodando', estReturnPct:36, invested:400, profit:144,
+          roiData: {
+            metaTotal: 12000,
+            publicoEstimado: 900,
+            taxaConversao: 28,
+            precoProduto: 35,
+            investimentoSugerido: 400
+          }
+        },
+        {id:5, name:'Remarketing Pro', course:'Funil Avançado', budget:900, status:'Rodando', estReturnPct:22, invested:150, profit:33,
+          roiData: {
+            metaTotal: 9000,
+            publicoEstimado: 700,
+            taxaConversao: 22,
+            precoProduto: 28,
+            investimentoSugerido: 400
+          }
         }
-    }
-    return lista;
-}
-
-//abrir abas do usuario
-
-
-function abrirabas(){
-	const natributos = camposTrue(user);
-
-	console.log(natributos)
-
-	if(!user.admin){
-		if(natributos.includes('financeiro')){
-
-		var select = document.getElementById('subcategoria1');
-		select.style.display = "initial"
-		}
-		if(natributos.includes('analise')){
-		var select = document.getElementById('subcategoria2');
-		select.style.display = "initial"
-		}
-		if(natributos.includes('pacientes')){
-		var select = document.getElementById('subcategoria3');
-		select.style.display = "initial"
-		}
-		if(natributos.includes('gestao')){
-		var select = document.getElementById('subcategoria4');
-		select.style.display = "initial"
-		}
-		if(natributos.includes('cirurgias')){
-		var select = document.getElementById('subcategoria5');
-		select.style.display = "initial"
-		}
-
-	}else{
-	
-		var select = document.getElementById('bgcadastroitem');
-		select.style.display = "initial"
-
-		for (let i = 1; i < 6; i++) {
-			id = "subcategoria" + i
-			var select = document.getElementById(`${id}`);
-			select.style.display = "initial"
-		}
-	}
-
-
-	
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-function abrirselect(id){
-
-	console.log(id)
-	var select = document.getElementById(`${id}`);
-
-    select.style.display = "initial"
-
-}
-
-
-function teste(id) {
-
-
-
-
-
-    console.log(id);
-    
-    var select = document.getElementById(id);
-
-	id = id + "v"
-
-	console.log(id);
-
-    var subcat = document.getElementById(id);
-
-    // Verifica se o elemento foi encontrado
-    if (select) {
-        // Obtém o valor do estilo display
-        var displayValue = window.getComputedStyle(subcat).getPropertyValue('display');
-
-        console.log('Valor do display:', displayValue);
-		
-
-		if(displayValue == "block" || displayValue == "inline"){
-			
-			console.log('block:', displayValue);
-			subcat.style.display = "none"
-
-		}else if(displayValue == "none"){
-
-			subcat.style.display = "initial"
-
-			console.log('outrovalor:', displayValue);
-		}
-
-
-    } else {
-        console.error('Elemento não encontrado.');
-    }
-}
-
-
-
-function dashselect(id){
-	
-	var bcadastro = document.getElementById('bgcadatro');
-	bcadastro.style.display = "none"
-
-	
-
-	var bgcadatron = document.getElementById('bgcadatron');
-	bgcadatron.style.display = "none"
-
-
-	var bcadastro = document.getElementById('dahsid');
-	bcadastro.style.display = "initial"
-
-	var iframe = document.getElementById('dmeudash');
-var novaURL = `${id}`;
-iframe.src = novaURL;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function buscarusers() {
-
-	var xhr = new XMLHttpRequest();
-   xhr.open('GET', 'https://appatividades-7450d-default-rtdb.firebaseio.com/usuarios.json', true);
-   xhr.onreadystatechange = function () {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-         var usuario = JSON.parse(xhr.responseText);
-       
-         
-        //  // Itera sobre cada chave (ID) no objeto
-        //  for (var id in usuario) {
-        //     // Verifica se a descrição é igual ao parâmetro
-        //     if (usuario[id].nome === nome && usuario[id].senha === senha) {
-        //        // Adiciona o ID ao objeto da tarefa
-        //        user = usuario[id];
-        //        user.id = id;
-        //        users.push(user);
-        //     }
-        //  }
-
-		removerSenhas(usuario)
-
- 
-      }
-   };
-   xhr.send();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-function removerSenhas(data) {
-	//console.log(data)
-    // Percorrer a lista de JSONs e remover o campo "senha" de cada um
-	for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-            // Remover o campo "senha" de cada objeto
-            delete data[key].senha;
-        }
-    }
-	criartabela(data)
-}
-
-
-
-
-
-function criartabela(data) {
-    console.log(data);
-
-    // Limpar o conteúdo atual da tabela
-    clearTable();
-    console.log('tabela atualizada');
-    
-    // Obter a tabela
-    var tabela = document.querySelector('table');
-    
-    // Preencher o cabeçalho (thead)
-    var thead = tabela.querySelector('thead tr');
-    Object.keys(data[Object.keys(data)[0]]).forEach(chave => { // Usando a primeira chave para determinar as colunas
-		
-			var th = document.createElement('th');
-        th.textContent = chave;
-        thead.appendChild(th);
-		
-     
+      ]
+    };
+
+    /* ---------- Inicialização visual após loader ---------- */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').style.display = 'none';
+        document.getElementById('app').style.display = 'grid';
+        initApp();
+      }, 900); // efeito de carregamento
     });
 
-    // Preencher o corpo da tabela (tbody)
-    var tbody = tabela.querySelector('tbody');
+    function initApp(){
+      // populate initial values
+      document.getElementById('saldo').innerText = formatMoney(state.saldo);
+      document.getElementById('saldo2').innerText = formatMoney(state.saldo);
+      renderTransactions();
+      renderCampaignsList();
+      renderAllCampaigns();
+      renderAvailableToSponsor();
+      initCharts();
+      setupNav();
+      setupButtons();
+    }
 
-    // Iterar sobre as chaves do objeto data
-    Object.keys(data).forEach(chave => {
-		if(chave != "senha"){
-        var tr = document.createElement('tr');
-        // Iterar sobre as propriedades de cada objeto
-        Object.values(data[chave]).forEach(valor => {
-			
-            var td = document.createElement('td');
-            td.textContent = valor;
-            tr.appendChild(td); 
+    function formatMoney(v){
+      return v.toLocaleString('pt-BR');
+    }
+
+    /* ---------- Nav logic ---------- */
+    function setupNav(){
+      const nav = document.getElementById('nav');
+      nav.querySelectorAll('button').forEach(btn=>{
+        btn.addEventListener('click',(e)=>{
+          nav.querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+          btn.classList.add('active');
+          showView(btn.dataset.view);
         });
-        tbody.appendChild(tr);}
-    });
-}
+      });
+    }
 
-function clearTable() {
-var tabela = document.querySelector('table');
-tabela.querySelector('thead tr').innerHTML = '';
-tabela.querySelector('tbody').innerHTML = '';
-}
+    function showView(view){
+      // hide all
+      const views = ['dashboard','campanhas','patrocinar','pagamentos','metricas','patrocinadores','config'];
+      views.forEach(v=>{
+        document.getElementById('view-'+v).style.display = 'none';
+      });
+      document.getElementById('view-'+view).style.display = 'block';
+      // update top heading
+      const titles = {
+        dashboard:'Dashboard',
+        campanhas:'Campanhas',
+        patrocinar:'Patrocinar',
+        pagamentos:'Pagamentos',
+        metricas:'Métricas',
+        patrocinadores:'Seus patrocinadores',
+        config:'Configurações'
+      };
+      document.querySelector('.topbar h2').innerText = titles[view] || 'Dashboard';
+    }
 
+    /* ---------- Render components ---------- */
+    function renderTransactions(){
+      const tbody = document.querySelector('#transactionsTable tbody');
+      tbody.innerHTML = '';
+      state.transactions.forEach(tx=>{
+        const tr = document.createElement('tr');
+        const v = (tx.value > 0) ? `<strong style="color:#094">R$ ${formatMoney(tx.value)}</strong>` : `<strong style="color:#b31">- R$ ${formatMoney(Math.abs(tx.value))}</strong>`;
+        tr.innerHTML = `<td class="muted-sm">${tx.date}</td>
+                        <td>${tx.desc}</td>
+                        <td>${v}</td>
+                        <td class="muted-sm">${tx.status}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
 
+    function renderCampaignsList(){
+      const div = document.getElementById('campaignList');
+      div.innerHTML = '';
+      state.campaigns.forEach(c=>{
+        const el = document.createElement('div');
+        el.className = 'camp';
+        const statusClass = c.status === 'Rodando' ? 'status-running' : (c.status === 'Aguardando' ? 'status-wait' : '');
+        
+        // Calcular ROI para exibição no card
+        const roiData = calculateROI(c.roiData);
+        
+        el.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <div style="font-weight:800">${c.name}</div>
+              <div class="muted-sm">${c.course}</div>
+            </div>
+            <div class="pill ${statusClass}">${c.status}</div>
+          </div>
+          <div class="camp-roi-preview">
+            <div class="camp-roi-item">
+              <div>💸 Investimento sugerido:</div>
+              <div class="camp-roi-highlight">R$ ${formatMoney(c.roiData.investimentoSugerido)}</div>
+            </div>
+            <div class="camp-roi-item">
+              <div>💰 Retorno estimado:</div>
+              <div class="camp-roi-highlight">R$ ${formatMoney(roiData.lucroEstimado)}</div>
+            </div>
+            <div class="camp-roi-item">
+              <div>📈 ROI estimado:</div>
+              <div class="camp-roi-highlight">${roiData.roiPct.toFixed(0)}%</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:8px; margin-top:6px;">
+            <button onclick="openCampDetails(${c.id})" style="flex:1;background:transparent;border:1px solid #e6e6e6">Ver detalhes</button>
+            <button onclick="openROISimulator(${c.id})" style="flex:1">Simular ROI</button>
+          </div>
+        `;
+        div.appendChild(el);
+      });
 
+      // update count
+      const active = state.campaigns.filter(c=>c.status==='Rodando').length;
+      document.getElementById('camp-active').innerText = active;
+    }
 
+    function renderAllCampaigns(){
+      const div = document.getElementById('listAllCampaigns');
+      div.innerHTML = '';
+      state.campaigns.forEach(c=>{
+        const el = document.createElement('div');
+        el.className = 'camp';
+        
+        // Calcular ROI para exibição no card
+        const roiData = calculateROI(c.roiData);
+        
+        el.innerHTML = `<div style="display:flex; justify-content:space-between; align-items:center;">
+            <div><div style="font-weight:900">${c.name}</div><div class="muted-sm">${c.course}</div></div>
+            <div class="pill">${c.status}</div>
+          </div>
+          <div class="camp-roi-preview">
+            <div class="camp-roi-item">
+              <div>💸 Investimento sugerido:</div>
+              <div class="camp-roi-highlight">R$ ${formatMoney(c.roiData.investimentoSugerido)}</div>
+            </div>
+            <div class="camp-roi-item">
+              <div>💰 Retorno estimado:</div>
+              <div class="camp-roi-highlight">R$ ${formatMoney(roiData.lucroEstimado)}</div>
+            </div>
+            <div class="camp-roi-item">
+              <div>📈 ROI estimado:</div>
+              <div class="camp-roi-highlight">${roiData.roiPct.toFixed(0)}%</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:8px">
+            <button class="btn" style="background:transparent; border:1px solid #e6e6e6" onclick="openCampDetails(${c.id})">Abrir</button>
+            <button class="btn" style="background:var(--accent)" onclick="openROISimulator(${c.id})">Simular ROI</button>
+          </div>`;
+        div.appendChild(el);
+      });
+    }
 
-</script>
+    function renderAvailableToSponsor(){
+      const div = document.getElementById('availableToSponsor');
+      div.innerHTML = '';
+      state.campaigns.filter(c=>c.status !== 'Encerrada').forEach(c=>{
+        const el = document.createElement('div');
+        el.className = 'camp';
+        
+        // Calcular ROI para exibição no card
+        const roiData = calculateROI(c.roiData);
+        
+        el.innerHTML = `<div style="display:flex; justify-content:space-between; align-items:center;">
+            <div><div style="font-weight:900">${c.name}</div><div class="muted-sm">${c.course}</div></div>
+            <div class="pill ${c.status==='Rodando' ? 'status-running' : 'status-wait'}">${c.status}</div>
+          </div>
+          <div class="camp-roi-preview">
+            <div class="camp-roi-item">
+              <div>💸 Investimento sugerido:</div>
+              <div class="camp-roi-highlight">R$ ${formatMoney(c.roiData.investimentoSugerido)}</div>
+            </div>
+            <div class="camp-roi-item">
+              <div>💰 Retorno estimado:</div>
+              <div class="camp-roi-highlight">R$ ${formatMoney(roiData.lucroEstimado)}</div>
+            </div>
+            <div class="camp-roi-item">
+              <div>📈 ROI estimado:</div>
+              <div class="camp-roi-highlight">${roiData.roiPct.toFixed(0)}%</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:8px; margin-top:6px;">
+            <button onclick="openROISimulator(${c.id})" style="flex:1;background:var(--accent)">Simular ROI</button>
+            <button onclick="openCampDetails(${c.id})" style="flex:1;background:transparent;border:1px solid #e6e6e6">Detalhes</button>
+          </div>`;
+        div.appendChild(el);
+      });
+    }
+
+    /* ---------- ROI Calculation Functions ---------- */
+    function calculateROI(roiData) {
+      const vendasEsperadas = roiData.publicoEstimado * (roiData.taxaConversao / 100);
+      const faturamentoTotal = vendasEsperadas * roiData.precoProduto;
+      const participacao = roiData.investimentoSugerido / roiData.metaTotal;
+      const lucroEstimado = faturamentoTotal * participacao;
+      const roiPct = ((lucroEstimado - roiData.investimentoSugerido) / roiData.investimentoSugerido) * 100;
+      
+      return {
+        vendasEsperadas,
+        faturamentoTotal,
+        participacao,
+        lucroEstimado,
+        roiPct
+      };
+    }
+
+    function updateROICalculation(roiData) {
+      const result = calculateROI(roiData);
+      
+      // Atualizar valores na interface
+      document.getElementById('vendasEsperadas').innerText = Math.round(result.vendasEsperadas);
+      document.getElementById('faturamentoTotal').innerText = formatMoney(Math.round(result.faturamentoTotal));
+      document.getElementById('participacao').innerText = (result.participacao * 100).toFixed(2) + '%';
+      document.getElementById('lucroEstimado').innerText = formatMoney(Math.round(result.lucroEstimado));
+      document.getElementById('roiPct').innerText = result.roiPct.toFixed(0) + '%';
+      
+      // Atualizar fórmulas
+      document.getElementById('formulaVendas').innerText = 
+        `Vendas esperadas = ${roiData.publicoEstimado} × (${roiData.taxaConversao}% / 100) = ${Math.round(result.vendasEsperadas)}`;
+      
+      document.getElementById('formulaFaturamento').innerText = 
+        `Faturamento total = ${Math.round(result.vendasEsperadas)} × R$ ${roiData.precoProduto} = R$ ${formatMoney(Math.round(result.faturamentoTotal))}`;
+      
+      document.getElementById('formulaParticipacao').innerText = 
+        `Participação = ${formatMoney(roiData.investimentoSugerido)} / ${formatMoney(roiData.metaTotal)} = ${(result.participacao * 100).toFixed(2)}%`;
+      
+      document.getElementById('formulaLucro').innerText = 
+        `Lucro estimado = R$ ${formatMoney(Math.round(result.faturamentoTotal))} × ${(result.participacao * 100).toFixed(2)}% = R$ ${formatMoney(Math.round(result.lucroEstimado))}`;
+      
+      document.getElementById('formulaROI').innerText = 
+        `ROI = ((R$ ${formatMoney(Math.round(result.lucroEstimado))} − R$ ${formatMoney(roiData.investimentoSugerido)}) / R$ ${formatMoney(roiData.investimentoSugerido)}) × 100 = ${result.roiPct.toFixed(0)}%`;
+      
+      // Adicionar efeito de animação
+      const animatedElements = document.querySelectorAll('.animated-value');
+      animatedElements.forEach(el => {
+        el.classList.add('value-updated');
+        setTimeout(() => el.classList.remove('value-updated'), 500);
+      });
+    }
+
+    /* ---------- Modal operations ---------- */
+    function openROISimulator(campId){
+      const c = state.campaigns.find(x=>x.id===campId);
+      const modalRoot = document.getElementById('modalRoot');
+      modalRoot.style.display = 'block';
+      modalRoot.innerHTML = '';
+      const overlay = document.createElement('div');
+      overlay.className = 'overlay';
+      
+      // Calcular valores iniciais
+      const initialROI = calculateROI(c.roiData);
+      
+      overlay.innerHTML = `<div class="modal">
+        <h2>Simulador de ROI — ${c.name}</h2>
+        <div class="muted-sm" style="margin-bottom:10px">Curso: ${c.course}</div>
+
+        <div class="simulator-grid">
+          <div>
+            <h3>Parâmetros da Campanha</h3>
+            <div class="input-group">
+              <label>🎯 Meta total (R$)</label>
+              <input id="metaTotal" type="number" value="${c.roiData.metaTotal}" onchange="updateROISimulator(${c.id})" />
+            </div>
+            <div class="input-group">
+              <label>👥 Público estimado</label>
+              <input id="publicoEstimado" type="number" value="${c.roiData.publicoEstimado}" onchange="updateROISimulator(${c.id})" />
+            </div>
+            <div class="input-group">
+              <label>📈 Taxa de conversão (%)</label>
+              <input id="taxaConversao" type="number" value="${c.roiData.taxaConversao}" onchange="updateROISimulator(${c.id})" />
+            </div>
+            <div class="input-group">
+              <label>💰 Preço do produto (R$)</label>
+              <input id="precoProduto" type="number" value="${c.roiData.precoProduto}" onchange="updateROISimulator(${c.id})" />
+            </div>
+            <div class="input-group">
+              <label>💸 Seu investimento (R$)</label>
+              <input id="investimentoSugerido" type="number" value="${c.roiData.investimentoSugerido}" onchange="updateROISimulator(${c.id})" />
+            </div>
+          </div>
+          
+          <div>
+            <h3>Resultados</h3>
+            <div class="roi-result">
+              <div class="muted-sm">Vendas esperadas</div>
+              <div class="big animated-value" id="vendasEsperadas">${Math.round(initialROI.vendasEsperadas)}</div>
+            </div>
+            <div class="roi-result">
+              <div class="muted-sm">Faturamento total</div>
+              <div class="big animated-value" id="faturamentoTotal">R$ ${formatMoney(Math.round(initialROI.faturamentoTotal))}</div>
+            </div>
+            <div class="roi-result">
+              <div class="muted-sm">Sua participação</div>
+              <div class="big animated-value" id="participacao">${(initialROI.participacao * 100).toFixed(2)}%</div>
+            </div>
+            <div class="roi-result">
+              <div class="muted-sm">Lucro estimado</div>
+              <div class="big animated-value" id="lucroEstimado">R$ ${formatMoney(Math.round(initialROI.lucroEstimado))}</div>
+            </div>
+            <div class="roi-result">
+              <div class="muted-sm">ROI estimado</div>
+              <div class="big animated-value roi-highlight" id="roiPct">${initialROI.roiPct.toFixed(0)}%</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="formula-section">
+          <h3>🧮 Fórmulas utilizadas</h3>
+          <div class="formula-item" id="formulaVendas">Vendas esperadas = ${c.roiData.publicoEstimado} × (${c.roiData.taxaConversao}% / 100) = ${Math.round(initialROI.vendasEsperadas)}</div>
+          <div class="formula-item" id="formulaFaturamento">Faturamento total = ${Math.round(initialROI.vendasEsperadas)} × R$ ${c.roiData.precoProduto} = R$ ${formatMoney(Math.round(initialROI.faturamentoTotal))}</div>
+          <div class="formula-item" id="formulaParticipacao">Participação = ${formatMoney(c.roiData.investimentoSugerido)} / ${formatMoney(c.roiData.metaTotal)} = ${(initialROI.participacao * 100).toFixed(2)}%</div>
+          <div class="formula-item" id="formulaLucro">Lucro estimado = R$ ${formatMoney(Math.round(initialROI.faturamentoTotal))} × ${(initialROI.participacao * 100).toFixed(2)}% = R$ ${formatMoney(Math.round(initialROI.lucroEstimado))}</div>
+          <div class="formula-item" id="formulaROI">ROI = ((R$ ${formatMoney(Math.round(initialROI.lucroEstimado))} − R$ ${formatMoney(c.roiData.investimentoSugerido)}) / R$ ${formatMoney(c.roiData.investimentoSugerido)}) × 100 = ${initialROI.roiPct.toFixed(0)}%</div>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:12px; justify-content:flex-end">
+          <button class="btn" onclick="closeModal()">Fechar</button>
+          <button class="btn" style="background:var(--accent)" onclick="confirmInvestFromROI(${c.id})">Confirmar Investimento</button>
+        </div>
+      </div>`;
+      modalRoot.appendChild(overlay);
+    }
+
+    function updateROISimulator(campId) {
+      const c = state.campaigns.find(x=>x.id===campId);
+      
+      // Obter valores atualizados dos inputs
+      const updatedROIData = {
+        metaTotal: Number(document.getElementById('metaTotal').value),
+        publicoEstimado: Number(document.getElementById('publicoEstimado').value),
+        taxaConversao: Number(document.getElementById('taxaConversao').value),
+        precoProduto: Number(document.getElementById('precoProduto').value),
+        investimentoSugerido: Number(document.getElementById('investimentoSugerido').value)
+      };
+      
+      // Atualizar cálculos
+      updateROICalculation(updatedROIData);
+    }
+
+    function confirmInvestFromROI(campId) {
+      const c = state.campaigns.find(x=>x.id===campId);
+      const investValue = Number(document.getElementById('investimentoSugerido').value);
+      
+      if(!investValue || investValue <= 0){
+        alert('Informe um valor válido');
+        return;
+      }
+      
+      // Simula investimento: reduz saldo, aumenta invested, cria transação e atualiza lucros fictícios
+      if(investValue > state.saldo){
+        alert('Saldo insuficiente (protótipo).');
+        return;
+      }
+      
+      c.invested += investValue;
+      
+      // Calcular retorno baseado nos parâmetros atuais do simulador
+      const updatedROIData = {
+        metaTotal: Number(document.getElementById('metaTotal').value),
+        publicoEstimado: Number(document.getElementById('publicoEstimado').value),
+        taxaConversao: Number(document.getElementById('taxaConversao').value),
+        precoProduto: Number(document.getElementById('precoProduto').value),
+        investimentoSugerido: investValue
+      };
+      
+      const roiResult = calculateROI(updatedROIData);
+      const earned = Math.round(roiResult.lucroEstimado);
+      c.profit += earned;
+      state.saldo -= investValue;
+
+      // Inserir transaction
+      state.transactions.unshift({date: new Date().toISOString().slice(0,10), desc:`Investimento: ${c.name}`, value:-investValue, status:'Concluído'});
+      state.transactions.unshift({date: new Date().toISOString().slice(0,10), desc:`Retorno estimado: ${c.name}`, value:earned, status:'Concluído'});
+
+      // Atualizar visuais
+      document.getElementById('saldo').innerText = formatMoney(state.saldo);
+      document.getElementById('saldo2').innerText = formatMoney(state.saldo);
+      renderTransactions();
+      renderCampaignsList();
+      renderAllCampaigns();
+      renderAvailableToSponsor();
+      updateChartsAfterInvestment();
+      closeModal();
+      toast(`Investimento de R$ ${formatMoney(investValue)} confirmado em ${c.name}`);
+    }
+
+    function openSponsorModal(campId){
+      const c = state.campaigns.find(x=>x.id===campId);
+      const modalRoot = document.getElementById('modalRoot');
+      modalRoot.style.display = 'block';
+      modalRoot.innerHTML = '';
+      const overlay = document.createElement('div');
+      overlay.className = 'overlay';
+      overlay.innerHTML = `<div class="modal">
+        <h2>Patrocinar — ${c.name}</h2>
+        <div class="muted-sm" style="margin-bottom:10px">Curso: ${c.course} • Orçamento R$ ${formatMoney(c.budget)}</div>
+
+        <label class="muted-sm">Valor que deseja investir</label>
+        <div style="margin-top:8px" class="row">
+          <input id="investValue" type="number" min="10" step="10" value="${c.roiData.investimentoSugerido}" />
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:12px; justify-content:flex-end">
+          <button class="btn" onclick="closeModal()">Cancelar</button>
+          <button class="btn" style="background:var(--accent)" onclick="confirmInvest(${c.id})">Confirmar</button>
+        </div>
+      </div>`;
+      modalRoot.appendChild(overlay);
+    }
+
+    function openCampDetails(campId){
+      const c = state.campaigns.find(x=>x.id===campId);
+      const modalRoot = document.getElementById('modalRoot');
+      modalRoot.style.display = 'block';
+      modalRoot.innerHTML = '';
+      const overlay = document.createElement('div');
+      overlay.className = 'overlay';
+      overlay.innerHTML = `<div class="modal">
+        <h2>${c.name}</h2>
+        <div class="muted-sm">Curso: ${c.course}</div>
+        <div style="margin-top:10px">
+          <div class="muted-sm">Status: <strong>${c.status}</strong></div>
+          <div class="muted-sm">Orçamento total: R$ ${formatMoney(c.budget)}</div>
+          <div class="muted-sm">Investido: R$ ${formatMoney(c.invested)}</div>
+          <div class="muted-sm">Lucro atual: R$ ${formatMoney(c.profit)}</div>
+        </div>
+        <div style="margin-top:12px; display:flex; gap:10px; justify-content:flex-end">
+          <button class="btn" onclick="closeModal()">Fechar</button>
+        </div>
+      </div>`;
+      modalRoot.appendChild(overlay);
+    }
+
+    function closeModal(){
+      const modalRoot = document.getElementById('modalRoot');
+      modalRoot.style.display = 'none';
+      modalRoot.innerHTML = '';
+    }
+
+    function confirmInvest(campId){
+      const val = Number(document.getElementById('investValue').value);
+      if(!val || val <= 0){
+        alert('Informe um valor válido');
+        return;
+      }
+      // Simula investimento: reduz saldo, aumenta invested, cria transação e atualiza lucros fictícios
+      if(val > state.saldo){
+        alert('Saldo insuficiente (protótipo).');
+        return;
+      }
+      const c = state.campaigns.find(x=>x.id===campId);
+      c.invested += val;
+      // Simulate immediate effect: a porcentagem do profit depende do estReturnPct
+      const earned = Math.round(val * (c.estReturnPct/100));
+      c.profit += earned;
+      state.saldo -= val;
+
+      // Inserir transaction
+      state.transactions.unshift({date: new Date().toISOString().slice(0,10), desc:`Investimento: ${c.name}`, value:-val, status:'Concluído'});
+      state.transactions.unshift({date: new Date().toISOString().slice(0,10), desc:`Retorno estimado: ${c.name}`, value:earned, status:'Concluído'});
+
+      // Atualizar visuais
+      document.getElementById('saldo').innerText = formatMoney(state.saldo);
+      document.getElementById('saldo2').innerText = formatMoney(state.saldo);
+      renderTransactions();
+      renderCampaignsList();
+      renderAllCampaigns();
+      renderAvailableToSponsor();
+      updateChartsAfterInvestment();
+      closeModal();
+      toast(`Investimento de R$ ${formatMoney(val)} confirmado em ${c.name}`);
+    }
+
+    /* ---------- Charts ---------- */
+    let barChart, lineChart, profitChart, donutChart;
+
+    function initCharts(){
+      // BAR - Lucro por campanha
+      const barCtx = document.getElementById('barChart').getContext('2d');
+      barChart = new Chart(barCtx, {
+        type:'bar',
+        data:{
+          labels: state.campaigns.map(c=>c.name),
+          datasets:[{
+            label:'Lucro (R$)',
+            data: state.campaigns.map(c=>c.profit),
+            borderRadius:8,
+            backgroundColor: state.campaigns.map(c=>'rgba(0,255,127,0.9)'),
+          }]
+        },
+        options:{
+          plugins:{legend:{display:false}},
+          scales:{
+            y:{beginAtZero:true, ticks:{callback: v => 'R$ '+v}}
+          }
+        }
+      });
+
+      // LINE - Evolução de vendas (fake)
+      const lineCtx = document.getElementById('lineChart').getContext('2d');
+      const months = ['Mai','Jun','Jul','Ago','Set','Out'];
+      const sales = [200,320,420,380,520,610];
+      lineChart = new Chart(lineCtx,{
+        type:'line',
+        data:{labels:months, datasets:[{label:'Vendas', data:sales, fill:true, tension:0.35, backgroundColor:'rgba(0,255,127,0.14)', borderColor:'rgba(0,255,127,0.95)', pointRadius:3}]},
+        options:{plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}}}
+      });
+
+      // PROFIT - Área
+      const profitCtx = document.getElementById('profitChart').getContext('2d');
+      const profitSeries = [120,200,350,420,510,760];
+      profitChart = new Chart(profitCtx, {
+        type:'line',
+        data:{labels:months, datasets:[{label:'Lucro acumulado', data:profitSeries, fill:true, tension:0.3, backgroundColor:'rgba(0,255,127,0.12)', borderColor:'rgba(0,255,127,0.95)', pointRadius:2}]},
+        options:{plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}}}
+      });
+
+      // DONUT - CTR / ROI breakdown (fake)
+      const donutCtx = document.getElementById('donutChart').getContext('2d');
+      donutChart = new Chart(donutCtx, {
+        type:'doughnut',
+        data:{
+          labels:['ROI alto','ROI médio','ROI baixo'],
+          datasets:[{data:[45,30,25], backgroundColor:['rgba(0,255,127,0.95)','rgba(0,255,127,0.6)','rgba(0,255,127,0.3)'] }]
+        },
+        options:{plugins:{legend:{position:'bottom'}}}
+      });
+    }
+
+    function updateChartsAfterInvestment(){
+      // update bar chart data from state.campaigns profits
+      barChart.data.datasets[0].data = state.campaigns.map(c=>c.profit);
+      barChart.update();
+
+      // line chart simulate small bump
+      lineChart.data.datasets[0].data = lineChart.data.datasets[0].data.map(v => Math.round(v * (1 + Math.random()*0.04)));
+      lineChart.update();
+
+      // profit chart bump
+      profitChart.data.datasets[0].data = profitChart.data.datasets[0].data.map(v => Math.round(v * (1 + Math.random()*0.02)));
+      profitChart.update();
+
+      // donut update slightly
+      donutChart.data.datasets[0].data = [
+        Math.max(10, 40 + Math.round(Math.random()*10)),
+        Math.max(10, 30 + Math.round(Math.random()*8)),
+        Math.max(10, 30 - Math.round(Math.random()*8))
+      ];
+      donutChart.update();
+    }
+
+    /* ---------- UI helpers ---------- */
+    function toast(msg){
+      const el = document.createElement('div');
+      el.style.position='fixed';
+      el.style.right='18px';
+      el.style.bottom='18px';
+      el.style.background='#072';
+      el.style.color='#dfffbd';
+      el.style.padding='12px 16px';
+      el.style.borderRadius='10px';
+      el.style.boxShadow='0 8px 30px rgba(2,6,23,0.2)';
+      el.style.fontWeight='700';
+      el.innerText = msg;
+      document.body.appendChild(el);
+      setTimeout(()=>el.style.opacity=0,1800);
+      setTimeout(()=>el.remove(),2600);
+    }
+
+    /* ---------- Buttons ---------- */
+    function setupButtons(){
+      document.getElementById('addFunds').addEventListener('click', ()=> openAddFunds());
+      document.getElementById('addFundsBtn').addEventListener('click', ()=> openAddFunds());
+      document.getElementById('withdrawBtn').addEventListener('click', ()=> openWithdraw());
+      document.getElementById('newCampBtn').addEventListener('click', ()=> openCreateCampaign());
+    }
+
+    function openAddFunds(){
+      const modalRoot = document.getElementById('modalRoot');
+      modalRoot.style.display = 'block';
+      modalRoot.innerHTML = `<div class="overlay"><div class="modal">
+        <h2>Adicionar fundos</h2>
+        <div class="muted-sm">Valor (simulação)</div>
+        <div style="margin-top:8px"><input id="addValue" type="number" value="500" /></div>
+        <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:12px">
+          <button class="btn" onclick="closeModal()">Cancelar</button>
+          <button class="btn" style="background:var(--accent)" onclick="confirmAddFunds()">Adicionar</button>
+        </div>
+      </div></div>`;
+    }
+
+    function confirmAddFunds(){
+      const val = Number(document.getElementById('addValue').value);
+      if(!val || val <= 0) return alert('Valor inválido');
+      state.saldo += val;
+      state.transactions.unshift({date:new Date().toISOString().slice(0,10), desc:'Depósito (simulado)', value:val, status:'Concluído'});
+      document.getElementById('saldo').innerText = formatMoney(state.saldo);
+      document.getElementById('saldo2').innerText = formatMoney(state.saldo);
+      renderTransactions();
+      closeModal();
+      toast(`R$ ${formatMoney(val)} adicionados ao saldo`);
+    }
+
+    function openWithdraw(){
+      const modalRoot = document.getElementById('modalRoot');
+      modalRoot.style.display = 'block';
+      modalRoot.innerHTML = `<div class="overlay"><div class="modal">
+        <h2>Solicitar saque</h2>
+        <div class="muted-sm">Valor disponível: R$ ${formatMoney(state.saldo)}</div>
+        <div style="margin-top:8px"><input id="withdrawValue" type="number" value="200" /></div>
+        <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:12px">
+          <button class="btn" onclick="closeModal()">Cancelar</button>
+          <button class="btn" style="background:var(--accent)" onclick="confirmWithdraw()">Solicitar</button>
+        </div>
+      </div></div>`;
+    }
+
+    function confirmWithdraw(){
+      const val = Number(document.getElementById('withdrawValue').value);
+      if(!val || val <= 0) return alert('Valor inválido');
+      if(val > state.saldo) return alert('Saldo insuficiente');
+      state.saldo -= val;
+      state.transactions.unshift({date:new Date().toISOString().slice(0,10), desc:'Saque solicitado (simulado)', value:-val, status:'Pendente'});
+      document.getElementById('saldo').innerText = formatMoney(state.saldo);
+      document.getElementById('saldo2').innerText = formatMoney(state.saldo);
+      renderTransactions();
+      closeModal();
+      toast(`Saque de R$ ${formatMoney(val)} solicitado`);
+    }
+
+    function openCreateCampaign(){
+      const modalRoot = document.getElementById('modalRoot');
+      modalRoot.style.display = 'block';
+      modalRoot.innerHTML = `<div class="overlay"><div class="modal">
+        <h2>Criar campanha (simulada)</h2>
+        <div class="muted-sm">Preencha os dados para criar uma campanha fictícia</div>
+        <div style="margin-top:8px"><input id="campName" type="text" placeholder="Nome da campanha" /></div>
+        <div style="margin-top:8px"><input id="campCourse" type="text" placeholder="Nome do curso" /></div>
+        <div style="display:flex; gap:8px; margin-top:8px"><input id="campBudget" type="number" placeholder="Orçamento R$" value="1000" /></div>
+        <div style="display:flex; gap:8px; margin-top:12px; justify-content:flex-end">
+          <button class="btn" onclick="closeModal()">Cancelar</button>
+          <button class="btn" style="background:var(--accent)" onclick="confirmCreateCamp()">Criar</button>
+        </div>
+      </div></div>`;
+    }
+
+    function confirmCreateCamp(){
+      const name = document.getElementById('campName').value || 'Campanha Demo';
+      const course = document.getElementById('campCourse').value || 'Curso Demo';
+      const budget = Number(document.getElementById('campBudget').value) || 1000;
+      const newId = Math.max(...state.campaigns.map(c=>c.id)) + 1;
+      const pct = 15 + Math.round(Math.random()*30);
+      
+      // Adicionar dados de ROI para a nova campanha
+      state.campaigns.push({
+        id:newId, 
+        name, 
+        course, 
+        budget, 
+        status:'Aguardando', 
+        estReturnPct:pct, 
+        invested:0, 
+        profit:0,
+        roiData: {
+          metaTotal: budget * 8,
+          publicoEstimado: 800 + Math.round(Math.random() * 400),
+          taxaConversao: 20 + Math.round(Math.random() * 15),
+          precoProduto: 25 + Math.round(Math.random() * 20),
+          investimentoSugerido: 400
+        }
+      });
+      
+      renderAllCampaigns();
+      renderCampaignsList();
+      renderAvailableToSponsor();
+      closeModal();
+      toast('Campanha criada (simulada)');
+    }
+
+  </script>
 </body>
 </html>
