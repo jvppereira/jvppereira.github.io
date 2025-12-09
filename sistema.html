@@ -191,6 +191,20 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Dashboard Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 70% 30%;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1200px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         /* Stats Cards */
         .stats-container {
             display: grid;
@@ -243,16 +257,10 @@
 
         /* Charts Container */
         .charts-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 30px;
             margin-bottom: 30px;
-        }
-
-        @media (max-width: 768px) {
-            .charts-container {
-                grid-template-columns: 1fr;
-            }
         }
 
         .chart-card {
@@ -280,6 +288,146 @@
         .chart-wrapper {
             height: 400px;
             position: relative;
+        }
+
+        /* Resumo de Campanhas (Coluna Direita) */
+        .campaigns-summary {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            height: calc(100% - 40px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dark-mode .campaigns-summary {
+            background-color: var(--gray-light);
+        }
+
+        .summary-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .summary-list {
+            flex: 1;
+            overflow-y: auto;
+            max-height: 600px;
+        }
+
+        .summary-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .summary-list::-webkit-scrollbar-track {
+            background: var(--gray-light);
+            border-radius: 10px;
+        }
+
+        .summary-list::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .summary-item {
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--primary);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .dark-mode .summary-item {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .summary-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .summary-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .summary-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .summary-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 10px;
+        }
+
+        .summary-areas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 8px;
+        }
+
+        .area-badge {
+            background-color: var(--primary);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray);
+        }
+
+        .no-data i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--gray-light);
+        }
+
+        /* Chart Filters */
+        .chart-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .chart-filter {
+            padding: 8px 15px;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--border-radius);
+            background-color: var(--light);
+            color: var(--dark);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .chart-filter:hover, .chart-filter.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
         }
 
         /* Campanhas List */
@@ -553,7 +701,7 @@
             padding: 30px;
             max-width: 800px;
             width: 100%;
-            max-height: 90vh;
+            max-height: 80vh;
             overflow-y: auto;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
@@ -562,11 +710,37 @@
             background-color: var(--gray-light);
         }
 
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
         .modal-title {
             font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 15px;
             color: var(--primary);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--danger);
+        }
+
+        .modal-body {
+            overflow-y: auto;
+            max-height: calc(80vh - 120px);
         }
 
         .modal-actions {
@@ -574,6 +748,88 @@
             justify-content: flex-end;
             gap: 10px;
             margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        /* Tabela com Scroll */
+        .table-scroll-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--border-radius);
+            margin-top: 20px;
+        }
+
+        .table-scroll-container table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        .table-scroll-container thead {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .table-scroll-container th {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--primary-dark);
+        }
+
+        .table-scroll-container td {
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .table-scroll-container tr:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .dark-mode .table-scroll-container tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .table-scroll-container::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .table-scroll-container::-webkit-scrollbar-track {
+            background: var(--gray-light);
+            border-radius: 10px;
+        }
+
+        .table-scroll-container::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        /* Area Summary */
+        .area-summary {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: var(--light);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary);
+        }
+
+        .dark-mode .area-summary {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .area-summary h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .area-summary p {
+            margin: 5px 0;
         }
 
         /* Loading */
@@ -629,75 +885,6 @@
             background-color: var(--primary);
         }
 
-        /* Tabela de Detalhes */
-        .details-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-
-        .details-table th {
-            background-color: var(--primary);
-            color: white;
-            padding: 12px 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .details-table td {
-            padding: 10px 15px;
-            border-bottom: 1px solid var(--gray-light);
-        }
-
-        .details-table tr:hover {
-            background-color: rgba(0, 0, 0, 0.05);
-        }
-
-        .dark-mode .details-table tr:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .area-summary {
-            margin: 15px 0;
-            padding: 15px;
-            background-color: var(--light);
-            border-radius: var(--border-radius);
-            border-left: 4px solid var(--primary);
-        }
-
-        .area-summary h4 {
-            color: var(--primary);
-            margin-bottom: 10px;
-        }
-
-        .area-summary p {
-            margin: 5px 0;
-        }
-
-        /* Chart Filters */
-        .chart-filters {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .chart-filter {
-            padding: 8px 15px;
-            border: 1px solid var(--gray-light);
-            border-radius: var(--border-radius);
-            background-color: var(--light);
-            color: var(--dark);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .chart-filter:hover, .chart-filter.active {
-            background-color: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .header {
@@ -718,12 +905,12 @@
                 grid-template-columns: 1fr;
             }
             
-            .charts-container {
-                grid-template-columns: 1fr;
-            }
-            
             .chart-wrapper {
                 height: 300px;
+            }
+            
+            .summary-list {
+                max-height: 400px;
             }
         }
     </style>
@@ -784,46 +971,49 @@
                 <div class="chart-filter" data-filter="CRIAÇÃO">Apenas CRIAÇÃO</div>
             </div>
 
-            <!-- Charts -->
-            <div class="charts-container">
-                <div class="chart-card">
-                    <div class="chart-title">
-                        <span>Valor por Campanha (Barras Agrupadas por Área)</span>
-                        <button class="btn btn-small btn-secondary" id="toggleStacked">
-                            <i class="fas fa-layer-group"></i> Alternar Visualização
-                        </button>
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Coluna Esquerda: Gráficos -->
+                <div class="charts-column">
+                    <!-- Gráfico de Barras Stacked -->
+                    <div class="chart-card">
+                        <div class="chart-title">
+                            <span>Valor por Campanha (Barras Agrupadas por Área)</span>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="chartCampaigns"></canvas>
+                        </div>
+                        <div class="chart-help" style="margin-top: 10px; font-size: 0.9rem; color: var(--gray);">
+                            <i class="fas fa-mouse-pointer"></i> Clique em uma barra para ver os detalhes da campanha
+                        </div>
                     </div>
-                    <div class="chart-wrapper">
-                        <canvas id="chartCampaigns"></canvas>
-                    </div>
-                    <div class="chart-help" style="margin-top: 10px; font-size: 0.9rem; color: var(--gray);">
-                        <i class="fas fa-mouse-pointer"></i> Clique em uma barra para ver os detalhes da campanha
+                    
+                    <!-- Gráfico de Pizza -->
+                    <div class="chart-card">
+                        <div class="chart-title">
+                            <span>Distribuição por Área (Total Geral)</span>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="chartAreas"></canvas>
+                        </div>
+                        <div class="chart-help" style="margin-top: 10px; font-size: 0.9rem; color: var(--gray);">
+                            <i class="fas fa-mouse-pointer"></i> Clique em uma fatia para ver detalhes da área
+                        </div>
                     </div>
                 </div>
-                
-                <div class="chart-card">
-                    <div class="chart-title">
-                        <span>Distribuição por Área (Total Geral)</span>
-                    </div>
-                    <div class="chart-wrapper">
-                        <canvas id="chartAreas"></canvas>
-                    </div>
-                    <div class="chart-help" style="margin-top: 10px; font-size: 0.9rem; color: var(--gray);">
-                        <i class="fas fa-mouse-pointer"></i> Clique em uma fatia para ver gastos detalhados da área
-                    </div>
-                </div>
-            </div>
 
-            <!-- Tabela de Detalhes (Aparece quando clica nos gráficos) -->
-            <div class="chart-card" id="detailsTableContainer" style="display: none;">
-                <div class="chart-title">
-                    <span id="detailsTableTitle">Detalhes da Seleção</span>
-                    <button class="btn btn-small btn-secondary" onclick="hideDetailsTable()">
-                        <i class="fas fa-times"></i> Fechar
-                    </button>
-                </div>
-                <div id="detailsTableContent">
-                    <!-- Conteúdo será carregado dinamicamente -->
+                <!-- Coluna Direita: Resumo de Campanhas -->
+                <div class="campaigns-summary">
+                    <div class="summary-header">
+                        <span>Resumo das Campanhas</span>
+                        <span class="summary-count" id="summaryCount">0 campanhas</span>
+                    </div>
+                    <div class="summary-list" id="campaignsSummaryList">
+                        <div class="no-data">
+                            <i class="fas fa-chart-pie"></i>
+                            <p>Carregando campanhas...</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -880,7 +1070,6 @@
                     </div>
                     
                     <div class="itens-list" id="itemsListNew">
-                        <!-- Itens serão adicionados aqui -->
                         <div class="empty-message">
                             Nenhum item adicionado. Clique em "Adicionar Item" para começar.
                         </div>
@@ -904,8 +1093,13 @@
     <!-- Modal de Confirmação -->
     <div class="modal" id="confirmModal">
         <div class="modal-content">
-            <div class="modal-title">Confirmar Exclusão</div>
-            <p>Tem certeza que deseja excluir esta campanha? Esta ação não pode ser desfeita.</p>
+            <div class="modal-header">
+                <div class="modal-title">Confirmar Exclusão</div>
+                <button class="modal-close" onclick="hideModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja excluir esta campanha? Esta ação não pode ser desfeita.</p>
+            </div>
             <div class="modal-actions">
                 <button class="btn btn-secondary" id="modalCancel">Cancelar</button>
                 <button class="btn btn-danger" id="modalConfirm">Excluir</button>
@@ -913,11 +1107,40 @@
         </div>
     </div>
 
+    <!-- Modal de Detalhes -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="detailsModalTitle">Detalhes da Campanha</div>
+                <button class="modal-close" onclick="hideDetailsModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="detailsModalContent">
+                <!-- Conteúdo será carregado dinamicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Área -->
+    <div class="modal" id="areaModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="areaModalTitle">Detalhes da Área</div>
+                <button class="modal-close" onclick="hideAreaModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="areaModalContent">
+                <!-- Conteúdo será carregado dinamicamente -->
+            </div>
+        </div>
+    </div>
+
     <!-- Modal de Edição -->
     <div class="modal" id="editModal">
         <div class="modal-content">
-            <div class="modal-title" id="editModalTitle">Editar Campanha</div>
-            <div id="editModalContent">
+            <div class="modal-header">
+                <div class="modal-title" id="editModalTitle">Editar Campanha</div>
+                <button class="modal-close" onclick="hideEditModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="editModalContent">
                 <!-- Conteúdo será carregado dinamicamente -->
             </div>
         </div>
@@ -1006,6 +1229,24 @@
         </div>
     </template>
 
+    <!-- Summary Item Template -->
+    <template id="summaryTemplate">
+        <div class="summary-item" data-id="{id}" onclick="showCampaignDetailsModal('{id}')">
+            <div class="summary-title">
+                <span>{nome}</span>
+                <span style="font-size: 0.8rem; color: var(--gray);">{itens} itens</span>
+            </div>
+            <div class="summary-value">{valor}</div>
+            <div class="summary-areas">
+                {areasBadges}
+            </div>
+            <div class="summary-details">
+                <span>Média: {media}</span>
+                <span>ID: {idShort}</span>
+            </div>
+        </div>
+    </template>
+
     <script>
         // Configurações do Firebase
         const FIREBASE_URL = 'https://appatividades-7450d-default-rtdb.firebaseio.com/dadoscampanhas.json';
@@ -1016,7 +1257,7 @@
             currentCampaignId: null,
             itemCounter: 1,
             chartFilter: 'all',
-            stackedChart: true
+            activeFilter: 'all'
         };
 
         // Formatadores
@@ -1024,6 +1265,14 @@
             style: 'currency',
             currency: 'BRL'
         });
+
+        // Cores para áreas
+        const areaColors = {
+            'MÍDIA': '#4361ee',
+            'PRODUÇÃO': '#7209b7',
+            'CRIAÇÃO': '#4cc9f0',
+            'OUTROS': '#f72585'
+        };
 
         // Elementos DOM principais
         const elements = {
@@ -1036,7 +1285,9 @@
             searchCampaigns: document.getElementById('searchCampaigns'),
             campanhasList: document.getElementById('campanhasList'),
             statsContainer: document.getElementById('statsContainer'),
-            chartFilters: document.getElementById('chartFilters')
+            chartFilters: document.getElementById('chartFilters'),
+            campaignsSummaryList: document.getElementById('campaignsSummaryList'),
+            summaryCount: document.getElementById('summaryCount')
         };
 
         // Inicialização
@@ -1080,19 +1331,10 @@
                 filter.addEventListener('click', () => {
                     document.querySelectorAll('.chart-filter').forEach(f => f.classList.remove('active'));
                     filter.classList.add('active');
-                    state.chartFilter = filter.dataset.filter;
+                    state.activeFilter = filter.dataset.filter;
                     updateCharts();
+                    updateCampaignsSummary();
                 });
-            });
-
-            // Toggle stacked chart
-            document.getElementById('toggleStacked').addEventListener('click', () => {
-                state.stackedChart = !state.stackedChart;
-                updateChartCampaigns();
-                document.getElementById('toggleStacked').innerHTML = 
-                    state.stackedChart ? 
-                    '<i class="fas fa-chart-bar"></i> Modo Simples' : 
-                    '<i class="fas fa-layer-group"></i> Modo Agrupado';
             });
 
             // Delegation para itens
@@ -1107,7 +1349,7 @@
                 // Ver detalhes da campanha
                 if (e.target.closest('.btn-details')) {
                     const card = e.target.closest('.campanha-card');
-                    showCampaignDetails(card.dataset.id);
+                    showCampaignDetailsModal(card.dataset.id);
                 }
                 
                 // Editar campanha
@@ -1127,7 +1369,7 @@
                     const card = e.target.closest('.stat-card');
                     const area = card.dataset.area;
                     if (area && area !== 'all') {
-                        showAreaDetails(area);
+                        showAreaDetailsModal(area);
                     }
                 }
             });
@@ -1170,6 +1412,7 @@
                 
                 renderCampaignsList();
                 updateDashboard();
+                updateCampaignsSummary();
                 
                 showNotification('Dados carregados com sucesso!', 'success');
             } catch (error) {
@@ -1327,7 +1570,7 @@
             const campanha = state.campanhas[id];
             let editHtml = `
                 <div class="form-group">
-                    <label class="form-label">Nome da Campanha</label>
+                    <label class="form-label">Nome da Campanha *</label>
                     <input type="text" id="editName" class="form-input" value="${campanha.campanha || ''}">
                 </div>
                 
@@ -1354,8 +1597,9 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
-                                    <label class="form-label">Área</label>
+                                    <label class="form-label">Área *</label>
                                     <select class="form-select edit-item-area">
+                                        <option value="">Selecione</option>
                                         <option value="MÍDIA" ${item.area === 'MÍDIA' ? 'selected' : ''}>MÍDIA</option>
                                         <option value="PRODUÇÃO" ${item.area === 'PRODUÇÃO' ? 'selected' : ''}>PRODUÇÃO</option>
                                         <option value="CRIAÇÃO" ${item.area === 'CRIAÇÃO' ? 'selected' : ''}>CRIAÇÃO</option>
@@ -1363,12 +1607,12 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Serviço</label>
-                                    <input type="text" class="form-input edit-item-service" value="${item.servico || ''}">
+                                    <label class="form-label">Serviço/Veículo *</label>
+                                    <input type="text" class="form-input edit-item-service" value="${item.servico || ''}" placeholder="TV CULTURA GLOBO, Promotor, etc.">
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">Valor (R$)</label>
-                                    <input type="number" class="form-input edit-item-value" step="0.01" value="${item.valor || 0}">
+                                    <label class="form-label">Valor (R$) *</label>
+                                    <input type="number" class="form-input edit-item-value" step="0.01" min="0" value="${item.valor || 0}" placeholder="0,00">
                                 </div>
                             </div>
                         </div>
@@ -1397,19 +1641,19 @@
             document.getElementById('editModal').style.display = 'flex';
             
             // Configurar eventos do modal de edição
-            document.getElementById('addEditItem').addEventListener('click', addEditItemModal);
-            document.getElementById('saveEdit').addEventListener('click', () => saveEditCampaign(id));
-            document.getElementById('cancelEdit').addEventListener('click', () => {
-                document.getElementById('editModal').style.display = 'none';
-            });
-            
-            // Delegation para remover itens no modal
-            document.getElementById('editModalContent').addEventListener('click', (e) => {
-                if (e.target.closest('.remove-edit-item')) {
-                    e.target.closest('.item-card').remove();
-                    updateEditItemNumbers();
-                }
-            });
+            setTimeout(() => {
+                document.getElementById('addEditItem').addEventListener('click', addEditItemModal);
+                document.getElementById('saveEdit').addEventListener('click', () => saveEditCampaign(id));
+                document.getElementById('cancelEdit').addEventListener('click', hideEditModal);
+                
+                // Delegation para remover itens no modal
+                document.getElementById('editModalContent').addEventListener('click', (e) => {
+                    if (e.target.closest('.remove-edit-item')) {
+                        e.target.closest('.item-card').remove();
+                        updateEditItemNumbers();
+                    }
+                });
+            }, 100);
         }
 
         function addEditItemModal() {
@@ -1426,8 +1670,9 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label class="form-label">Área</label>
+                            <label class="form-label">Área *</label>
                             <select class="form-select edit-item-area">
+                                <option value="">Selecione</option>
                                 <option value="MÍDIA">MÍDIA</option>
                                 <option value="PRODUÇÃO">PRODUÇÃO</option>
                                 <option value="CRIAÇÃO">CRIAÇÃO</option>
@@ -1435,12 +1680,12 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Serviço</label>
-                            <input type="text" class="form-input edit-item-service" placeholder="Digite o serviço...">
+                            <label class="form-label">Serviço/Veículo *</label>
+                            <input type="text" class="form-input edit-item-service" placeholder="TV CULTURA GLOBO, Promotor, etc.">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Valor (R$)</label>
-                            <input type="number" class="form-input edit-item-value" step="0.01" placeholder="0,00">
+                            <label class="form-label">Valor (R$) *</label>
+                            <input type="number" class="form-input edit-item-value" step="0.01" min="0" placeholder="0,00">
                         </div>
                     </div>
                 </div>
@@ -1457,6 +1702,10 @@
                 item.dataset.index = index + 1;
                 item.querySelector('.item-title').textContent = `Item ${index + 1}`;
             });
+        }
+
+        function hideEditModal() {
+            document.getElementById('editModal').style.display = 'none';
         }
 
         async function saveEditCampaign(id) {
@@ -1504,7 +1753,7 @@
                 
                 showNotification('Campanha atualizada com sucesso!', 'success');
                 loadCampaigns();
-                document.getElementById('editModal').style.display = 'none';
+                hideEditModal();
                 
             } catch (error) {
                 showNotification('Erro ao atualizar campanha: ' + error.message, 'error');
@@ -1609,6 +1858,9 @@
             
             // Atualizar gráficos
             updateCharts();
+            
+            // Atualizar resumo de campanhas
+            updateCampaignsSummary();
         }
 
         function updateStatsCards() {
@@ -1678,7 +1930,7 @@
         }
 
         function setupCharts() {
-            // Inicializar gráficos
+            // Inicializar gráfico de barras STACKED
             window.charts = {
                 campaigns: new Chart(document.getElementById('chartCampaigns'), {
                     type: 'bar',
@@ -1688,7 +1940,6 @@
                         onClick: (evt, elements) => {
                             if (elements.length > 0) {
                                 const element = elements[0];
-                                const datasetIndex = element.datasetIndex;
                                 const index = element.index;
                                 
                                 // Obter dados do gráfico
@@ -1701,19 +1952,33 @@
                                 );
                                 
                                 if (campanhaEntry) {
-                                    showCampaignDetailsTable(campanhaEntry[0], campanhaEntry[1]);
+                                    showCampaignDetailsModal(campanhaEntry[0]);
                                 }
                             }
                         },
                         plugins: {
                             legend: { 
                                 display: true,
-                                position: 'top'
+                                position: 'top',
+                                labels: {
+                                    boxWidth: 15,
+                                    padding: 15
+                                }
                             },
                             tooltip: {
+                                mode: 'index',
+                                intersect: false,
                                 callbacks: {
                                     label: function(context) {
-                                        return `${context.dataset.label}: ${formatter.format(context.raw)}`;
+                                        const dataset = context.dataset;
+                                        const value = context.raw;
+                                        const total = dataset.data.reduce((a, b) => a + b, 0);
+                                        const percent = total > 0 ? ((value / total) * 100).toFixed(1) : '0.0';
+                                        return `${dataset.label}: ${formatter.format(value)} (${percent}%)`;
+                                    },
+                                    footer: function(tooltipItems) {
+                                        const total = tooltipItems.reduce((sum, item) => sum + item.raw, 0);
+                                        return `Total: ${formatter.format(total)}`;
                                     }
                                 }
                             }
@@ -1760,14 +2025,15 @@
                                 const chart = window.charts.areas;
                                 const label = chart.data.labels[index];
                                 
-                                showAreaDetails(label);
+                                showAreaDetailsModal(label);
                             }
                         },
                         plugins: {
                             legend: { 
                                 position: 'right',
                                 labels: {
-                                    padding: 20
+                                    padding: 20,
+                                    boxWidth: 15
                                 }
                             },
                             tooltip: {
@@ -1797,10 +2063,10 @@
             // Filtrar campanhas baseado no filtro selecionado
             let campanhasFiltradas = Object.entries(state.campanhas);
             
-            if (state.chartFilter !== 'all') {
+            if (state.activeFilter !== 'all') {
                 campanhasFiltradas = campanhasFiltradas.filter(([id, campanha]) => {
                     const itens = campanha.itens || [];
-                    return itens.some(item => item.area === state.chartFilter);
+                    return itens.some(item => item.area === state.activeFilter);
                 });
             }
             
@@ -1808,33 +2074,40 @@
                 // Mostrar mensagem de nenhum dado
                 window.charts.campaigns.data = {
                     labels: ['Nenhuma campanha encontrada'],
-                    datasets: [{ data: [0], backgroundColor: '#ccc' }]
+                    datasets: [{ 
+                        label: 'Sem dados',
+                        data: [0], 
+                        backgroundColor: '#ccc' 
+                    }]
                 };
                 window.charts.campaigns.update();
                 return;
             }
             
-            // Obter todas as áreas únicas para as legendas
-            const allAreas = new Set();
-            campanhasFiltradas.forEach(([id, campanha]) => {
-                const itens = campanha.itens || [];
-                itens.forEach(item => {
-                    if (item.area) allAreas.add(item.area);
-                });
+            // Ordenar campanhas por valor total (maior primeiro)
+            campanhasFiltradas.sort((a, b) => {
+                const totalA = (a[1].itens || []).reduce((sum, item) => sum + (item.valor || 0), 0);
+                const totalB = (b[1].itens || []).reduce((sum, item) => sum + (item.valor || 0), 0);
+                return totalB - totalA;
             });
+            
+            // Limitar a 10 campanhas para melhor visualização
+            campanhasFiltradas = campanhasFiltradas.slice(0, 10);
+            
+            // Obter todas as áreas únicas para as legendas
+            const allAreas = new Set(['MÍDIA', 'PRODUÇÃO', 'CRIAÇÃO', 'OUTROS']);
             
             const areasArray = Array.from(allAreas);
             
-            // Preparar dados para gráfico de barras agrupadas
+            // Preparar dados para gráfico de barras STACKED
             const labels = campanhasFiltradas.map(([id, campanha]) => 
                 (campanha.campanha || id).substring(0, 25) + 
                 ((campanha.campanha || id).length > 25 ? '...' : '')
             );
             
-            // Criar datasets para cada área
-            const datasets = areasArray.map((area, index) => {
-                const colors = ['#4361ee', '#7209b7', '#4cc9f0', '#f72585', '#3a0ca3', '#4895ef', '#560bad'];
-                const color = colors[index % colors.length];
+            // Criar datasets para cada área (STACKED)
+            const datasets = areasArray.map((area) => {
+                const color = areaColors[area] || '#6c757d';
                 
                 const data = campanhasFiltradas.map(([id, campanha]) => {
                     const itens = campanha.itens || [];
@@ -1843,13 +2116,25 @@
                         .reduce((sum, item) => sum + (item.valor || 0), 0);
                 });
                 
+                // Se o filtro for específico, mostrar apenas a área filtrada
+                if (state.activeFilter !== 'all' && state.activeFilter !== area) {
+                    return {
+                        label: area,
+                        data: data.map(() => 0), // Zerar dados de outras áreas
+                        backgroundColor: color + '20', // Cor com transparência
+                        borderColor: color,
+                        borderWidth: 0,
+                        stack: 'Stack 0'
+                    };
+                }
+                
                 return {
                     label: area,
                     data: data,
                     backgroundColor: color,
                     borderColor: color,
                     borderWidth: 1,
-                    stack: state.stackedChart ? 'stack' + (index % 2) : undefined
+                    stack: 'Stack 0'
                 };
             });
             
@@ -1857,10 +2142,6 @@
                 labels: labels,
                 datasets: datasets
             };
-            
-            // Atualizar configuração de stacked
-            window.charts.campaigns.options.scales.x.stacked = state.stackedChart;
-            window.charts.campaigns.options.scales.y.stacked = state.stackedChart;
             
             window.charts.campaigns.update();
         }
@@ -1886,13 +2167,13 @@
             const data = sortedAreas.map(([_, value]) => value);
             
             // Cores para o gráfico
-            const colors = ['#4361ee', '#7209b7', '#4cc9f0', '#f72585', '#3a0ca3', '#4895ef', '#560bad'];
+            const colors = labels.map(area => areaColors[area] || '#6c757d');
             
             window.charts.areas.data = {
                 labels: labels,
                 datasets: [{
                     data: data,
-                    backgroundColor: colors.slice(0, labels.length),
+                    backgroundColor: colors,
                     borderColor: '#fff',
                     borderWidth: 2
                 }]
@@ -1901,58 +2182,165 @@
             window.charts.areas.update();
         }
 
-        // Funções para mostrar detalhes
-        function showCampaignDetailsTable(id, campanha) {
+        // Resumo de Campanhas (Coluna Direita)
+        function updateCampaignsSummary() {
+            const container = elements.campaignsSummaryList;
+            
+            if (!state.campanhas || Object.keys(state.campanhas).length === 0) {
+                container.innerHTML = `
+                    <div class="no-data">
+                        <i class="fas fa-inbox"></i>
+                        <p>Nenhuma campanha cadastrada</p>
+                        <button class="btn btn-primary btn-small" onclick="switchTab('nova-campanha')" style="margin-top: 10px;">
+                            <i class="fas fa-plus"></i> Criar Campanha
+                        </button>
+                    </div>
+                `;
+                elements.summaryCount.textContent = '0 campanhas';
+                return;
+            }
+            
+            // Filtrar campanhas baseado no filtro selecionado
+            let campanhasFiltradas = Object.entries(state.campanhas);
+            
+            if (state.activeFilter !== 'all') {
+                campanhasFiltradas = campanhasFiltradas.filter(([id, campanha]) => {
+                    const itens = campanha.itens || [];
+                    return itens.some(item => item.area === state.activeFilter);
+                });
+            }
+            
+            if (campanhasFiltradas.length === 0) {
+                container.innerHTML = `
+                    <div class="no-data">
+                        <i class="fas fa-filter"></i>
+                        <p>Nenhuma campanha com ${state.activeFilter}</p>
+                        <button class="btn btn-secondary btn-small" onclick="resetFilter()" style="margin-top: 10px;">
+                            <i class="fas fa-times"></i> Limpar Filtro
+                        </button>
+                    </div>
+                `;
+                elements.summaryCount.textContent = '0 campanhas';
+                return;
+            }
+            
+            // Ordenar por valor total (maior primeiro)
+            campanhasFiltradas.sort((a, b) => {
+                const totalA = (a[1].itens || []).reduce((sum, item) => sum + (item.valor || 0), 0);
+                const totalB = (b[1].itens || []).reduce((sum, item) => sum + (item.valor || 0), 0);
+                return totalB - totalA;
+            });
+            
+            // Limitar a 15 campanhas
+            campanhasFiltradas = campanhasFiltradas.slice(0, 15);
+            
+            let html = '';
+            const template = document.getElementById('summaryTemplate').innerHTML;
+            
+            campanhasFiltradas.forEach(([id, campanha]) => {
+                const nome = campanha.campanha || id;
+                const itens = campanha.itens ? campanha.itens.length : 0;
+                const valorTotal = campanha.itens ? 
+                    campanha.itens.reduce((sum, item) => sum + (item.valor || 0), 0) : 0;
+                const media = itens > 0 ? formatter.format(valorTotal / itens) : 'R$ 0,00';
+                
+                // Obter áreas únicas e criar badges
+                const areas = campanha.itens ? 
+                    [...new Set(campanha.itens.map(item => item.area).filter(Boolean))] : [];
+                
+                const areasBadges = areas.map(area => 
+                    `<span class="area-badge" style="background-color: ${areaColors[area] || '#6c757d'}">${area}</span>`
+                ).join('');
+                
+                const cardHtml = template
+                    .replace(/{id}/g, id)
+                    .replace(/{nome}/g, nome.length > 25 ? nome.substring(0, 25) + '...' : nome)
+                    .replace(/{itens}/g, itens)
+                    .replace(/{valor}/g, formatter.format(valorTotal))
+                    .replace(/{media}/g, media)
+                    .replace(/{areasBadges}/g, areasBadges)
+                    .replace(/{idShort}/g, id.substring(0, 8) + '...');
+                
+                html += cardHtml;
+            });
+            
+            container.innerHTML = html;
+            elements.summaryCount.textContent = `${campanhasFiltradas.length} campanhas`;
+        }
+
+        // Funções de Modal
+        function showCampaignDetailsModal(id) {
+            if (!state.campanhas[id]) {
+                showNotification('Campanha não encontrada', 'error');
+                return;
+            }
+            
+            const campanha = state.campanhas[id];
             const nome = campanha.campanha || id;
             const itens = campanha.itens || [];
             
+            // Calcular totais
+            const totalGeral = itens.reduce((sum, item) => sum + (item.valor || 0), 0);
+            
             // Agrupar itens por área
             const itensPorArea = {};
+            const totaisPorArea = {};
+            
             itens.forEach(item => {
                 const area = item.area || 'OUTROS';
                 if (!itensPorArea[area]) {
                     itensPorArea[area] = [];
+                    totaisPorArea[area] = 0;
                 }
                 itensPorArea[area].push(item);
+                totaisPorArea[area] += item.valor || 0;
             });
             
             let html = `
-                <h3 style="color: var(--primary); margin-bottom: 20px;">${nome}</h3>
-                <p><strong>ID:</strong> ${id}</p>
-                <p><strong>Total de Itens:</strong> ${itens.length}</p>
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: var(--primary);">${nome}</h3>
+                    <p><strong>ID:</strong> ${id}</p>
+                    <p><strong>Total de Itens:</strong> ${itens.length}</p>
+                    <div style="background-color: var(--light); padding: 15px; border-radius: var(--border-radius); margin-top: 15px;">
+                        <p style="font-weight: bold; color: var(--primary);">
+                            <i class="fas fa-calculator"></i> Total Geral: ${formatter.format(totalGeral)}
+                        </p>
+                    </div>
+                </div>
             `;
             
             // Resumo por área
-            Object.entries(itensPorArea).forEach(([area, itensArea]) => {
-                const totalArea = itensArea.reduce((sum, item) => sum + (item.valor || 0), 0);
-                const totalGeral = itens.reduce((sum, item) => sum + (item.valor || 0), 0);
-                const percentual = ((totalArea / totalGeral) * 100).toFixed(1);
+            html += `<h4 style="margin: 20px 0 10px 0; color: var(--dark);">Resumo por Área</h4>`;
+            
+            Object.entries(totaisPorArea).forEach(([area, totalArea]) => {
+                const percentual = totalGeral > 0 ? ((totalArea / totalGeral) * 100).toFixed(1) : '0.0';
+                const qtdItens = itensPorArea[area] ? itensPorArea[area].length : 0;
                 
                 html += `
                     <div class="area-summary">
                         <h4>${area}</h4>
-                        <p><strong>Total Gastado:</strong> ${formatter.format(totalArea)}</p>
-                        <p><strong>Percentual do Total:</strong> ${percentual}%</p>
-                        <p><strong>Quantidade de Itens:</strong> ${itensArea.length}</p>
+                        <p><strong>Total:</strong> ${formatter.format(totalArea)}</p>
+                        <p><strong>Percentual:</strong> ${percentual}%</p>
+                        <p><strong>Quantidade de Itens:</strong> ${qtdItens}</p>
                     </div>
                 `;
             });
             
-            // Tabela detalhada
+            // Tabela detalhada com scroll
             html += `
-                <table class="details-table">
-                    <thead>
-                        <tr>
-                            <th>Área</th>
-                            <th>Serviço/Veículo</th>
-                            <th>Valor (R$)</th>
-                            <th>% da Campanha</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <h4 style="margin: 20px 0 10px 0; color: var(--dark);">Detalhamento dos Itens</h4>
+                <div class="table-scroll-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Área</th>
+                                <th>Serviço/Veículo</th>
+                                <th>Valor (R$)</th>
+                                <th>% da Campanha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
             `;
-            
-            const totalGeral = itens.reduce((sum, item) => sum + (item.valor || 0), 0);
             
             itens.forEach(item => {
                 const percentual = totalGeral > 0 ? ((item.valor || 0) / totalGeral * 100).toFixed(1) : '0.0';
@@ -1967,24 +2355,25 @@
             });
             
             html += `
-                    </tbody>
-                </table>
-                <div style="margin-top: 20px; padding: 15px; background-color: var(--light); border-radius: var(--border-radius);">
-                    <p style="font-weight: bold; color: var(--primary);">
-                        <i class="fas fa-calculator"></i> Total Geral da Campanha: ${formatter.format(totalGeral)}
-                    </p>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="margin-top: 20px; display: flex; gap: 10px;">
+                    <button class="btn btn-success" onclick="editCampaign('${id}'); hideDetailsModal();">
+                        <i class="fas fa-edit"></i> Editar Campanha
+                    </button>
+                    <button class="btn btn-danger" onclick="showDeleteModal('${id}'); hideDetailsModal();">
+                        <i class="fas fa-trash"></i> Excluir Campanha
+                    </button>
                 </div>
             `;
             
-            document.getElementById('detailsTableTitle').textContent = `Detalhes: ${nome}`;
-            document.getElementById('detailsTableContent').innerHTML = html;
-            document.getElementById('detailsTableContainer').style.display = 'block';
-            
-            // Scroll para a tabela
-            document.getElementById('detailsTableContainer').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('detailsModalTitle').textContent = `Detalhes: ${nome}`;
+            document.getElementById('detailsModalContent').innerHTML = html;
+            document.getElementById('detailsModal').style.display = 'flex';
         }
 
-        function showAreaDetails(area) {
+        function showAreaDetailsModal(area) {
             // Coletar todos os itens da área selecionada
             const itensArea = [];
             let totalArea = 0;
@@ -2012,49 +2401,6 @@
             // Ordenar por valor (maior primeiro)
             itensArea.sort((a, b) => b.valor - a.valor);
             
-            let html = `
-                <h3 style="color: var(--primary); margin-bottom: 20px;">
-                    <i class="fas fa-chart-pie"></i> Detalhamento da Área: ${area}
-                </h3>
-                <div style="margin-bottom: 20px; padding: 15px; background-color: var(--light); border-radius: var(--border-radius);">
-                    <p><strong>Total Gastado em ${area}:</strong> ${formatter.format(totalArea)}</p>
-                    <p><strong>Quantidade de Itens:</strong> ${itensArea.length}</p>
-                    <p><strong>Quantidade de Campanhas:</strong> ${[...new Set(itensArea.map(item => item.campanhaId))].length}</p>
-                </div>
-                
-                <table class="details-table">
-                    <thead>
-                        <tr>
-                            <th>Campanha</th>
-                            <th>Serviço/Veículo</th>
-                            <th>Valor (R$)</th>
-                            <th>% da Área</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-            
-            itensArea.forEach(item => {
-                const percentual = totalArea > 0 ? ((item.valor || 0) / totalArea * 100).toFixed(1) : '0.0';
-                html += `
-                    <tr onclick="showCampaignDetailsTable('${item.campanhaId}', state.campanhas['${item.campanhaId}'])" 
-                        style="cursor: pointer;">
-                        <td>${item.campanha}</td>
-                        <td>${item.servico || 'Não informado'}</td>
-                        <td>${formatter.format(item.valor || 0)}</td>
-                        <td>${percentual}%</td>
-                    </tr>
-                `;
-            });
-            
-            html += `
-                    </tbody>
-                </table>
-                
-                <div style="margin-top: 20px;">
-                    <h4>Resumo por Campanha:</h4>
-            `;
-            
             // Agrupar por campanha
             const porCampanha = {};
             itensArea.forEach(item => {
@@ -2073,42 +2419,89 @@
             const campanhasArray = Object.entries(porCampanha)
                 .sort((a, b) => b[1].total - a[1].total);
             
+            let html = `
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: var(--primary);">
+                        <i class="fas fa-chart-pie"></i> Detalhamento da Área: ${area}
+                    </h3>
+                    <div style="background-color: var(--light); padding: 15px; border-radius: var(--border-radius); margin-top: 15px;">
+                        <p><strong>Total Gastado em ${area}:</strong> ${formatter.format(totalArea)}</p>
+                        <p><strong>Quantidade de Itens:</strong> ${itensArea.length}</p>
+                        <p><strong>Quantidade de Campanhas:</strong> ${campanhasArray.length}</p>
+                    </div>
+                </div>
+            `;
+            
+            // Resumo por campanha
+            html += `<h4 style="margin: 20px 0 10px 0; color: var(--dark);">Resumo por Campanha</h4>`;
+            
             campanhasArray.forEach(([id, dados]) => {
-                const percentual = totalArea > 0 ? (dados.total / totalArea * 100).toFixed(1) : '0.0';
+                const percentual = totalArea > 0 ? ((dados.total / totalArea) * 100).toFixed(1) : '0.0';
                 html += `
-                    <div class="area-summary" onclick="showCampaignDetailsTable('${id}', state.campanhas['${id}'])" 
-                         style="cursor: pointer; margin-bottom: 10px;">
-                        <p><strong>${dados.nome}:</strong> ${formatter.format(dados.total)} (${percentual}%)</p>
-                        <p style="font-size: 0.9rem; color: var(--gray);">${dados.itens} itens</p>
+                    <div class="area-summary" onclick="showCampaignDetailsModal('${id}')" style="cursor: pointer;">
+                        <h4>${dados.nome}</h4>
+                        <p><strong>Total:</strong> ${formatter.format(dados.total)} (${percentual}%)</p>
+                        <p><strong>Quantidade de Itens:</strong> ${dados.itens}</p>
                     </div>
                 `;
             });
             
-            html += `</div>`;
+            // Tabela detalhada com scroll
+            html += `
+                <h4 style="margin: 20px 0 10px 0; color: var(--dark);">Detalhamento dos Itens</h4>
+                <div class="table-scroll-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Campanha</th>
+                                <th>Serviço/Veículo</th>
+                                <th>Valor (R$)</th>
+                                <th>% da Área</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
             
-            document.getElementById('detailsTableTitle').textContent = `Detalhes da Área: ${area}`;
-            document.getElementById('detailsTableContent').innerHTML = html;
-            document.getElementById('detailsTableContainer').style.display = 'block';
+            itensArea.forEach(item => {
+                const percentual = totalArea > 0 ? ((item.valor || 0) / totalArea * 100).toFixed(1) : '0.0';
+                html += `
+                    <tr onclick="showCampaignDetailsModal('${item.campanhaId}')" style="cursor: pointer;">
+                        <td>${item.campanha}</td>
+                        <td>${item.servico || 'Não informado'}</td>
+                        <td>${formatter.format(item.valor || 0)}</td>
+                        <td>${percentual}%</td>
+                    </tr>
+                `;
+            });
             
-            // Scroll para a tabela
-            document.getElementById('detailsTableContainer').scrollIntoView({ behavior: 'smooth' });
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            document.getElementById('areaModalTitle').textContent = `Detalhes da Área: ${area}`;
+            document.getElementById('areaModalContent').innerHTML = html;
+            document.getElementById('areaModal').style.display = 'flex';
         }
 
-        function hideDetailsTable() {
-            document.getElementById('detailsTableContainer').style.display = 'none';
+        function hideDetailsModal() {
+            document.getElementById('detailsModal').style.display = 'none';
         }
 
-        function showCampaignDetails(id) {
-            if (!state.campanhas[id]) {
-                showNotification('Campanha não encontrada', 'error');
-                return;
-            }
-            
-            showCampaignDetailsTable(id, state.campanhas[id]);
-            switchTab('dashboard');
+        function hideAreaModal() {
+            document.getElementById('areaModal').style.display = 'none';
         }
 
         // Utilitários
+        function resetFilter() {
+            document.querySelectorAll('.chart-filter').forEach(f => f.classList.remove('active'));
+            document.querySelector('.chart-filter[data-filter="all"]').classList.add('active');
+            state.activeFilter = 'all';
+            updateCharts();
+            updateCampaignsSummary();
+        }
+
         function showLoading(element) {
             if (element) {
                 element.innerHTML = `
